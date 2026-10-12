@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SudoPrivacyInteractionClient Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Protocol/SudoPrivacyInteractionClient" class="dashAnchor"></a>
+
+    <a title="SudoPrivacyInteractionClient Protocol Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+           Docs
+        </a>
+        
+      </p>
+    
+      <div class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </div>
+    
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html"> Reference</a>
+      <img class="carat" src="../img/carat.png" alt=""/>
+      SudoPrivacyInteractionClient Protocol Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultSudoPrivacyInteractionClient.html">DefaultSudoPrivacyInteractionClient</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/ActionFulfilmentMethod.html">ActionFulfilmentMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/ActionIntent.html">ActionIntent</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/ActionOrigin.html">ActionOrigin</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/ActionStatus.html">ActionStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/AnalysisResultStatus.html">AnalysisResultStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/ConnectionState.html">ConnectionState</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/DataCategory.html">DataCategory</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/DataHolderProtectionState.html">DataHolderProtectionState</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/OrganizationAnalysisDomainResolution.html">OrganizationAnalysisDomainResolution</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/OrganizationAnalysisMode.html">OrganizationAnalysisMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/OrganizationCategory.html">OrganizationCategory</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/ProviderType.html">ProviderType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RelationshipProvider.html">RelationshipProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RetentionStyle.html">RetentionStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/ShareStyle.html">ShareStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/SignalValue.html">SignalValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VirtualPresenceState.html">VirtualPresenceState</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions.html#/GraphQL">GraphQL</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/SudoLogging.html">SudoLogging</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/SudoLogging/Logger.html">– Logger</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/ActionSubscriber.html">ActionSubscriber</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/AnalysisResultSubscriber.html">AnalysisResultSubscriber</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/DataHolderSubscriber.html">DataHolderSubscriber</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/SudoPrivacyInteractionClient.html">SudoPrivacyInteractionClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VirtualPresenceSubscriber.html">VirtualPresenceSubscriber</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Action.html">Action</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ActionContact.html">ActionContact</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/AnalysisResult.html">AnalysisResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/AnalysisResultData.html">AnalysisResultData</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/AnalysisResultUpdate.html">AnalysisResultUpdate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/AssistedEmailTemplate.html">AssistedEmailTemplate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/AssistedPayload.html">AssistedPayload</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/AvailableAction.html">AvailableAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/CapabilitySignals.html">CapabilitySignals</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/CategorySignals.html">CategorySignals</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ConnectVirtualPresenceWithAuthCodeInput.html">ConnectVirtualPresenceWithAuthCodeInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ConnectVirtualPresenceWithRefreshTokenInput.html">ConnectVirtualPresenceWithRefreshTokenInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/DataHolder.html">DataHolder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/DataHolderScanSummary.html">DataHolderScanSummary</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/GetOrganizationAnalysisInput.html">GetOrganizationAnalysisInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/InitiateActionInput.html">InitiateActionInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ListAnalysisResultsInput.html">ListAnalysisResultsInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ListDataHolderScanSummariesInput.html">ListDataHolderScanSummariesInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ListDataHoldersInput.html">ListDataHoldersInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ListOutput.html">ListOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ListVirtualPresencesInput.html">ListVirtualPresencesInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/OrganizationAnalysis.html">OrganizationAnalysis</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/OrganizationIdentity.html">OrganizationIdentity</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PrivacyScore.html">PrivacyScore</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PrivacySummary.html">PrivacySummary</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ProviderConfiguration.html">ProviderConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RescanVirtualPresenceInput.html">RescanVirtualPresenceInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RetentionInfo.html">RetentionInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RiskIndicators.html">RiskIndicators</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ScanOptions.html">ScanOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ScoreContribution.html">ScoreContribution</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ScoreCoverage.html">ScoreCoverage</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VirtualPresence.html">VirtualPresence</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:22SudoPrivacyInteraction16ClientCompletiona">ClientCompletion</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>SudoPrivacyInteractionClient</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">SudoPrivacyInteractionClient</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
+
+                </div>
+              </div>
+            <p>Client used to interface with the Sudo Platform Privacy Interaction service.</p>
+
+<p>It is recommended to code to this interface, rather than the implementation class
+(<code><a href="../Classes/DefaultSudoPrivacyInteractionClient.html">DefaultSudoPrivacyInteractionClient</a></code>) as the implementation class is only meant to be used for
+initializing an instance of the client.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Lifecycle"></a>
+                <a name="//apple_ref/swift/Section/Lifecycle" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Lifecycle"></a>
+                  <h3 class="section-name"><span>Lifecycle</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP5resetyyYaKF"></a>
+                    <a name="//apple_ref/swift/Method/reset()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP5resetyyYaKF">reset()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Removes all keys associated with this client, resets any cached data, cleans up subscriptions,
+and purges any pending operations.</p>
+
+<p>It is important to note that this will clear ALL cached data related to all Sudo services.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">reset</span><span class="p">()</span> <span class="k">async</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Virtual%20Presences"></a>
+                <a name="//apple_ref/swift/Section/Virtual Presences" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Virtual%20Presences"></a>
+                  <h3 class="section-name"><span>Virtual Presences</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP34connectVirtualPresenceWithAuthCode9withInputAA0fG0VAA07ConnectfghijL0V_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/connectVirtualPresenceWithAuthCode(withInput:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP34connectVirtualPresenceWithAuthCode9withInputAA0fG0VAA07ConnectfghijL0V_tYaKF">connectVirtualPresenceWithAuthCode(withInput:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Connect a new virtual presence using an OAuth authorization code obtained from the provider
+consent flow.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">connectVirtualPresenceWithAuthCode</span><span class="p">(</span>
+    <span class="n">withInput</span> <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Structs/ConnectVirtualPresenceWithAuthCodeInput.html">ConnectVirtualPresenceWithAuthCodeInput</a></span>
+<span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/VirtualPresence.html">VirtualPresence</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Parameters used to connect the virtual presence.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The newly connected <code><a href="../Structs/VirtualPresence.html">VirtualPresence</a></code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP38connectVirtualPresenceWithRefreshToken9withInputAA0fG0VAA07ConnectfghijL0V_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/connectVirtualPresenceWithRefreshToken(withInput:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP38connectVirtualPresenceWithRefreshToken9withInputAA0fG0VAA07ConnectfghijL0V_tYaKF">connectVirtualPresenceWithRefreshToken(withInput:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Connect a new virtual presence using a pre-obtained OAuth refresh token.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">connectVirtualPresenceWithRefreshToken</span><span class="p">(</span>
+    <span class="n">withInput</span> <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Structs/ConnectVirtualPresenceWithRefreshTokenInput.html">ConnectVirtualPresenceWithRefreshTokenInput</a></span>
+<span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/VirtualPresence.html">VirtualPresence</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Parameters used to connect the virtual presence.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The newly connected <code><a href="../Structs/VirtualPresence.html">VirtualPresence</a></code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP25disconnectVirtualPresence6withIdAA0fG0VSS_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/disconnectVirtualPresence(withId:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP25disconnectVirtualPresence6withIdAA0fG0VSS_tYaKF">disconnectVirtualPresence(withId:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Disconnect an existing virtual presence.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">disconnectVirtualPresence</span><span class="p">(</span><span class="n">withId</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/VirtualPresence.html">VirtualPresence</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Unique identifier of the virtual presence to disconnect.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The disconnected <code><a href="../Structs/VirtualPresence.html">VirtualPresence</a></code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP20listVirtualPresences9withInputAA10ListOutputVyAA0F8PresenceVGAA0jfgI0V_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/listVirtualPresences(withInput:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP20listVirtualPresences9withInputAA10ListOutputVyAA0F8PresenceVGAA0jfgI0V_tYaKF">listVirtualPresences(withInput:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List the virtual presences owned by the signed-in user.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">listVirtualPresences</span><span class="p">(</span><span class="n">withInput</span> <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Structs/ListVirtualPresencesInput.html">ListVirtualPresencesInput</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/ListOutput.html">ListOutput</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/VirtualPresence.html">VirtualPresence</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Parameters used to page the results.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A paginated list of <code><a href="../Structs/VirtualPresence.html">VirtualPresence</a></code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Data%20Holders"></a>
+                <a name="//apple_ref/swift/Section/Data Holders" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Data%20Holders"></a>
+                  <h3 class="section-name"><span>Data Holders</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP13getDataHolder6withIdAA0fG0VSgSS_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/getDataHolder(withId:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP13getDataHolder6withIdAA0fG0VSgSS_tYaKF">getDataHolder(withId:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get a single data holder by its identifier.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getDataHolder</span><span class="p">(</span><span class="n">withId</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/DataHolder.html">DataHolder</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Unique identifier of the data holder.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The matching <code><a href="../Structs/DataHolder.html">DataHolder</a></code>, or <code>nil</code> if no data holder exists with that identifier.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP15listDataHolders9withInputAA10ListOutputVyAA0F6HolderVGAA0jfgI0V_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/listDataHolders(withInput:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP15listDataHolders9withInputAA10ListOutputVyAA0F6HolderVGAA0jfgI0V_tYaKF">listDataHolders(withInput:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List the data holders discovered for a virtual presence.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">listDataHolders</span><span class="p">(</span><span class="n">withInput</span> <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Structs/ListDataHoldersInput.html">ListDataHoldersInput</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/ListOutput.html">ListOutput</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/DataHolder.html">DataHolder</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Parameters identifying the virtual presence and paging the results.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A paginated list of <code><a href="../Structs/DataHolder.html">DataHolder</a></code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP27listDataHolderScanSummaries9withInputAA10ListOutputVyAA0fgH7SummaryVGAA0lfghiK0V_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/listDataHolderScanSummaries(withInput:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP27listDataHolderScanSummaries9withInputAA10ListOutputVyAA0fgH7SummaryVGAA0lfghiK0V_tYaKF">listDataHolderScanSummaries(withInput:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List the scan summaries captured for a data holder, most recent first.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">listDataHolderScanSummaries</span><span class="p">(</span>
+    <span class="n">withInput</span> <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Structs/ListDataHolderScanSummariesInput.html">ListDataHolderScanSummariesInput</a></span>
+<span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/ListOutput.html">ListOutput</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/DataHolderScanSummary.html">DataHolderScanSummary</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Parameters identifying the data holder and paging the results.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A paginated list of <code><a href="../Structs/DataHolderScanSummary.html">DataHolderScanSummary</a></code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Analysis%20Results"></a>
+                <a name="//apple_ref/swift/Section/Analysis Results" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Analysis%20Results"></a>
+                  <h3 class="section-name"><span>Analysis Results</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP17getAnalysisResult6withIdAA0fG0VSgSS_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/getAnalysisResult(withId:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP17getAnalysisResult6withIdAA0fG0VSgSS_tYaKF">getAnalysisResult(withId:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get a single analysis result by its identifier, including its typed data.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getAnalysisResult</span><span class="p">(</span><span class="n">withId</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/AnalysisResult.html">AnalysisResult</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Unique identifier of the analysis result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The matching <code><a href="../Structs/AnalysisResult.html">AnalysisResult</a></code>, or <code>nil</code> if none exists with that identifier.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP19listAnalysisResults9withInputAA10ListOutputVyAA0F6ResultVGAA0jfgI0V_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/listAnalysisResults(withInput:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP19listAnalysisResults9withInputAA10ListOutputVyAA0F6ResultVGAA0jfgI0V_tYaKF">listAnalysisResults(withInput:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List the analysis results for a virtual presence.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">listAnalysisResults</span><span class="p">(</span><span class="n">withInput</span> <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Structs/ListAnalysisResultsInput.html">ListAnalysisResultsInput</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/ListOutput.html">ListOutput</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/AnalysisResult.html">AnalysisResult</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Parameters identifying the virtual presence and paging the results.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A paginated list of <code><a href="../Structs/AnalysisResult.html">AnalysisResult</a></code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Organization%20Analysis"></a>
+                <a name="//apple_ref/swift/Section/Organization Analysis" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Organization%20Analysis"></a>
+                  <h3 class="section-name"><span>Organization Analysis</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP23getOrganizationAnalysis9withInputAA0fG0VSgAA03GetfgI0V_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/getOrganizationAnalysis(withInput:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP23getOrganizationAnalysis9withInputAA0fG0VSgAA03GetfgI0V_tYaKF">getOrganizationAnalysis(withInput:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Analyze (read-through) and return the shared, organization-generic analysis for a domain.</p>
+
+<p>Returns a result with <code>.pending</code> status when an asynchronous source is still resolving;
+re-query for the terminal result.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getOrganizationAnalysis</span><span class="p">(</span><span class="n">withInput</span> <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Structs/GetOrganizationAnalysisInput.html">GetOrganizationAnalysisInput</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/OrganizationAnalysis.html">OrganizationAnalysis</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The domain to analyze and options controlling analysis mode/resolution.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The <code><a href="../Structs/OrganizationAnalysis.html">OrganizationAnalysis</a></code>, or <code>nil</code> if none exists for the domain.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Provider%20Configuration"></a>
+                <a name="//apple_ref/swift/Section/Provider Configuration" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Provider%20Configuration"></a>
+                  <h3 class="section-name"><span>Provider Configuration</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP24getProviderConfigurationAA0fG0VyYaKF"></a>
+                    <a name="//apple_ref/swift/Method/getProviderConfiguration()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP24getProviderConfigurationAA0fG0VyYaKF">getProviderConfiguration()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get the opaque provider configuration required to support the provider OAuth flow.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getProviderConfiguration</span><span class="p">()</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/ProviderConfiguration.html">ProviderConfiguration</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The <code><a href="../Structs/ProviderConfiguration.html">ProviderConfiguration</a></code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Actions"></a>
+                <a name="//apple_ref/swift/Section/Actions" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Actions"></a>
+                  <h3 class="section-name"><span>Actions</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP20listAvailableActions15forDataHolderIdAA10ListOutputVyAA0F6ActionVGSS_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/listAvailableActions(forDataHolderId:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP20listAvailableActions15forDataHolderIdAA10ListOutputVyAA0F6ActionVGSS_tYaKF">listAvailableActions(forDataHolderId:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List the actions currently available for a data holder relationship.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">listAvailableActions</span><span class="p">(</span><span class="n">forDataHolderId</span> <span class="nv">dataHolderId</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/ListOutput.html">ListOutput</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/AvailableAction.html">AvailableAction</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dataHolderId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Identifier of the data holder whose available actions to list.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A paginated list of <code><a href="../Structs/AvailableAction.html">AvailableAction</a></code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP14initiateAction9withInputAA0F0VAA08InitiatefH0V_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/initiateAction(withInput:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP14initiateAction9withInputAA0F0VAA08InitiatefH0V_tYaKF">initiateAction(withInput:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initiate an action against a data holder relationship.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">initiateAction</span><span class="p">(</span><span class="n">withInput</span> <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Structs/InitiateActionInput.html">InitiateActionInput</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Action.html">Action</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Parameters identifying the data holder, intent, and fulfilment method.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The initiated <code><a href="../Structs/Action.html">Action</a></code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP20confirmActionOutcome6withIdAA0F0VSS_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/confirmActionOutcome(withId:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP20confirmActionOutcome6withIdAA0F0VSS_tYaKF">confirmActionOutcome(withId:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Confirm that an assisted or delegated action was completed.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">confirmActionOutcome</span><span class="p">(</span><span class="n">withId</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Action.html">Action</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Identifier of the action to confirm.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The updated <code><a href="../Structs/Action.html">Action</a></code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Rescan"></a>
+                <a name="//apple_ref/swift/Section/Rescan" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Rescan"></a>
+                  <h3 class="section-name"><span>Rescan</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP21rescanVirtualPresence9withInputAA0fG0VAA06RescanfgI0V_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/rescanVirtualPresence(withInput:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP21rescanVirtualPresence9withInputAA0fG0VAA06RescanfgI0V_tYaKF">rescanVirtualPresence(withInput:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Rescan an existing virtual presence for new data holders.</p>
+
+<p>The rescan proceeds from the virtual presence&rsquo;s last scan date forward.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">rescanVirtualPresence</span><span class="p">(</span><span class="n">withInput</span> <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Structs/RescanVirtualPresenceInput.html">RescanVirtualPresenceInput</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/VirtualPresence.html">VirtualPresence</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Parameters identifying the virtual presence and controlling the scan.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The updated <code><a href="../Structs/VirtualPresence.html">VirtualPresence</a></code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Subscriptions"></a>
+                <a name="//apple_ref/swift/Section/Subscriptions" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Subscriptions"></a>
+                  <h3 class="section-name"><span>Subscriptions</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP26subscribeToVirtualPresence14subscriptionId10subscriberySS_AA0gH10Subscriber_ptYaKF"></a>
+                    <a name="//apple_ref/swift/Method/subscribeToVirtualPresence(subscriptionId:subscriber:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP26subscribeToVirtualPresence14subscriptionId10subscriberySS_AA0gH10Subscriber_ptYaKF">subscribeToVirtualPresence(subscriptionId:<wbr>subscriber:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Subscribe to virtual presence state events, emitted when a virtual presence changes state
+(e.g. to <code>.needsReauth</code> or <code>.scanning</code>).</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError.notSignedIn</code> if there is no signed-in user.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">subscribeToVirtualPresence</span><span class="p">(</span><span class="nv">subscriptionId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">subscriber</span><span class="p">:</span> <span class="kt"><a href="../Protocols/VirtualPresenceSubscriber.html">VirtualPresenceSubscriber</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subscriptionId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A unique identifier for this subscription, used to unsubscribe later.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subscriber</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Callback implementation invoked when a virtual presence event occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP30unsubscribeFromVirtualPresence14subscriptionIdySS_tF"></a>
+                    <a name="//apple_ref/swift/Method/unsubscribeFromVirtualPresence(subscriptionId:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP30unsubscribeFromVirtualPresence14subscriptionIdySS_tF">unsubscribeFromVirtualPresence(subscriptionId:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Unsubscribe from virtual presence state events.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">unsubscribeFromVirtualPresence</span><span class="p">(</span><span class="nv">subscriptionId</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subscriptionId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The identifier of the subscription to cancel.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP22subscribeToDataHolders14subscriptionId10subscriberySS_AA0G16HolderSubscriber_ptYaKF"></a>
+                    <a name="//apple_ref/swift/Method/subscribeToDataHolders(subscriptionId:subscriber:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP22subscribeToDataHolders14subscriptionId10subscriberySS_AA0G16HolderSubscriber_ptYaKF">subscribeToDataHolders(subscriptionId:<wbr>subscriber:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Subscribe to data holder events, emitted when data holders are discovered or updated
+during scanning.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError.notSignedIn</code> if there is no signed-in user.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">subscribeToDataHolders</span><span class="p">(</span><span class="nv">subscriptionId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">subscriber</span><span class="p">:</span> <span class="kt"><a href="../Protocols/DataHolderSubscriber.html">DataHolderSubscriber</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subscriptionId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A unique identifier for this subscription, used to unsubscribe later.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subscriber</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Callback implementation invoked when data holder events occur.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP26unsubscribeFromDataHolders14subscriptionIdySS_tF"></a>
+                    <a name="//apple_ref/swift/Method/unsubscribeFromDataHolders(subscriptionId:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP26unsubscribeFromDataHolders14subscriptionIdySS_tF">unsubscribeFromDataHolders(subscriptionId:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Unsubscribe from data holder events.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">unsubscribeFromDataHolders</span><span class="p">(</span><span class="nv">subscriptionId</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subscriptionId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The identifier of the subscription to cancel.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP25subscribeToAnalysisResult14subscriptionId10subscriberySS_AA0gH10Subscriber_ptYaKF"></a>
+                    <a name="//apple_ref/swift/Method/subscribeToAnalysisResult(subscriptionId:subscriber:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP25subscribeToAnalysisResult14subscriptionId10subscriberySS_AA0gH10Subscriber_ptYaKF">subscribeToAnalysisResult(subscriptionId:<wbr>subscriber:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Subscribe to analysis result events, emitted when an analysis result changes status or is
+updated. The delivered <code><a href="../Structs/AnalysisResultUpdate.html">AnalysisResultUpdate</a></code> is a lightweight notification; use
+<code>getAnalysisResult</code> to fetch the full typed data.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError.notSignedIn</code> if there is no signed-in user.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">subscribeToAnalysisResult</span><span class="p">(</span><span class="nv">subscriptionId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">subscriber</span><span class="p">:</span> <span class="kt"><a href="../Protocols/AnalysisResultSubscriber.html">AnalysisResultSubscriber</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subscriptionId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A unique identifier for this subscription, used to unsubscribe later.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subscriber</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Callback implementation invoked when an analysis result event occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP29unsubscribeFromAnalysisResult14subscriptionIdySS_tF"></a>
+                    <a name="//apple_ref/swift/Method/unsubscribeFromAnalysisResult(subscriptionId:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP29unsubscribeFromAnalysisResult14subscriptionIdySS_tF">unsubscribeFromAnalysisResult(subscriptionId:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Unsubscribe from analysis result events.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">unsubscribeFromAnalysisResult</span><span class="p">(</span><span class="nv">subscriptionId</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subscriptionId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The identifier of the subscription to cancel.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP17subscribeToAction14subscriptionId10subscriberySS_AA0G10Subscriber_ptYaKF"></a>
+                    <a name="//apple_ref/swift/Method/subscribeToAction(subscriptionId:subscriber:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP17subscribeToAction14subscriptionId10subscriberySS_AA0G10Subscriber_ptYaKF">subscribeToAction(subscriptionId:<wbr>subscriber:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Subscribe to action events, emitted each time an action is updated.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError.notSignedIn</code> if there is no signed-in user.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">subscribeToAction</span><span class="p">(</span><span class="nv">subscriptionId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">subscriber</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ActionSubscriber.html">ActionSubscriber</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subscriptionId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A unique identifier for this subscription, used to unsubscribe later.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subscriber</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Callback implementation invoked when an action event occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP21unsubscribeFromAction14subscriptionIdySS_tF"></a>
+                    <a name="//apple_ref/swift/Method/unsubscribeFromAction(subscriptionId:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP21unsubscribeFromAction14subscriptionIdySS_tF">unsubscribeFromAction(subscriptionId:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Unsubscribe from action events.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">unsubscribeFromAction</span><span class="p">(</span><span class="nv">subscriptionId</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subscriptionId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The identifier of the subscription to cancel.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2026 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2026-10-13)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+    </section>
+  </body>
+</html>

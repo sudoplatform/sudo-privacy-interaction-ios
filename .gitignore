@@ -1,0 +1,46 @@
+.DS_Store
+_Store
+
+## User settings
+xcuserdata/
+
+## Obj-C/Swift specific
+*.hmap
+
+## App packaging
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+.build/
+build/
+sonarqube-generic-coverage.xml
+identity-system-test-config
+
+dist/
+node_modules/
+aws-exports.js
+awsconfiguration.json
+*.swift.bak
+
+html/*
+Documentation/*
+docs/
+util/*.sed.*
+DocBuild/
+github-release/
+
+
+.idea/
+.env
+.build
+.Build/
+*.xcresult
+graphql/.yarn/
+graphql/node_modules/
+
+.kiro/
