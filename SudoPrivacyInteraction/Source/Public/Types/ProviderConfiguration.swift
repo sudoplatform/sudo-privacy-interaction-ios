@@ -6,16 +6,24 @@
 
 import Foundation
 
-/// Opaque provider configuration required by consumers to support the provider OAuth flow.
+/// A single provider client configuration required by consumers to support the provider OAuth flow.
 ///
-/// The `data` payload is base-64 encoded and intended to be passed through to the provider
-/// integration; its contents are not interpreted by the SDK.
+/// This is the decoded form of the opaque, base-64 encoded configuration data returned by the
+/// service; the SDK decodes it into one `ProviderConfiguration` per supported provider.
 public struct ProviderConfiguration: Equatable, Sendable {
 
-    /// Base-64 encoded, opaque provider configuration data.
-    public let data: String
+    /// Human-readable provider name (e.g. "google").
+    public let name: String
 
-    public init(data: String) {
-        self.data = data
+    /// The kind of virtual presence this provider backs (e.g. `.email`).
+    public let providerType: ProviderType
+
+    /// OAuth client id.
+    public let clientId: String
+
+    public init(name: String, providerType: ProviderType, clientId: String) {
+        self.name = name
+        self.providerType = providerType
+        self.clientId = clientId
     }
 }

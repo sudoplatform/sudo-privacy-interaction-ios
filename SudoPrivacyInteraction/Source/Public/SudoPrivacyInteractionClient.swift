@@ -115,11 +115,11 @@ public protocol SudoPrivacyInteractionClient: AnyObject {
 
     // MARK: - Provider Configuration
 
-    /// Get the opaque provider configuration required to support the provider OAuth flow.
+    /// Get the provider configurations required to support the provider OAuth flow.
     ///
-    /// - Returns: The `ProviderConfiguration`.
+    /// - Returns: The list of `ProviderConfiguration`, one per supported provider.
     /// - Throws: `SudoPrivacyInteractionError`.
-    func getProviderConfiguration() async throws -> ProviderConfiguration
+    func getProviderConfiguration() async throws -> [ProviderConfiguration]
 
     // MARK: - Actions
 

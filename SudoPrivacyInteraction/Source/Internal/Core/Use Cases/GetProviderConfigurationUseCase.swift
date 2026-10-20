@@ -21,7 +21,7 @@ class GetProviderConfigurationUseCase {
 
     // MARK: - Methods
 
-    func execute() async throws -> ProviderConfiguration {
+    func execute() async throws -> [ProviderConfiguration] {
         try await providerConfigurationRepository.get()
     }
 }

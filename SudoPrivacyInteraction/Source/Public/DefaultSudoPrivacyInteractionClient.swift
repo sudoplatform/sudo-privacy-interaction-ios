@@ -199,7 +199,7 @@ public class DefaultSudoPrivacyInteractionClient: SudoPrivacyInteractionClient {
 
     // MARK: - Provider Configuration
 
-    public func getProviderConfiguration() async throws -> ProviderConfiguration {
+    public func getProviderConfiguration() async throws -> [ProviderConfiguration] {
         let useCase = useCaseFactory.generateGetProviderConfigurationUseCase()
         return try await useCase.execute()
     }

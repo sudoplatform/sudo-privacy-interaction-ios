@@ -27,9 +27,9 @@ final class DefaultProviderConfigurationRepository: ProviderConfigurationReposit
 
     // MARK: - ProviderConfigurationRepository
 
-    func get() async throws -> ProviderConfiguration {
+    func get() async throws -> [ProviderConfiguration] {
         let query = GraphQL.GetProviderConfigurationQuery()
         let result = try await fetch(query)
-        return transformer.transform(result.getProviderConfiguration.fragments.providerConfigurationFields)
+        return try transformer.transform(result.getProviderConfiguration.fragments.providerConfigurationFields)
     }
 }
