@@ -85,6 +85,22 @@ public protocol SudoPrivacyInteractionClient: AnyObject {
         withInput input: ListDataHolderScanSummariesInput
     ) async throws -> ListOutput<DataHolderScanSummary>
 
+    /// Archive a data holder, removing it from the user's active list.
+    ///
+    /// - Parameter id: Unique identifier of the data holder to archive.
+    /// - Returns: The archived `DataHolder`.
+    /// - Throws: `SudoPrivacyInteractionError`.
+    func archiveDataHolder(withId id: String) async throws -> DataHolder
+
+    /// Unarchive a previously archived data holder, returning it to the monitored state.
+    ///
+    /// Only a data holder in the archived state may be unarchived.
+    ///
+    /// - Parameter id: Unique identifier of the data holder to unarchive.
+    /// - Returns: The unarchived `DataHolder`.
+    /// - Throws: `SudoPrivacyInteractionError`.
+    func unarchiveDataHolder(withId id: String) async throws -> DataHolder
+
     // MARK: - Analysis Results
 
     /// Get a single analysis result by its identifier, including its typed data.
@@ -143,6 +159,17 @@ public protocol SudoPrivacyInteractionClient: AnyObject {
     /// - Returns: The updated `Action`.
     /// - Throws: `SudoPrivacyInteractionError`.
     func confirmActionOutcome(withId id: String) async throws -> Action
+
+    /// Get a single action by its identifier.
+    ///
+    /// Resolves an in-flight delegated action on read: if the action is still in progress its
+    /// outcome is polled and, once terminal, the action is updated to its verified result before
+    /// being returned.
+    ///
+    /// - Parameter id: Unique identifier of the action.
+    /// - Returns: The matching `Action`, or `nil` if no action exists with that identifier.
+    /// - Throws: `SudoPrivacyInteractionError`.
+    func getAction(withId id: String) async throws -> Action?
 
     // MARK: - Rescan
 

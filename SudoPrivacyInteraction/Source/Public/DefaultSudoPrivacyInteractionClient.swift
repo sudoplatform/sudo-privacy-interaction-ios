@@ -176,6 +176,16 @@ public class DefaultSudoPrivacyInteractionClient: SudoPrivacyInteractionClient {
         return try await useCase.execute(input: input)
     }
 
+    public func archiveDataHolder(withId id: String) async throws -> DataHolder {
+        let useCase = useCaseFactory.generateArchiveDataHolderUseCase()
+        return try await useCase.execute(id: id)
+    }
+
+    public func unarchiveDataHolder(withId id: String) async throws -> DataHolder {
+        let useCase = useCaseFactory.generateUnarchiveDataHolderUseCase()
+        return try await useCase.execute(id: id)
+    }
+
     // MARK: - Analysis Results
 
     public func getAnalysisResult(withId id: String) async throws -> AnalysisResult? {
@@ -218,6 +228,11 @@ public class DefaultSudoPrivacyInteractionClient: SudoPrivacyInteractionClient {
 
     public func confirmActionOutcome(withId id: String) async throws -> Action {
         let useCase = useCaseFactory.generateConfirmActionOutcomeUseCase()
+        return try await useCase.execute(id: id)
+    }
+
+    public func getAction(withId id: String) async throws -> Action? {
+        let useCase = useCaseFactory.generateGetActionUseCase()
         return try await useCase.execute(id: id)
     }
 

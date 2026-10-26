@@ -85,7 +85,7 @@ struct AnalysisResultEntityTransformer {
             supportsDataDeletionRequests: transform(capabilities.getSignalValue(forKey: "supportsDataDeletionRequests")),
             supportsDataExport: transform(capabilities.getSignalValue(forKey: "supportsDataExport")),
             supportsSubscriptions: transform(capabilities.getSignalValue(forKey: "supportsSubscriptions")),
-            sellsPersonalInformation: transform(capabilities.getSignalValue(forKey: "sellsPersonalInformation")),
+            supportsOptOutOfSale: transform(capabilities.getSignalValue(forKey: "supportsOptOutOfSale")),
             usesCookiesOrTracking: transform(capabilities.getSignalValue(forKey: "usesCookiesOrTracking")),
             supportsTwoFactorAuth: transform(capabilities.getSignalValue(forKey: "supportsTwoFactorAuth"))
         )
@@ -264,6 +264,8 @@ struct AnalysisResultEntityTransformer {
             return .socialMedia
         case .dating:
             return .dating
+        case .adultEntertainment:
+            return .adultEntertainment
         case .communityAndCharity:
             return .communityAndCharity
         case .health:

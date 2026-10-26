@@ -18,6 +18,7 @@ struct VirtualPresenceEntityTransformer {
             identifier: fields.identifier,
             state: transform(fields.getVirtualPresenceState()),
             relationshipProvider: fields.getRelationshipProvider().flatMap(transform(_:)),
+            dataHolderCount: transform(fields.dataHolderCount),
             lastScannedAt: Self.date(fromEpochMs: fields.lastScannedAtEpochMs),
             version: fields.version,
             createdAt: Self.date(fromEpochMs: fields.createdAtEpochMs),
@@ -26,6 +27,16 @@ struct VirtualPresenceEntityTransformer {
     }
 
     // MARK: - Enum mapping
+
+    private func transform(_ count: GraphQL.VirtualPresenceFields.DataHolderCount) -> DataHolderCount {
+        DataHolderCount(
+            count: count.count,
+            monitored: count.monitored,
+            initiatedActions: count.initiatedActions,
+            completedActions: count.completedActions,
+            archived: count.archived
+        )
+    }
 
     private func transform(_ providerType: GraphQL.ProviderType) -> ProviderType {
         switch providerType {

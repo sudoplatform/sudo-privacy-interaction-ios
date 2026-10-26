@@ -30,6 +30,34 @@ public enum RelationshipProvider: String, Equatable, Sendable {
     case testProvider
 }
 
+/// Counts of a virtual presence's data holders, broken down by protection state.
+public struct DataHolderCount: Equatable, Sendable {
+
+    /// Active (non-archived) data holders: the sum of `monitored`, `initiatedActions`, and
+    /// `completedActions`. Excludes archived data holders.
+    public let count: Int
+
+    /// Data holders in the monitored protection state.
+    public let monitored: Int
+
+    /// Data holders with an action in progress (action-requested protection state).
+    public let initiatedActions: Int
+
+    /// Data holders with a completed action (resolved protection state).
+    public let completedActions: Int
+
+    /// Data holders in the archived protection state.
+    public let archived: Int
+
+    public init(count: Int, monitored: Int, initiatedActions: Int, completedActions: Int, archived: Int) {
+        self.count = count
+        self.monitored = monitored
+        self.initiatedActions = initiatedActions
+        self.completedActions = completedActions
+        self.archived = archived
+    }
+}
+
 /// Representation of a virtual presence in the Sudo Platform Privacy Interaction service.
 ///
 /// A virtual presence represents a connection to a third-party provider (for example an email
@@ -54,6 +82,9 @@ public struct VirtualPresence: Equatable, Sendable {
     /// Which relationship provider to use for discovery, if any.
     public let relationshipProvider: RelationshipProvider?
 
+    /// Counts of this virtual presence's data holders, broken down by protection state.
+    public let dataHolderCount: DataHolderCount
+
     /// Time of the most recent scan.
     public let lastScannedAt: Date
 
@@ -73,6 +104,7 @@ public struct VirtualPresence: Equatable, Sendable {
         identifier: String,
         state: VirtualPresenceState,
         relationshipProvider: RelationshipProvider?,
+        dataHolderCount: DataHolderCount,
         lastScannedAt: Date,
         version: Int,
         createdAt: Date,
@@ -84,6 +116,7 @@ public struct VirtualPresence: Equatable, Sendable {
         self.identifier = identifier
         self.state = state
         self.relationshipProvider = relationshipProvider
+        self.dataHolderCount = dataHolderCount
         self.lastScannedAt = lastScannedAt
         self.version = version
         self.createdAt = createdAt

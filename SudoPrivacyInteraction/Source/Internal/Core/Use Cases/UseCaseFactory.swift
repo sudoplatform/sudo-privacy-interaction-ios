@@ -56,6 +56,14 @@ class UseCaseFactory: @unchecked Sendable {
         return ListDataHolderScanSummariesUseCase(dataHolderRepository: dataHolderRepository)
     }
 
+    func generateArchiveDataHolderUseCase() -> ArchiveDataHolderUseCase {
+        return ArchiveDataHolderUseCase(dataHolderRepository: dataHolderRepository)
+    }
+
+    func generateUnarchiveDataHolderUseCase() -> UnarchiveDataHolderUseCase {
+        return UnarchiveDataHolderUseCase(dataHolderRepository: dataHolderRepository)
+    }
+
     func generateGetAnalysisResultUseCase() -> GetAnalysisResultUseCase {
         return GetAnalysisResultUseCase(analysisResultRepository: analysisResultRepository)
     }
@@ -86,5 +94,9 @@ class UseCaseFactory: @unchecked Sendable {
 
     func generateConfirmActionOutcomeUseCase() -> ConfirmActionOutcomeUseCase {
         return ConfirmActionOutcomeUseCase(actionRepository: actionRepository)
+    }
+
+    func generateGetActionUseCase() -> GetActionUseCase {
+        return GetActionUseCase(actionRepository: actionRepository)
     }
 }

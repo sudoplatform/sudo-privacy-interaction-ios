@@ -11,6 +11,7 @@ public enum DataHolderProtectionState: String, Equatable, Sendable {
     case monitored
     case actionRequested
     case resolved
+    case archived
     /// A protection state returned by the service that this version of the SDK does not recognize.
     case unknown
 }

@@ -35,6 +35,8 @@ struct DataHolderEntityTransformer {
             return .actionRequested
         case .resolved:
             return .resolved
+        case .archived:
+            return .archived
         case .unknown:
             return .unknown
         }

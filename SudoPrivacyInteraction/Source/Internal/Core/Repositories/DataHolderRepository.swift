@@ -23,4 +23,10 @@ protocol DataHolderRepository: AnyObject {
         limit: Int?,
         nextToken: String?
     ) async throws -> ListOutput<DataHolderScanSummary>
+
+    /// Archive a data holder, removing it from the user's active list.
+    func archive(id: String) async throws -> DataHolder
+
+    /// Unarchive a previously archived data holder, returning it to the monitored state.
+    func unarchive(id: String) async throws -> DataHolder
 }

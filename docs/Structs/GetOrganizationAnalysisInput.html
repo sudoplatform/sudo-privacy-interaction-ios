@@ -185,6 +185,9 @@
                 <a class="nav-group-task-link" href="../Structs/DataHolder.html">DataHolder</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/DataHolderCount.html">DataHolderCount</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/DataHolderScanSummary.html">DataHolderScanSummary</a>
               </li>
               <li class="nav-group-task">
@@ -307,6 +310,35 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:22SudoPrivacyInteraction28GetOrganizationAnalysisInputV4nameSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/name" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction28GetOrganizationAnalysisInputV4nameSSSgvp">name</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Analyze by organization name (e.g. &ldquo;amazon&rdquo;, &ldquo;stripe&rdquo;). When the name resolves to a domain
+it takes precedence over <code><a href="../Structs/GetOrganizationAnalysisInput.html#/s:22SudoPrivacyInteraction28GetOrganizationAnalysisInputV6domainSSvp">domain</a></code>; <code><a href="../Structs/GetOrganizationAnalysisInput.html#/s:22SudoPrivacyInteraction28GetOrganizationAnalysisInputV6domainSSvp">domain</a></code> remains the fallback when the name cannot be
+resolved.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:22SudoPrivacyInteraction28GetOrganizationAnalysisInputV4modeAA0eF4ModeOSgvp"></a>
                     <a name="//apple_ref/swift/Property/mode" class="dashAnchor"></a>
                     <a class="token" href="#/s:22SudoPrivacyInteraction28GetOrganizationAnalysisInputV4modeAA0eF4ModeOSgvp">mode</a>
@@ -345,8 +377,7 @@ Defaults to <code>.analyze</code> on the service when omitted.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>How the requested domain is treated before analysis. Defaults to <code>.registrable</code> on the
-service when omitted.</p>
+                        <p>How the requested domain is treated before analysis. Defaults to <code>.exact</code> when omitted.</p>
 
                       </div>
                       <div class="declaration">
@@ -363,9 +394,9 @@ service when omitted.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:22SudoPrivacyInteraction28GetOrganizationAnalysisInputV6domain4mode10resolutionACSS_AA0eF4ModeOSgAA0eF16DomainResolutionOSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(domain:mode:resolution:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:22SudoPrivacyInteraction28GetOrganizationAnalysisInputV6domain4mode10resolutionACSS_AA0eF4ModeOSgAA0eF16DomainResolutionOSgtcfc">init(domain:<wbr>mode:<wbr>resolution:<wbr>)</a>
+                    <a name="/s:22SudoPrivacyInteraction28GetOrganizationAnalysisInputV6domain4name4mode10resolutionACSS_SSSgAA0eF4ModeOSgAA0eF16DomainResolutionOSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(domain:name:mode:resolution:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction28GetOrganizationAnalysisInputV6domain4name4mode10resolutionACSS_SSSgAA0eF4ModeOSgAA0eF16DomainResolutionOSgtcfc">init(domain:<wbr>name:<wbr>mode:<wbr>resolution:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -381,6 +412,7 @@ service when omitted.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
     <span class="nv">domain</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">mode</span><span class="p">:</span> <span class="kt"><a href="../Enums/OrganizationAnalysisMode.html">OrganizationAnalysisMode</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">resolution</span><span class="p">:</span> <span class="kt"><a href="../Enums/OrganizationAnalysisDomainResolution.html">OrganizationAnalysisDomainResolution</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
 <span class="p">)</span></code></pre>
@@ -398,7 +430,7 @@ service when omitted.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2026 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2026-10-20)</p>
+      <p>&copy; 2026 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2026-10-26)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>

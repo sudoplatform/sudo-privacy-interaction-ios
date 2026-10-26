@@ -19,4 +19,7 @@ protocol ActionRepository: AnyObject {
 
     /// Confirm that an assisted or delegated action was completed.
     func confirmOutcome(id: String) async throws -> Action
+
+    /// Get a single action by its identifier.
+    func get(id: String) async throws -> Action?
 }

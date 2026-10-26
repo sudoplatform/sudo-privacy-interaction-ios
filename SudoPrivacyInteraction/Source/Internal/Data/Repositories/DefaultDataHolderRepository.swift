@@ -63,4 +63,16 @@ final class DefaultDataHolderRepository: DataHolderRepository, SudoApiGraphQLExe
         }
         return ListOutput(items: items, nextToken: result.listDataHolderScanSummaries.nextToken)
     }
+
+    func archive(id: String) async throws -> DataHolder {
+        let mutation = GraphQL.ArchiveDataHolderMutation(id: id)
+        let result = try await perform(mutation)
+        return transformer.transform(result.archiveDataHolder.fragments.dataHolderFields)
+    }
+
+    func unarchive(id: String) async throws -> DataHolder {
+        let mutation = GraphQL.UnarchiveDataHolderMutation(id: id)
+        let result = try await perform(mutation)
+        return transformer.transform(result.unarchiveDataHolder.fragments.dataHolderFields)
+    }
 }

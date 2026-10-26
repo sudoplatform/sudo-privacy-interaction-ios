@@ -53,6 +53,12 @@ final class DefaultActionRepository: ActionRepository, SudoApiGraphQLExecutor {
         return transformer.transform(result.confirmActionOutcome.fragments.actionFields)
     }
 
+    func get(id: String) async throws -> Action? {
+        let query = GraphQL.GetActionQuery(id: id)
+        let result = try await fetch(query)
+        return result.getAction.map { transformer.transform($0.fragments.actionFields) }
+    }
+
     // MARK: - Input mapping
 
     private static func transform(_ intent: ActionIntent) -> GraphQL.ActionIntent {

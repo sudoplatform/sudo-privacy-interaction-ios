@@ -29,7 +29,7 @@ final class DefaultOrganizationAnalysisRepository: OrganizationAnalysisRepositor
 
     func get(input: GetOrganizationAnalysisInput) async throws -> OrganizationAnalysis? {
         let options = Self.transform(input)
-        let query = GraphQL.GetOrganizationAnalysisQuery(domain: input.domain, options: options)
+        let query = GraphQL.GetOrganizationAnalysisQuery(domain: input.domain, name: input.name, options: options)
         let result = try await fetch(query)
         return result.getOrganizationAnalysis.map {
             transformer.transform($0.fragments.organizationAnalysisFields)
@@ -38,14 +38,12 @@ final class DefaultOrganizationAnalysisRepository: OrganizationAnalysisRepositor
 
     // MARK: - Input mapping
 
-    /// Builds the generated options input, or `nil` when neither option is supplied.
-    private static func transform(_ input: GetOrganizationAnalysisInput) -> GraphQL.OrganizationAnalysisOptions? {
-        guard input.mode != nil || input.resolution != nil else {
-            return nil
-        }
+    /// Builds the generated options input. A concrete resolution is always sent, defaulting to
+    /// `.exact` when the caller does not supply one.
+    private static func transform(_ input: GetOrganizationAnalysisInput) -> GraphQL.OrganizationAnalysisOptions {
         return GraphQL.OrganizationAnalysisOptions(
             mode: input.mode.map { .some(transform($0)) },
-            resolution: input.resolution.map { .some(transform($0)) }
+            resolution: .some(transform(input.resolution ?? .exact))
         )
     }
 

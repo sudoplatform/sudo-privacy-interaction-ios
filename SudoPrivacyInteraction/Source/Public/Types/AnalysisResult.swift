@@ -91,6 +91,7 @@ public enum OrganizationCategory: String, Equatable, Sendable {
     case sportsAndFitness
     case socialMedia
     case dating
+    case adultEntertainment
     case communityAndCharity
     case health
     case education
@@ -186,9 +187,16 @@ public struct CapabilitySignals: Equatable, Sendable {
     public let supportsDataDeletionRequests: SignalValue
     public let supportsDataExport: SignalValue
     public let supportsSubscriptions: SignalValue
-    public let sellsPersonalInformation: SignalValue
+
+    /// Whether the organization exposes an opt-out-of-sale control to users.
+    public let supportsOptOutOfSale: SignalValue
+
     public let usesCookiesOrTracking: SignalValue
     public let supportsTwoFactorAuth: SignalValue
+
+    /// Whether the organization sells personal information.
+    @available(*, deprecated, message: "Use supportsOptOutOfSale instead.")
+    public var sellsPersonalInformation: SignalValue { supportsOptOutOfSale }
 
     public init(
         supportsAccountCreation: SignalValue,
@@ -196,7 +204,7 @@ public struct CapabilitySignals: Equatable, Sendable {
         supportsDataDeletionRequests: SignalValue,
         supportsDataExport: SignalValue,
         supportsSubscriptions: SignalValue,
-        sellsPersonalInformation: SignalValue,
+        supportsOptOutOfSale: SignalValue,
         usesCookiesOrTracking: SignalValue,
         supportsTwoFactorAuth: SignalValue
     ) {
@@ -205,7 +213,7 @@ public struct CapabilitySignals: Equatable, Sendable {
         self.supportsDataDeletionRequests = supportsDataDeletionRequests
         self.supportsDataExport = supportsDataExport
         self.supportsSubscriptions = supportsSubscriptions
-        self.sellsPersonalInformation = sellsPersonalInformation
+        self.supportsOptOutOfSale = supportsOptOutOfSale
         self.usesCookiesOrTracking = usesCookiesOrTracking
         self.supportsTwoFactorAuth = supportsTwoFactorAuth
     }

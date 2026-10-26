@@ -185,6 +185,9 @@
                 <a class="nav-group-task-link" href="../Structs/DataHolder.html">DataHolder</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/DataHolderCount.html">DataHolderCount</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/DataHolderScanSummary.html">DataHolderScanSummary</a>
               </li>
               <li class="nav-group-task">
@@ -445,6 +448,33 @@ account) through which data holders can be discovered on behalf of a Sudo.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:22SudoPrivacyInteraction15VirtualPresenceV15dataHolderCountAA04DatagH0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/dataHolderCount" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction15VirtualPresenceV15dataHolderCountAA04DatagH0Vvp">dataHolderCount</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Counts of this virtual presence&rsquo;s data holders, broken down by protection state.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">dataHolderCount</span><span class="p">:</span> <span class="kt"><a href="../Structs/DataHolderCount.html">DataHolderCount</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:22SudoPrivacyInteraction15VirtualPresenceV13lastScannedAt10Foundation4DateVvp"></a>
                     <a name="//apple_ref/swift/Property/lastScannedAt" class="dashAnchor"></a>
                     <a class="token" href="#/s:22SudoPrivacyInteraction15VirtualPresenceV13lastScannedAt10Foundation4DateVvp">lastScannedAt</a>
@@ -553,9 +583,9 @@ account) through which data holders can be discovered on behalf of a Sudo.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:22SudoPrivacyInteraction15VirtualPresenceV2id5owner12providerType10identifier5state20relationshipProvider13lastScannedAt7version07createdP007updatedP0ACSS_SSAA0mI0OSSAA0dE5StateOAA012RelationshipM0OSg10Foundation4DateVSiA2Wtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(id:owner:providerType:identifier:state:relationshipProvider:lastScannedAt:version:createdAt:updatedAt:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:22SudoPrivacyInteraction15VirtualPresenceV2id5owner12providerType10identifier5state20relationshipProvider13lastScannedAt7version07createdP007updatedP0ACSS_SSAA0mI0OSSAA0dE5StateOAA012RelationshipM0OSg10Foundation4DateVSiA2Wtcfc">init(id:<wbr>owner:<wbr>providerType:<wbr>identifier:<wbr>state:<wbr>relationshipProvider:<wbr>lastScannedAt:<wbr>version:<wbr>createdAt:<wbr>updatedAt:<wbr>)</a>
+                    <a name="/s:22SudoPrivacyInteraction15VirtualPresenceV2id5owner12providerType10identifier5state20relationshipProvider15dataHolderCount13lastScannedAt7version07createdS007updatedS0ACSS_SSAA0mI0OSSAA0dE5StateOAA012RelationshipM0OSgAA04DataoP0V10Foundation4DateVSiA2Ztcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(id:owner:providerType:identifier:state:relationshipProvider:dataHolderCount:lastScannedAt:version:createdAt:updatedAt:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction15VirtualPresenceV2id5owner12providerType10identifier5state20relationshipProvider15dataHolderCount13lastScannedAt7version07createdS007updatedS0ACSS_SSAA0mI0OSSAA0dE5StateOAA012RelationshipM0OSgAA04DataoP0V10Foundation4DateVSiA2Ztcfc">init(id:<wbr>owner:<wbr>providerType:<wbr>identifier:<wbr>state:<wbr>relationshipProvider:<wbr>dataHolderCount:<wbr>lastScannedAt:<wbr>version:<wbr>createdAt:<wbr>updatedAt:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -576,6 +606,7 @@ account) through which data holders can be discovered on behalf of a Sudo.</p>
     <span class="nv">identifier</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../Enums/VirtualPresenceState.html">VirtualPresenceState</a></span><span class="p">,</span>
     <span class="nv">relationshipProvider</span><span class="p">:</span> <span class="kt"><a href="../Enums/RelationshipProvider.html">RelationshipProvider</a></span><span class="p">?,</span>
+    <span class="nv">dataHolderCount</span><span class="p">:</span> <span class="kt"><a href="../Structs/DataHolderCount.html">DataHolderCount</a></span><span class="p">,</span>
     <span class="nv">lastScannedAt</span><span class="p">:</span> <span class="kt">Date</span><span class="p">,</span>
     <span class="nv">version</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span>
     <span class="nv">createdAt</span><span class="p">:</span> <span class="kt">Date</span><span class="p">,</span>
@@ -595,7 +626,7 @@ account) through which data holders can be discovered on behalf of a Sudo.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2026 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2026-10-20)</p>
+      <p>&copy; 2026 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2026-10-26)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>
