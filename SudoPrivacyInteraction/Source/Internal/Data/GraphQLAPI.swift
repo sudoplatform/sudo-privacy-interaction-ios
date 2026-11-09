@@ -12,7 +12,11 @@ internal enum ActionIntent: RawRepresentable, Equatable, JSONDecodable, JSONEnco
   case deleteMyData
   case limitDataUse
   case other
+  case saveInPassword
   case stopContact
+  case swapEmail
+  case swapPhone
+  case swapVirtualCard
   /// Auto generated constant for unknown enum values
   case unknown(RawValue)
 
@@ -22,7 +26,11 @@ internal enum ActionIntent: RawRepresentable, Equatable, JSONDecodable, JSONEnco
       case "DELETE_MY_DATA": self = .deleteMyData
       case "LIMIT_DATA_USE": self = .limitDataUse
       case "OTHER": self = .other
+      case "SAVE_IN_PASSWORD": self = .saveInPassword
       case "STOP_CONTACT": self = .stopContact
+      case "SWAP_EMAIL": self = .swapEmail
+      case "SWAP_PHONE": self = .swapPhone
+      case "SWAP_VIRTUAL_CARD": self = .swapVirtualCard
       default: self = .unknown(rawValue)
     }
   }
@@ -33,7 +41,11 @@ internal enum ActionIntent: RawRepresentable, Equatable, JSONDecodable, JSONEnco
       case .deleteMyData: return "DELETE_MY_DATA"
       case .limitDataUse: return "LIMIT_DATA_USE"
       case .other: return "OTHER"
+      case .saveInPassword: return "SAVE_IN_PASSWORD"
       case .stopContact: return "STOP_CONTACT"
+      case .swapEmail: return "SWAP_EMAIL"
+      case .swapPhone: return "SWAP_PHONE"
+      case .swapVirtualCard: return "SWAP_VIRTUAL_CARD"
       case .unknown(let value): return value
     }
   }
@@ -44,7 +56,11 @@ internal enum ActionIntent: RawRepresentable, Equatable, JSONDecodable, JSONEnco
       case (.deleteMyData, .deleteMyData): return true
       case (.limitDataUse, .limitDataUse): return true
       case (.other, .other): return true
+      case (.saveInPassword, .saveInPassword): return true
       case (.stopContact, .stopContact): return true
+      case (.swapEmail, .swapEmail): return true
+      case (.swapPhone, .swapPhone): return true
+      case (.swapVirtualCard, .swapVirtualCard): return true
       case (.unknown(let lhsValue), .unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
     }
@@ -574,6 +590,51 @@ internal enum AnalysisResultStatus: RawRepresentable, Equatable, JSONDecodable, 
       case (.partial, .partial): return true
       case (.pending, .pending): return true
       case (.unavailable, .unavailable): return true
+      case (.unknown(let lhsValue), .unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+}
+
+internal enum AnalysisResultStatusReason: RawRepresentable, Equatable, JSONDecodable, JSONEncodable {
+  internal typealias RawValue = String
+  case invalidDomain
+  case malicious
+  case notAttempted
+  case other
+  case policyUnavailable
+  /// Auto generated constant for unknown enum values
+  case unknown(RawValue)
+
+  internal init?(rawValue: RawValue) {
+    switch rawValue {
+      case "INVALID_DOMAIN": self = .invalidDomain
+      case "MALICIOUS": self = .malicious
+      case "NOT_ATTEMPTED": self = .notAttempted
+      case "OTHER": self = .other
+      case "POLICY_UNAVAILABLE": self = .policyUnavailable
+      default: self = .unknown(rawValue)
+    }
+  }
+
+  internal var rawValue: RawValue {
+    switch self {
+      case .invalidDomain: return "INVALID_DOMAIN"
+      case .malicious: return "MALICIOUS"
+      case .notAttempted: return "NOT_ATTEMPTED"
+      case .other: return "OTHER"
+      case .policyUnavailable: return "POLICY_UNAVAILABLE"
+      case .unknown(let value): return value
+    }
+  }
+
+  internal static func == (lhs: AnalysisResultStatusReason, rhs: AnalysisResultStatusReason) -> Bool {
+    switch (lhs, rhs) {
+      case (.invalidDomain, .invalidDomain): return true
+      case (.malicious, .malicious): return true
+      case (.notAttempted, .notAttempted): return true
+      case (.other, .other): return true
+      case (.policyUnavailable, .policyUnavailable): return true
       case (.unknown(let lhsValue), .unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
     }
@@ -1650,6 +1711,292 @@ internal final class RescanVirtualPresenceMutation: GraphQLMutation {
     }
 
     internal struct RescanVirtualPresence: GraphQLSelectionSet {
+      internal static let possibleTypes = ["VirtualPresence"]
+
+      internal static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+        GraphQLField("providerType", type: .nonNull(.scalar(ProviderType.self))),
+        GraphQLField("identifier", type: .nonNull(.scalar(String.self))),
+        GraphQLField("state", type: .nonNull(.scalar(VirtualPresenceState.self))),
+        GraphQLField("relationshipProvider", type: .scalar(RelationshipProvider.self)),
+        GraphQLField("lastScannedAtEpochMs", type: .nonNull(.scalar(Double.self))),
+        GraphQLField("owner", type: .nonNull(.scalar(GraphQLID.self))),
+        GraphQLField("version", type: .nonNull(.scalar(Int.self))),
+        GraphQLField("createdAtEpochMs", type: .nonNull(.scalar(Double.self))),
+        GraphQLField("updatedAtEpochMs", type: .nonNull(.scalar(Double.self))),
+        GraphQLField("dataHolderCount", type: .nonNull(.object(DataHolderCount.selections))),
+      ]
+
+      internal var snapshot: Snapshot
+
+      internal init(snapshot: Snapshot) {
+        self.snapshot = snapshot
+      }
+
+      internal init(id: GraphQLID, providerType: ProviderType, identifier: String, state: VirtualPresenceState, relationshipProvider: RelationshipProvider? = nil, lastScannedAtEpochMs: Double, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double, dataHolderCount: DataHolderCount) {
+        self.init(snapshot: ["__typename": "VirtualPresence", "id": id, "providerType": providerType, "identifier": identifier, "state": state, "relationshipProvider": relationshipProvider, "lastScannedAtEpochMs": lastScannedAtEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs, "dataHolderCount": dataHolderCount.snapshot])
+      }
+
+      internal var __typename: String {
+        get {
+          return snapshot["__typename"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      internal var id: GraphQLID {
+        get {
+          return snapshot["id"]! as! GraphQLID
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      internal var providerType: ProviderType {
+        get {
+          return snapshot["providerType"]! as! ProviderType
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "providerType")
+        }
+      }
+
+      internal var identifier: String {
+        get {
+          return snapshot["identifier"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "identifier")
+        }
+      }
+
+      internal var state: VirtualPresenceState {
+        get {
+          return snapshot["state"]! as! VirtualPresenceState
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "state")
+        }
+      }
+
+      internal var relationshipProvider: RelationshipProvider? {
+        get {
+          return snapshot["relationshipProvider"] as? RelationshipProvider
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "relationshipProvider")
+        }
+      }
+
+      internal var lastScannedAtEpochMs: Double {
+        get {
+          return snapshot["lastScannedAtEpochMs"]! as! Double
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "lastScannedAtEpochMs")
+        }
+      }
+
+      internal var owner: GraphQLID {
+        get {
+          return snapshot["owner"]! as! GraphQLID
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "owner")
+        }
+      }
+
+      internal var version: Int {
+        get {
+          return snapshot["version"]! as! Int
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "version")
+        }
+      }
+
+      internal var createdAtEpochMs: Double {
+        get {
+          return snapshot["createdAtEpochMs"]! as! Double
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "createdAtEpochMs")
+        }
+      }
+
+      internal var updatedAtEpochMs: Double {
+        get {
+          return snapshot["updatedAtEpochMs"]! as! Double
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "updatedAtEpochMs")
+        }
+      }
+
+      internal var dataHolderCount: DataHolderCount {
+        get {
+          return DataHolderCount(snapshot: snapshot["dataHolderCount"]! as! Snapshot)
+        }
+        set {
+          snapshot.updateValue(newValue.snapshot, forKey: "dataHolderCount")
+        }
+      }
+
+      internal var fragments: Fragments {
+        get {
+          return Fragments(snapshot: snapshot)
+        }
+        set {
+          snapshot += newValue.snapshot
+        }
+      }
+
+      internal struct Fragments {
+        internal var snapshot: Snapshot
+
+        internal var virtualPresenceFields: VirtualPresenceFields {
+          get {
+            return VirtualPresenceFields(snapshot: snapshot)
+          }
+          set {
+            snapshot += newValue.snapshot
+          }
+        }
+      }
+
+      internal struct DataHolderCount: GraphQLSelectionSet {
+        internal static let possibleTypes = ["DataHolderCount"]
+
+        internal static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("count", type: .nonNull(.scalar(Int.self))),
+          GraphQLField("monitored", type: .nonNull(.scalar(Int.self))),
+          GraphQLField("initiatedActions", type: .nonNull(.scalar(Int.self))),
+          GraphQLField("completedActions", type: .nonNull(.scalar(Int.self))),
+          GraphQLField("archived", type: .nonNull(.scalar(Int.self))),
+        ]
+
+        internal var snapshot: Snapshot
+
+        internal init(snapshot: Snapshot) {
+          self.snapshot = snapshot
+        }
+
+        internal init(count: Int, monitored: Int, initiatedActions: Int, completedActions: Int, archived: Int) {
+          self.init(snapshot: ["__typename": "DataHolderCount", "count": count, "monitored": monitored, "initiatedActions": initiatedActions, "completedActions": completedActions, "archived": archived])
+        }
+
+        internal var __typename: String {
+          get {
+            return snapshot["__typename"]! as! String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        internal var count: Int {
+          get {
+            return snapshot["count"]! as! Int
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "count")
+          }
+        }
+
+        internal var monitored: Int {
+          get {
+            return snapshot["monitored"]! as! Int
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "monitored")
+          }
+        }
+
+        internal var initiatedActions: Int {
+          get {
+            return snapshot["initiatedActions"]! as! Int
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "initiatedActions")
+          }
+        }
+
+        internal var completedActions: Int {
+          get {
+            return snapshot["completedActions"]! as! Int
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "completedActions")
+          }
+        }
+
+        internal var archived: Int {
+          get {
+            return snapshot["archived"]! as! Int
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "archived")
+          }
+        }
+      }
+    }
+  }
+}
+
+internal final class RefreshVirtualPresenceStateMutation: GraphQLMutation {
+  internal static let operationString =
+    "mutation RefreshVirtualPresenceState($id: String!) {\n  refreshVirtualPresenceState(id: $id) {\n    __typename\n    ...VirtualPresenceFields\n  }\n}"
+
+  internal static var requestString: String { return operationString.appending(VirtualPresenceFields.fragmentString) }
+
+  internal var id: String
+
+  internal init(id: String) {
+    self.id = id
+  }
+
+  internal var variables: GraphQLMap? {
+    return ["id": id]
+  }
+
+  internal struct Data: GraphQLSelectionSet {
+    internal static let possibleTypes = ["Mutation"]
+
+    internal static let selections: [GraphQLSelection] = [
+      GraphQLField("refreshVirtualPresenceState", arguments: ["id": GraphQLVariable("id")], type: .nonNull(.object(RefreshVirtualPresenceState.selections))),
+    ]
+
+    internal var snapshot: Snapshot
+
+    internal init(snapshot: Snapshot) {
+      self.snapshot = snapshot
+    }
+
+    internal init(refreshVirtualPresenceState: RefreshVirtualPresenceState) {
+      self.init(snapshot: ["__typename": "Mutation", "refreshVirtualPresenceState": refreshVirtualPresenceState.snapshot])
+    }
+
+    /// Validate a virtual presence's provider grant on demand and return its
+    /// reconciled state. If the provider confirms the grant has been revoked (e.g.
+    /// the user removed access in their provider account), the presence transitions
+    /// to NEEDS_REAUTH; otherwise its state is returned unchanged. Use before gating
+    /// access on a current CONNECTED state.
+    internal var refreshVirtualPresenceState: RefreshVirtualPresenceState {
+      get {
+        return RefreshVirtualPresenceState(snapshot: snapshot["refreshVirtualPresenceState"]! as! Snapshot)
+      }
+      set {
+        snapshot.updateValue(newValue.snapshot, forKey: "refreshVirtualPresenceState")
+      }
+    }
+
+    internal struct RefreshVirtualPresenceState: GraphQLSelectionSet {
       internal static let possibleTypes = ["VirtualPresence"]
 
       internal static let selections: [GraphQLSelection] = [
@@ -4340,6 +4687,7 @@ internal final class GetAnalysisResultQuery: GraphQLQuery {
         GraphQLField("virtualPresenceId", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("dataHolderIdentifier", type: .nonNull(.scalar(String.self))),
         GraphQLField("status", type: .nonNull(.scalar(AnalysisResultStatus.self))),
+        GraphQLField("statusReason", type: .scalar(AnalysisResultStatusReason.self)),
         GraphQLField("lastAnalyzedAtEpochMs", type: .nonNull(.scalar(Double.self))),
         GraphQLField("data", type: .object(Datum.selections)),
         GraphQLField("owner", type: .nonNull(.scalar(GraphQLID.self))),
@@ -4354,8 +4702,8 @@ internal final class GetAnalysisResultQuery: GraphQLQuery {
         self.snapshot = snapshot
       }
 
-      internal init(id: GraphQLID, virtualPresenceId: GraphQLID, dataHolderIdentifier: String, status: AnalysisResultStatus, lastAnalyzedAtEpochMs: Double, data: Datum? = nil, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
-        self.init(snapshot: ["__typename": "AnalysisResult", "id": id, "virtualPresenceId": virtualPresenceId, "dataHolderIdentifier": dataHolderIdentifier, "status": status, "lastAnalyzedAtEpochMs": lastAnalyzedAtEpochMs, "data": data.flatMap { $0.snapshot }, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
+      internal init(id: GraphQLID, virtualPresenceId: GraphQLID, dataHolderIdentifier: String, status: AnalysisResultStatus, statusReason: AnalysisResultStatusReason? = nil, lastAnalyzedAtEpochMs: Double, data: Datum? = nil, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
+        self.init(snapshot: ["__typename": "AnalysisResult", "id": id, "virtualPresenceId": virtualPresenceId, "dataHolderIdentifier": dataHolderIdentifier, "status": status, "statusReason": statusReason, "lastAnalyzedAtEpochMs": lastAnalyzedAtEpochMs, "data": data.flatMap { $0.snapshot }, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
       }
 
       internal var __typename: String {
@@ -4400,6 +4748,15 @@ internal final class GetAnalysisResultQuery: GraphQLQuery {
         }
         set {
           snapshot.updateValue(newValue, forKey: "status")
+        }
+      }
+
+      internal var statusReason: AnalysisResultStatusReason? {
+        get {
+          return snapshot["statusReason"] as? AnalysisResultStatusReason
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "statusReason")
         }
       }
 
@@ -5368,6 +5725,7 @@ internal final class ListAnalysisResultsQuery: GraphQLQuery {
           GraphQLField("virtualPresenceId", type: .nonNull(.scalar(GraphQLID.self))),
           GraphQLField("dataHolderIdentifier", type: .nonNull(.scalar(String.self))),
           GraphQLField("status", type: .nonNull(.scalar(AnalysisResultStatus.self))),
+          GraphQLField("statusReason", type: .scalar(AnalysisResultStatusReason.self)),
           GraphQLField("lastAnalyzedAtEpochMs", type: .nonNull(.scalar(Double.self))),
           GraphQLField("data", type: .object(Datum.selections)),
           GraphQLField("owner", type: .nonNull(.scalar(GraphQLID.self))),
@@ -5382,8 +5740,8 @@ internal final class ListAnalysisResultsQuery: GraphQLQuery {
           self.snapshot = snapshot
         }
 
-        internal init(id: GraphQLID, virtualPresenceId: GraphQLID, dataHolderIdentifier: String, status: AnalysisResultStatus, lastAnalyzedAtEpochMs: Double, data: Datum? = nil, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
-          self.init(snapshot: ["__typename": "AnalysisResult", "id": id, "virtualPresenceId": virtualPresenceId, "dataHolderIdentifier": dataHolderIdentifier, "status": status, "lastAnalyzedAtEpochMs": lastAnalyzedAtEpochMs, "data": data.flatMap { $0.snapshot }, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
+        internal init(id: GraphQLID, virtualPresenceId: GraphQLID, dataHolderIdentifier: String, status: AnalysisResultStatus, statusReason: AnalysisResultStatusReason? = nil, lastAnalyzedAtEpochMs: Double, data: Datum? = nil, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
+          self.init(snapshot: ["__typename": "AnalysisResult", "id": id, "virtualPresenceId": virtualPresenceId, "dataHolderIdentifier": dataHolderIdentifier, "status": status, "statusReason": statusReason, "lastAnalyzedAtEpochMs": lastAnalyzedAtEpochMs, "data": data.flatMap { $0.snapshot }, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
         }
 
         internal var __typename: String {
@@ -5428,6 +5786,15 @@ internal final class ListAnalysisResultsQuery: GraphQLQuery {
           }
           set {
             snapshot.updateValue(newValue, forKey: "status")
+          }
+        }
+
+        internal var statusReason: AnalysisResultStatusReason? {
+          get {
+            return snapshot["statusReason"] as? AnalysisResultStatusReason
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "statusReason")
           }
         }
 
@@ -6460,6 +6827,7 @@ internal final class GetOrganizationAnalysisQuery: GraphQLQuery {
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("domain", type: .nonNull(.scalar(String.self))),
         GraphQLField("status", type: .nonNull(.scalar(AnalysisResultStatus.self))),
+        GraphQLField("statusReason", type: .scalar(AnalysisResultStatusReason.self)),
         GraphQLField("lastAnalyzedAtEpochMs", type: .nonNull(.scalar(Double.self))),
         GraphQLField("data", type: .object(Datum.selections)),
         GraphQLField("owner", type: .nonNull(.scalar(GraphQLID.self))),
@@ -6474,8 +6842,8 @@ internal final class GetOrganizationAnalysisQuery: GraphQLQuery {
         self.snapshot = snapshot
       }
 
-      internal init(id: GraphQLID, domain: String, status: AnalysisResultStatus, lastAnalyzedAtEpochMs: Double, data: Datum? = nil, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
-        self.init(snapshot: ["__typename": "OrganizationAnalysis", "id": id, "domain": domain, "status": status, "lastAnalyzedAtEpochMs": lastAnalyzedAtEpochMs, "data": data.flatMap { $0.snapshot }, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
+      internal init(id: GraphQLID, domain: String, status: AnalysisResultStatus, statusReason: AnalysisResultStatusReason? = nil, lastAnalyzedAtEpochMs: Double, data: Datum? = nil, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
+        self.init(snapshot: ["__typename": "OrganizationAnalysis", "id": id, "domain": domain, "status": status, "statusReason": statusReason, "lastAnalyzedAtEpochMs": lastAnalyzedAtEpochMs, "data": data.flatMap { $0.snapshot }, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
       }
 
       internal var __typename: String {
@@ -6511,6 +6879,15 @@ internal final class GetOrganizationAnalysisQuery: GraphQLQuery {
         }
         set {
           snapshot.updateValue(newValue, forKey: "status")
+        }
+      }
+
+      internal var statusReason: AnalysisResultStatusReason? {
+        get {
+          return snapshot["statusReason"] as? AnalysisResultStatusReason
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "statusReason")
         }
       }
 
@@ -7378,25 +7755,27 @@ internal final class GetOrganizationAnalysisQuery: GraphQLQuery {
 
 internal final class ListAvailableActionsQuery: GraphQLQuery {
   internal static let operationString =
-    "query ListAvailableActions($dataHolderId: ID!) {\n  listAvailableActions(dataHolderId: $dataHolderId) {\n    __typename\n    items {\n      __typename\n      ...AvailableActionFields\n    }\n    nextToken\n  }\n}"
+    "query ListAvailableActions($dataHolderId: ID!, $includeCompleted: Boolean) {\n  listAvailableActions(dataHolderId: $dataHolderId, includeCompleted: $includeCompleted) {\n    __typename\n    items {\n      __typename\n      ...AvailableActionFields\n    }\n    nextToken\n  }\n}"
 
   internal static var requestString: String { return operationString.appending(AvailableActionFields.fragmentString) }
 
   internal var dataHolderId: GraphQLID
+  internal var includeCompleted: Bool?
 
-  internal init(dataHolderId: GraphQLID) {
+  internal init(dataHolderId: GraphQLID, includeCompleted: Bool? = nil) {
     self.dataHolderId = dataHolderId
+    self.includeCompleted = includeCompleted
   }
 
   internal var variables: GraphQLMap? {
-    return ["dataHolderId": dataHolderId]
+    return ["dataHolderId": dataHolderId, "includeCompleted": includeCompleted]
   }
 
   internal struct Data: GraphQLSelectionSet {
     internal static let possibleTypes = ["Query"]
 
     internal static let selections: [GraphQLSelection] = [
-      GraphQLField("listAvailableActions", arguments: ["dataHolderId": GraphQLVariable("dataHolderId")], type: .nonNull(.object(ListAvailableAction.selections))),
+      GraphQLField("listAvailableActions", arguments: ["dataHolderId": GraphQLVariable("dataHolderId"), "includeCompleted": GraphQLVariable("includeCompleted")], type: .nonNull(.object(ListAvailableAction.selections))),
     ]
 
     internal var snapshot: Snapshot
@@ -7479,6 +7858,7 @@ internal final class ListAvailableActionsQuery: GraphQLQuery {
           GraphQLField("origin", type: .nonNull(.scalar(ActionOrigin.self))),
           GraphQLField("title", type: .scalar(String.self)),
           GraphQLField("description", type: .scalar(String.self)),
+          GraphQLField("status", type: .scalar(ActionStatus.self)),
         ]
 
         internal var snapshot: Snapshot
@@ -7487,8 +7867,8 @@ internal final class ListAvailableActionsQuery: GraphQLQuery {
           self.snapshot = snapshot
         }
 
-        internal init(intent: ActionIntent, additionalInfo: String? = nil, fulfilmentMethod: ActionFulfilmentMethod, origin: ActionOrigin, title: String? = nil, description: String? = nil) {
-          self.init(snapshot: ["__typename": "AvailableAction", "intent": intent, "additionalInfo": additionalInfo, "fulfilmentMethod": fulfilmentMethod, "origin": origin, "title": title, "description": description])
+        internal init(intent: ActionIntent, additionalInfo: String? = nil, fulfilmentMethod: ActionFulfilmentMethod, origin: ActionOrigin, title: String? = nil, description: String? = nil, status: ActionStatus? = nil) {
+          self.init(snapshot: ["__typename": "AvailableAction", "intent": intent, "additionalInfo": additionalInfo, "fulfilmentMethod": fulfilmentMethod, "origin": origin, "title": title, "description": description, "status": status])
         }
 
         internal var __typename: String {
@@ -7551,6 +7931,15 @@ internal final class ListAvailableActionsQuery: GraphQLQuery {
           }
           set {
             snapshot.updateValue(newValue, forKey: "description")
+          }
+        }
+
+        internal var status: ActionStatus? {
+          get {
+            return snapshot["status"] as? ActionStatus
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "status")
           }
         }
 
@@ -8034,6 +8423,520 @@ internal final class GetActionQuery: GraphQLQuery {
             }
             set {
               snapshot.updateValue(newValue, forKey: "body")
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+internal final class ListActionsForDataHolderQuery: GraphQLQuery {
+  internal static let operationString =
+    "query ListActionsForDataHolder($dataHolderId: ID!, $limit: Int, $nextToken: String) {\n  listActionsForDataHolder(dataHolderId: $dataHolderId, limit: $limit, nextToken: $nextToken) {\n    __typename\n    items {\n      __typename\n      ...ActionFields\n    }\n    nextToken\n  }\n}"
+
+  internal static var requestString: String { return operationString.appending(ActionFields.fragmentString).appending(AssistedPayloadFields.fragmentString) }
+
+  internal var dataHolderId: GraphQLID
+  internal var limit: Int?
+  internal var nextToken: String?
+
+  internal init(dataHolderId: GraphQLID, limit: Int? = nil, nextToken: String? = nil) {
+    self.dataHolderId = dataHolderId
+    self.limit = limit
+    self.nextToken = nextToken
+  }
+
+  internal var variables: GraphQLMap? {
+    return ["dataHolderId": dataHolderId, "limit": limit, "nextToken": nextToken]
+  }
+
+  internal struct Data: GraphQLSelectionSet {
+    internal static let possibleTypes = ["Query"]
+
+    internal static let selections: [GraphQLSelection] = [
+      GraphQLField("listActionsForDataHolder", arguments: ["dataHolderId": GraphQLVariable("dataHolderId"), "limit": GraphQLVariable("limit"), "nextToken": GraphQLVariable("nextToken")], type: .nonNull(.object(ListActionsForDataHolder.selections))),
+    ]
+
+    internal var snapshot: Snapshot
+
+    internal init(snapshot: Snapshot) {
+      self.snapshot = snapshot
+    }
+
+    internal init(listActionsForDataHolder: ListActionsForDataHolder) {
+      self.init(snapshot: ["__typename": "Query", "listActionsForDataHolder": listActionsForDataHolder.snapshot])
+    }
+
+    /// List the persisted action history for a data holder. Returns every action
+    /// that has been initiated against the data holder (all intents, all statuses,
+    /// every attempt), ordered newest-first. This is the executed-action history,
+    /// distinct from listAvailableActions, which returns the derived set of actions
+    /// a user could take.
+    internal var listActionsForDataHolder: ListActionsForDataHolder {
+      get {
+        return ListActionsForDataHolder(snapshot: snapshot["listActionsForDataHolder"]! as! Snapshot)
+      }
+      set {
+        snapshot.updateValue(newValue.snapshot, forKey: "listActionsForDataHolder")
+      }
+    }
+
+    internal struct ListActionsForDataHolder: GraphQLSelectionSet {
+      internal static let possibleTypes = ["ActionConnection"]
+
+      internal static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("items", type: .nonNull(.list(.nonNull(.object(Item.selections))))),
+        GraphQLField("nextToken", type: .scalar(String.self)),
+      ]
+
+      internal var snapshot: Snapshot
+
+      internal init(snapshot: Snapshot) {
+        self.snapshot = snapshot
+      }
+
+      internal init(items: [Item], nextToken: String? = nil) {
+        self.init(snapshot: ["__typename": "ActionConnection", "items": items.map { $0.snapshot }, "nextToken": nextToken])
+      }
+
+      internal var __typename: String {
+        get {
+          return snapshot["__typename"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      internal var items: [Item] {
+        get {
+          return (snapshot["items"] as! [Snapshot]).map { Item(snapshot: $0) }
+        }
+        set {
+          snapshot.updateValue(newValue.map { $0.snapshot }, forKey: "items")
+        }
+      }
+
+      internal var nextToken: String? {
+        get {
+          return snapshot["nextToken"] as? String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "nextToken")
+        }
+      }
+
+      internal struct Item: GraphQLSelectionSet {
+        internal static let possibleTypes = ["Action"]
+
+        internal static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("virtualPresenceId", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("dataHolderId", type: .scalar(GraphQLID.self)),
+          GraphQLField("intent", type: .nonNull(.scalar(ActionIntent.self))),
+          GraphQLField("additionalInfo", type: .scalar(String.self)),
+          GraphQLField("fulfilmentMethod", type: .nonNull(.scalar(ActionFulfilmentMethod.self))),
+          GraphQLField("status", type: .nonNull(.scalar(ActionStatus.self))),
+          GraphQLField("assistedPayload", type: .object(AssistedPayload.selections)),
+          GraphQLField("initiatedAtEpochMs", type: .scalar(Double.self)),
+          GraphQLField("completedAtEpochMs", type: .scalar(Double.self)),
+          GraphQLField("owner", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("version", type: .nonNull(.scalar(Int.self))),
+          GraphQLField("createdAtEpochMs", type: .nonNull(.scalar(Double.self))),
+          GraphQLField("updatedAtEpochMs", type: .nonNull(.scalar(Double.self))),
+        ]
+
+        internal var snapshot: Snapshot
+
+        internal init(snapshot: Snapshot) {
+          self.snapshot = snapshot
+        }
+
+        internal init(id: GraphQLID, virtualPresenceId: GraphQLID, dataHolderId: GraphQLID? = nil, intent: ActionIntent, additionalInfo: String? = nil, fulfilmentMethod: ActionFulfilmentMethod, status: ActionStatus, assistedPayload: AssistedPayload? = nil, initiatedAtEpochMs: Double? = nil, completedAtEpochMs: Double? = nil, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
+          self.init(snapshot: ["__typename": "Action", "id": id, "virtualPresenceId": virtualPresenceId, "dataHolderId": dataHolderId, "intent": intent, "additionalInfo": additionalInfo, "fulfilmentMethod": fulfilmentMethod, "status": status, "assistedPayload": assistedPayload.flatMap { $0.snapshot }, "initiatedAtEpochMs": initiatedAtEpochMs, "completedAtEpochMs": completedAtEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
+        }
+
+        internal var __typename: String {
+          get {
+            return snapshot["__typename"]! as! String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        internal var id: GraphQLID {
+          get {
+            return snapshot["id"]! as! GraphQLID
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "id")
+          }
+        }
+
+        internal var virtualPresenceId: GraphQLID {
+          get {
+            return snapshot["virtualPresenceId"]! as! GraphQLID
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "virtualPresenceId")
+          }
+        }
+
+        internal var dataHolderId: GraphQLID? {
+          get {
+            return snapshot["dataHolderId"] as? GraphQLID
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "dataHolderId")
+          }
+        }
+
+        internal var intent: ActionIntent {
+          get {
+            return snapshot["intent"]! as! ActionIntent
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "intent")
+          }
+        }
+
+        internal var additionalInfo: String? {
+          get {
+            return snapshot["additionalInfo"] as? String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "additionalInfo")
+          }
+        }
+
+        internal var fulfilmentMethod: ActionFulfilmentMethod {
+          get {
+            return snapshot["fulfilmentMethod"]! as! ActionFulfilmentMethod
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "fulfilmentMethod")
+          }
+        }
+
+        internal var status: ActionStatus {
+          get {
+            return snapshot["status"]! as! ActionStatus
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "status")
+          }
+        }
+
+        internal var assistedPayload: AssistedPayload? {
+          get {
+            return (snapshot["assistedPayload"] as? Snapshot).flatMap { AssistedPayload(snapshot: $0) }
+          }
+          set {
+            snapshot.updateValue(newValue?.snapshot, forKey: "assistedPayload")
+          }
+        }
+
+        internal var initiatedAtEpochMs: Double? {
+          get {
+            return snapshot["initiatedAtEpochMs"] as? Double
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "initiatedAtEpochMs")
+          }
+        }
+
+        internal var completedAtEpochMs: Double? {
+          get {
+            return snapshot["completedAtEpochMs"] as? Double
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "completedAtEpochMs")
+          }
+        }
+
+        internal var owner: GraphQLID {
+          get {
+            return snapshot["owner"]! as! GraphQLID
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "owner")
+          }
+        }
+
+        internal var version: Int {
+          get {
+            return snapshot["version"]! as! Int
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "version")
+          }
+        }
+
+        internal var createdAtEpochMs: Double {
+          get {
+            return snapshot["createdAtEpochMs"]! as! Double
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "createdAtEpochMs")
+          }
+        }
+
+        internal var updatedAtEpochMs: Double {
+          get {
+            return snapshot["updatedAtEpochMs"]! as! Double
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "updatedAtEpochMs")
+          }
+        }
+
+        internal var fragments: Fragments {
+          get {
+            return Fragments(snapshot: snapshot)
+          }
+          set {
+            snapshot += newValue.snapshot
+          }
+        }
+
+        internal struct Fragments {
+          internal var snapshot: Snapshot
+
+          internal var actionFields: ActionFields {
+            get {
+              return ActionFields(snapshot: snapshot)
+            }
+            set {
+              snapshot += newValue.snapshot
+            }
+          }
+        }
+
+        internal struct AssistedPayload: GraphQLSelectionSet {
+          internal static let possibleTypes = ["AssistedPayload"]
+
+          internal static let selections: [GraphQLSelection] = [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("toAddress", type: .scalar(String.self)),
+            GraphQLField("unsubscribeUrl", type: .scalar(String.self)),
+            GraphQLField("unsubscribeMailto", type: .scalar(String.self)),
+            GraphQLField("contact", type: .object(Contact.selections)),
+            GraphQLField("jurisdiction", type: .scalar(String.self)),
+            GraphQLField("instructions", type: .scalar(String.self)),
+            GraphQLField("emailTemplate", type: .object(EmailTemplate.selections)),
+          ]
+
+          internal var snapshot: Snapshot
+
+          internal init(snapshot: Snapshot) {
+            self.snapshot = snapshot
+          }
+
+          internal init(toAddress: String? = nil, unsubscribeUrl: String? = nil, unsubscribeMailto: String? = nil, contact: Contact? = nil, jurisdiction: String? = nil, instructions: String? = nil, emailTemplate: EmailTemplate? = nil) {
+            self.init(snapshot: ["__typename": "AssistedPayload", "toAddress": toAddress, "unsubscribeUrl": unsubscribeUrl, "unsubscribeMailto": unsubscribeMailto, "contact": contact.flatMap { $0.snapshot }, "jurisdiction": jurisdiction, "instructions": instructions, "emailTemplate": emailTemplate.flatMap { $0.snapshot }])
+          }
+
+          internal var __typename: String {
+            get {
+              return snapshot["__typename"]! as! String
+            }
+            set {
+              snapshot.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          internal var toAddress: String? {
+            get {
+              return snapshot["toAddress"] as? String
+            }
+            set {
+              snapshot.updateValue(newValue, forKey: "toAddress")
+            }
+          }
+
+          internal var unsubscribeUrl: String? {
+            get {
+              return snapshot["unsubscribeUrl"] as? String
+            }
+            set {
+              snapshot.updateValue(newValue, forKey: "unsubscribeUrl")
+            }
+          }
+
+          internal var unsubscribeMailto: String? {
+            get {
+              return snapshot["unsubscribeMailto"] as? String
+            }
+            set {
+              snapshot.updateValue(newValue, forKey: "unsubscribeMailto")
+            }
+          }
+
+          internal var contact: Contact? {
+            get {
+              return (snapshot["contact"] as? Snapshot).flatMap { Contact(snapshot: $0) }
+            }
+            set {
+              snapshot.updateValue(newValue?.snapshot, forKey: "contact")
+            }
+          }
+
+          internal var jurisdiction: String? {
+            get {
+              return snapshot["jurisdiction"] as? String
+            }
+            set {
+              snapshot.updateValue(newValue, forKey: "jurisdiction")
+            }
+          }
+
+          internal var instructions: String? {
+            get {
+              return snapshot["instructions"] as? String
+            }
+            set {
+              snapshot.updateValue(newValue, forKey: "instructions")
+            }
+          }
+
+          internal var emailTemplate: EmailTemplate? {
+            get {
+              return (snapshot["emailTemplate"] as? Snapshot).flatMap { EmailTemplate(snapshot: $0) }
+            }
+            set {
+              snapshot.updateValue(newValue?.snapshot, forKey: "emailTemplate")
+            }
+          }
+
+          internal var fragments: Fragments {
+            get {
+              return Fragments(snapshot: snapshot)
+            }
+            set {
+              snapshot += newValue.snapshot
+            }
+          }
+
+          internal struct Fragments {
+            internal var snapshot: Snapshot
+
+            internal var assistedPayloadFields: AssistedPayloadFields {
+              get {
+                return AssistedPayloadFields(snapshot: snapshot)
+              }
+              set {
+                snapshot += newValue.snapshot
+              }
+            }
+          }
+
+          internal struct Contact: GraphQLSelectionSet {
+            internal static let possibleTypes = ["ActionContact"]
+
+            internal static let selections: [GraphQLSelection] = [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("email", type: .scalar(String.self)),
+              GraphQLField("phone", type: .scalar(String.self)),
+              GraphQLField("address", type: .scalar(String.self)),
+            ]
+
+            internal var snapshot: Snapshot
+
+            internal init(snapshot: Snapshot) {
+              self.snapshot = snapshot
+            }
+
+            internal init(email: String? = nil, phone: String? = nil, address: String? = nil) {
+              self.init(snapshot: ["__typename": "ActionContact", "email": email, "phone": phone, "address": address])
+            }
+
+            internal var __typename: String {
+              get {
+                return snapshot["__typename"]! as! String
+              }
+              set {
+                snapshot.updateValue(newValue, forKey: "__typename")
+              }
+            }
+
+            internal var email: String? {
+              get {
+                return snapshot["email"] as? String
+              }
+              set {
+                snapshot.updateValue(newValue, forKey: "email")
+              }
+            }
+
+            internal var phone: String? {
+              get {
+                return snapshot["phone"] as? String
+              }
+              set {
+                snapshot.updateValue(newValue, forKey: "phone")
+              }
+            }
+
+            internal var address: String? {
+              get {
+                return snapshot["address"] as? String
+              }
+              set {
+                snapshot.updateValue(newValue, forKey: "address")
+              }
+            }
+          }
+
+          internal struct EmailTemplate: GraphQLSelectionSet {
+            internal static let possibleTypes = ["AssistedEmailTemplate"]
+
+            internal static let selections: [GraphQLSelection] = [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("subject", type: .scalar(String.self)),
+              GraphQLField("body", type: .nonNull(.scalar(String.self))),
+            ]
+
+            internal var snapshot: Snapshot
+
+            internal init(snapshot: Snapshot) {
+              self.snapshot = snapshot
+            }
+
+            internal init(subject: String? = nil, body: String) {
+              self.init(snapshot: ["__typename": "AssistedEmailTemplate", "subject": subject, "body": body])
+            }
+
+            internal var __typename: String {
+              get {
+                return snapshot["__typename"]! as! String
+              }
+              set {
+                snapshot.updateValue(newValue, forKey: "__typename")
+              }
+            }
+
+            internal var subject: String? {
+              get {
+                return snapshot["subject"] as? String
+              }
+              set {
+                snapshot.updateValue(newValue, forKey: "subject")
+              }
+            }
+
+            internal var body: String {
+              get {
+                return snapshot["body"]! as! String
+              }
+              set {
+                snapshot.updateValue(newValue, forKey: "body")
+              }
             }
           }
         }
@@ -8656,6 +9559,7 @@ internal final class OnAnalysisResultUpdateSubscription: GraphQLSubscription {
         GraphQLField("virtualPresenceId", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("dataHolderIdentifier", type: .nonNull(.scalar(String.self))),
         GraphQLField("status", type: .nonNull(.scalar(AnalysisResultStatus.self))),
+        GraphQLField("statusReason", type: .scalar(AnalysisResultStatusReason.self)),
         GraphQLField("lastAnalyzedAtEpochMs", type: .nonNull(.scalar(Double.self))),
         GraphQLField("owner", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("version", type: .nonNull(.scalar(Int.self))),
@@ -8669,8 +9573,8 @@ internal final class OnAnalysisResultUpdateSubscription: GraphQLSubscription {
         self.snapshot = snapshot
       }
 
-      internal init(id: GraphQLID, virtualPresenceId: GraphQLID, dataHolderIdentifier: String, status: AnalysisResultStatus, lastAnalyzedAtEpochMs: Double, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
-        self.init(snapshot: ["__typename": "AnalysisResultUpdate", "id": id, "virtualPresenceId": virtualPresenceId, "dataHolderIdentifier": dataHolderIdentifier, "status": status, "lastAnalyzedAtEpochMs": lastAnalyzedAtEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
+      internal init(id: GraphQLID, virtualPresenceId: GraphQLID, dataHolderIdentifier: String, status: AnalysisResultStatus, statusReason: AnalysisResultStatusReason? = nil, lastAnalyzedAtEpochMs: Double, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
+        self.init(snapshot: ["__typename": "AnalysisResultUpdate", "id": id, "virtualPresenceId": virtualPresenceId, "dataHolderIdentifier": dataHolderIdentifier, "status": status, "statusReason": statusReason, "lastAnalyzedAtEpochMs": lastAnalyzedAtEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
       }
 
       internal var __typename: String {
@@ -8715,6 +9619,15 @@ internal final class OnAnalysisResultUpdateSubscription: GraphQLSubscription {
         }
         set {
           snapshot.updateValue(newValue, forKey: "status")
+        }
+      }
+
+      internal var statusReason: AnalysisResultStatusReason? {
+        get {
+          return snapshot["statusReason"] as? AnalysisResultStatusReason
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "statusReason")
         }
       }
 
@@ -9849,7 +10762,7 @@ internal struct ActionFields: GraphQLFragment {
 
 internal struct AvailableActionFields: GraphQLFragment {
   internal static let fragmentString =
-    "fragment AvailableActionFields on AvailableAction {\n  __typename\n  intent\n  additionalInfo\n  fulfilmentMethod\n  origin\n  title\n  description\n}"
+    "fragment AvailableActionFields on AvailableAction {\n  __typename\n  intent\n  additionalInfo\n  fulfilmentMethod\n  origin\n  title\n  description\n  status\n}"
 
   internal static let possibleTypes = ["AvailableAction"]
 
@@ -9861,6 +10774,7 @@ internal struct AvailableActionFields: GraphQLFragment {
     GraphQLField("origin", type: .nonNull(.scalar(ActionOrigin.self))),
     GraphQLField("title", type: .scalar(String.self)),
     GraphQLField("description", type: .scalar(String.self)),
+    GraphQLField("status", type: .scalar(ActionStatus.self)),
   ]
 
   internal var snapshot: Snapshot
@@ -9869,8 +10783,8 @@ internal struct AvailableActionFields: GraphQLFragment {
     self.snapshot = snapshot
   }
 
-  internal init(intent: ActionIntent, additionalInfo: String? = nil, fulfilmentMethod: ActionFulfilmentMethod, origin: ActionOrigin, title: String? = nil, description: String? = nil) {
-    self.init(snapshot: ["__typename": "AvailableAction", "intent": intent, "additionalInfo": additionalInfo, "fulfilmentMethod": fulfilmentMethod, "origin": origin, "title": title, "description": description])
+  internal init(intent: ActionIntent, additionalInfo: String? = nil, fulfilmentMethod: ActionFulfilmentMethod, origin: ActionOrigin, title: String? = nil, description: String? = nil, status: ActionStatus? = nil) {
+    self.init(snapshot: ["__typename": "AvailableAction", "intent": intent, "additionalInfo": additionalInfo, "fulfilmentMethod": fulfilmentMethod, "origin": origin, "title": title, "description": description, "status": status])
   }
 
   internal var __typename: String {
@@ -9933,6 +10847,15 @@ internal struct AvailableActionFields: GraphQLFragment {
     }
     set {
       snapshot.updateValue(newValue, forKey: "description")
+    }
+  }
+
+  internal var status: ActionStatus? {
+    get {
+      return snapshot["status"] as? ActionStatus
+    }
+    set {
+      snapshot.updateValue(newValue, forKey: "status")
     }
   }
 }
@@ -10702,7 +11625,7 @@ internal struct AnalysisResultDataFields: GraphQLFragment {
 
 internal struct AnalysisResultFields: GraphQLFragment {
   internal static let fragmentString =
-    "fragment AnalysisResultFields on AnalysisResult {\n  __typename\n  id\n  virtualPresenceId\n  dataHolderIdentifier\n  status\n  lastAnalyzedAtEpochMs\n  data {\n    __typename\n    ...AnalysisResultDataFields\n  }\n  owner\n  version\n  createdAtEpochMs\n  updatedAtEpochMs\n}"
+    "fragment AnalysisResultFields on AnalysisResult {\n  __typename\n  id\n  virtualPresenceId\n  dataHolderIdentifier\n  status\n  statusReason\n  lastAnalyzedAtEpochMs\n  data {\n    __typename\n    ...AnalysisResultDataFields\n  }\n  owner\n  version\n  createdAtEpochMs\n  updatedAtEpochMs\n}"
 
   internal static let possibleTypes = ["AnalysisResult"]
 
@@ -10712,6 +11635,7 @@ internal struct AnalysisResultFields: GraphQLFragment {
     GraphQLField("virtualPresenceId", type: .nonNull(.scalar(GraphQLID.self))),
     GraphQLField("dataHolderIdentifier", type: .nonNull(.scalar(String.self))),
     GraphQLField("status", type: .nonNull(.scalar(AnalysisResultStatus.self))),
+    GraphQLField("statusReason", type: .scalar(AnalysisResultStatusReason.self)),
     GraphQLField("lastAnalyzedAtEpochMs", type: .nonNull(.scalar(Double.self))),
     GraphQLField("data", type: .object(Datum.selections)),
     GraphQLField("owner", type: .nonNull(.scalar(GraphQLID.self))),
@@ -10726,8 +11650,8 @@ internal struct AnalysisResultFields: GraphQLFragment {
     self.snapshot = snapshot
   }
 
-  internal init(id: GraphQLID, virtualPresenceId: GraphQLID, dataHolderIdentifier: String, status: AnalysisResultStatus, lastAnalyzedAtEpochMs: Double, data: Datum? = nil, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
-    self.init(snapshot: ["__typename": "AnalysisResult", "id": id, "virtualPresenceId": virtualPresenceId, "dataHolderIdentifier": dataHolderIdentifier, "status": status, "lastAnalyzedAtEpochMs": lastAnalyzedAtEpochMs, "data": data.flatMap { $0.snapshot }, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
+  internal init(id: GraphQLID, virtualPresenceId: GraphQLID, dataHolderIdentifier: String, status: AnalysisResultStatus, statusReason: AnalysisResultStatusReason? = nil, lastAnalyzedAtEpochMs: Double, data: Datum? = nil, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
+    self.init(snapshot: ["__typename": "AnalysisResult", "id": id, "virtualPresenceId": virtualPresenceId, "dataHolderIdentifier": dataHolderIdentifier, "status": status, "statusReason": statusReason, "lastAnalyzedAtEpochMs": lastAnalyzedAtEpochMs, "data": data.flatMap { $0.snapshot }, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
   }
 
   internal var __typename: String {
@@ -10772,6 +11696,15 @@ internal struct AnalysisResultFields: GraphQLFragment {
     }
     set {
       snapshot.updateValue(newValue, forKey: "status")
+    }
+  }
+
+  internal var statusReason: AnalysisResultStatusReason? {
+    get {
+      return snapshot["statusReason"] as? AnalysisResultStatusReason
+    }
+    set {
+      snapshot.updateValue(newValue, forKey: "statusReason")
     }
   }
 
@@ -11615,7 +12548,7 @@ internal struct AnalysisResultFields: GraphQLFragment {
 
 internal struct AnalysisResultUpdateFields: GraphQLFragment {
   internal static let fragmentString =
-    "fragment AnalysisResultUpdateFields on AnalysisResultUpdate {\n  __typename\n  id\n  virtualPresenceId\n  dataHolderIdentifier\n  status\n  lastAnalyzedAtEpochMs\n  owner\n  version\n  createdAtEpochMs\n  updatedAtEpochMs\n}"
+    "fragment AnalysisResultUpdateFields on AnalysisResultUpdate {\n  __typename\n  id\n  virtualPresenceId\n  dataHolderIdentifier\n  status\n  statusReason\n  lastAnalyzedAtEpochMs\n  owner\n  version\n  createdAtEpochMs\n  updatedAtEpochMs\n}"
 
   internal static let possibleTypes = ["AnalysisResultUpdate"]
 
@@ -11625,6 +12558,7 @@ internal struct AnalysisResultUpdateFields: GraphQLFragment {
     GraphQLField("virtualPresenceId", type: .nonNull(.scalar(GraphQLID.self))),
     GraphQLField("dataHolderIdentifier", type: .nonNull(.scalar(String.self))),
     GraphQLField("status", type: .nonNull(.scalar(AnalysisResultStatus.self))),
+    GraphQLField("statusReason", type: .scalar(AnalysisResultStatusReason.self)),
     GraphQLField("lastAnalyzedAtEpochMs", type: .nonNull(.scalar(Double.self))),
     GraphQLField("owner", type: .nonNull(.scalar(GraphQLID.self))),
     GraphQLField("version", type: .nonNull(.scalar(Int.self))),
@@ -11638,8 +12572,8 @@ internal struct AnalysisResultUpdateFields: GraphQLFragment {
     self.snapshot = snapshot
   }
 
-  internal init(id: GraphQLID, virtualPresenceId: GraphQLID, dataHolderIdentifier: String, status: AnalysisResultStatus, lastAnalyzedAtEpochMs: Double, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
-    self.init(snapshot: ["__typename": "AnalysisResultUpdate", "id": id, "virtualPresenceId": virtualPresenceId, "dataHolderIdentifier": dataHolderIdentifier, "status": status, "lastAnalyzedAtEpochMs": lastAnalyzedAtEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
+  internal init(id: GraphQLID, virtualPresenceId: GraphQLID, dataHolderIdentifier: String, status: AnalysisResultStatus, statusReason: AnalysisResultStatusReason? = nil, lastAnalyzedAtEpochMs: Double, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
+    self.init(snapshot: ["__typename": "AnalysisResultUpdate", "id": id, "virtualPresenceId": virtualPresenceId, "dataHolderIdentifier": dataHolderIdentifier, "status": status, "statusReason": statusReason, "lastAnalyzedAtEpochMs": lastAnalyzedAtEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
   }
 
   internal var __typename: String {
@@ -11684,6 +12618,15 @@ internal struct AnalysisResultUpdateFields: GraphQLFragment {
     }
     set {
       snapshot.updateValue(newValue, forKey: "status")
+    }
+  }
+
+  internal var statusReason: AnalysisResultStatusReason? {
+    get {
+      return snapshot["statusReason"] as? AnalysisResultStatusReason
+    }
+    set {
+      snapshot.updateValue(newValue, forKey: "statusReason")
     }
   }
 
@@ -12385,7 +13328,7 @@ internal struct DataHoldersUpdateFields: GraphQLFragment {
 
 internal struct OrganizationAnalysisFields: GraphQLFragment {
   internal static let fragmentString =
-    "fragment OrganizationAnalysisFields on OrganizationAnalysis {\n  __typename\n  id\n  domain\n  status\n  lastAnalyzedAtEpochMs\n  data {\n    __typename\n    ...AnalysisResultDataFields\n  }\n  owner\n  version\n  createdAtEpochMs\n  updatedAtEpochMs\n}"
+    "fragment OrganizationAnalysisFields on OrganizationAnalysis {\n  __typename\n  id\n  domain\n  status\n  statusReason\n  lastAnalyzedAtEpochMs\n  data {\n    __typename\n    ...AnalysisResultDataFields\n  }\n  owner\n  version\n  createdAtEpochMs\n  updatedAtEpochMs\n}"
 
   internal static let possibleTypes = ["OrganizationAnalysis"]
 
@@ -12394,6 +13337,7 @@ internal struct OrganizationAnalysisFields: GraphQLFragment {
     GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
     GraphQLField("domain", type: .nonNull(.scalar(String.self))),
     GraphQLField("status", type: .nonNull(.scalar(AnalysisResultStatus.self))),
+    GraphQLField("statusReason", type: .scalar(AnalysisResultStatusReason.self)),
     GraphQLField("lastAnalyzedAtEpochMs", type: .nonNull(.scalar(Double.self))),
     GraphQLField("data", type: .object(Datum.selections)),
     GraphQLField("owner", type: .nonNull(.scalar(GraphQLID.self))),
@@ -12408,8 +13352,8 @@ internal struct OrganizationAnalysisFields: GraphQLFragment {
     self.snapshot = snapshot
   }
 
-  internal init(id: GraphQLID, domain: String, status: AnalysisResultStatus, lastAnalyzedAtEpochMs: Double, data: Datum? = nil, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
-    self.init(snapshot: ["__typename": "OrganizationAnalysis", "id": id, "domain": domain, "status": status, "lastAnalyzedAtEpochMs": lastAnalyzedAtEpochMs, "data": data.flatMap { $0.snapshot }, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
+  internal init(id: GraphQLID, domain: String, status: AnalysisResultStatus, statusReason: AnalysisResultStatusReason? = nil, lastAnalyzedAtEpochMs: Double, data: Datum? = nil, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
+    self.init(snapshot: ["__typename": "OrganizationAnalysis", "id": id, "domain": domain, "status": status, "statusReason": statusReason, "lastAnalyzedAtEpochMs": lastAnalyzedAtEpochMs, "data": data.flatMap { $0.snapshot }, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
   }
 
   internal var __typename: String {
@@ -12445,6 +13389,15 @@ internal struct OrganizationAnalysisFields: GraphQLFragment {
     }
     set {
       snapshot.updateValue(newValue, forKey: "status")
+    }
+  }
+
+  internal var statusReason: AnalysisResultStatusReason? {
+    get {
+      return snapshot["statusReason"] as? AnalysisResultStatusReason
+    }
+    set {
+      snapshot.updateValue(newValue, forKey: "statusReason")
     }
   }
 

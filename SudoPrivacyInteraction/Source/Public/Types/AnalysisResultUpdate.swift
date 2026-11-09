@@ -24,6 +24,9 @@ public struct AnalysisResultUpdate: Equatable, Sendable {
     /// Aggregate status of the analysis.
     public let status: AnalysisResultStatus
 
+    /// Reason for the current `status`, when the service provides one.
+    public let statusReason: AnalysisResultStatusReason?
+
     /// Time the aggregate was last derived.
     public let lastAnalyzedAt: Date
 
@@ -44,6 +47,7 @@ public struct AnalysisResultUpdate: Equatable, Sendable {
         virtualPresenceId: String,
         dataHolderIdentifier: String,
         status: AnalysisResultStatus,
+        statusReason: AnalysisResultStatusReason? = nil,
         lastAnalyzedAt: Date,
         owner: String,
         version: Int,
@@ -54,6 +58,7 @@ public struct AnalysisResultUpdate: Equatable, Sendable {
         self.virtualPresenceId = virtualPresenceId
         self.dataHolderIdentifier = dataHolderIdentifier
         self.status = status
+        self.statusReason = statusReason
         self.lastAnalyzedAt = lastAnalyzedAt
         self.owner = owner
         self.version = version

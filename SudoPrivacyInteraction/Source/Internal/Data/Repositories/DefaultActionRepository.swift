@@ -27,13 +27,26 @@ final class DefaultActionRepository: ActionRepository, SudoApiGraphQLExecutor {
 
     // MARK: - ActionRepository
 
-    func listAvailable(dataHolderId: String) async throws -> ListOutput<AvailableAction> {
-        let query = GraphQL.ListAvailableActionsQuery(dataHolderId: dataHolderId)
+    func listAvailable(dataHolderId: String, includeCompleted: Bool?) async throws -> ListOutput<AvailableAction> {
+        let query = GraphQL.ListAvailableActionsQuery(dataHolderId: dataHolderId, includeCompleted: includeCompleted)
         let result = try await fetch(query)
         let items = result.listAvailableActions.items.map {
             transformer.transform($0.fragments.availableActionFields)
         }
         return ListOutput(items: items, nextToken: result.listAvailableActions.nextToken)
+    }
+
+    func listForDataHolder(dataHolderId: String, limit: Int?, nextToken: String?) async throws -> ListOutput<Action> {
+        let query = GraphQL.ListActionsForDataHolderQuery(
+            dataHolderId: dataHolderId,
+            limit: limit,
+            nextToken: nextToken
+        )
+        let result = try await fetch(query)
+        let items = result.listActionsForDataHolder.items.map {
+            transformer.transform($0.fragments.actionFields)
+        }
+        return ListOutput(items: items, nextToken: result.listActionsForDataHolder.nextToken)
     }
 
     func initiate(input: InitiateActionInput) async throws -> Action {
@@ -71,6 +84,14 @@ final class DefaultActionRepository: ActionRepository, SudoApiGraphQLExecutor {
             return .deleteMyData
         case .limitDataUse:
             return .limitDataUse
+        case .swapEmail:
+            return .swapEmail
+        case .swapPhone:
+            return .swapPhone
+        case .swapVirtualCard:
+            return .swapVirtualCard
+        case .saveInPassword:
+            return .saveInPassword
         case .other:
             return .other
         }

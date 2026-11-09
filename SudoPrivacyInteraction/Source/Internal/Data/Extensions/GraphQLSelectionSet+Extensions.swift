@@ -77,6 +77,10 @@ extension GraphQLSelectionSet {
         getEnumValue(GraphQL.AnalysisResultStatus.self, forKey: "status")
     }
 
+    func getAnalysisResultStatusReason() -> GraphQL.AnalysisResultStatusReason? {
+        getOptionalEnumValue(GraphQL.AnalysisResultStatusReason.self, forKey: "statusReason")
+    }
+
     func getDataCategory() -> GraphQL.DataCategory {
         getEnumValue(GraphQL.DataCategory.self, forKey: "category")
     }
@@ -122,6 +126,10 @@ extension GraphQLSelectionSet {
     func getActionStatus() -> GraphQL.ActionStatus {
         getEnumValue(GraphQL.ActionStatus.self, forKey: "status")
     }
+
+    func getOptionalActionStatus() -> GraphQL.ActionStatus? {
+        getOptionalEnumValue(GraphQL.ActionStatus.self, forKey: "status")
+    }
 }
 
 protocol GraphQLEnum: RawRepresentable {
@@ -153,6 +161,12 @@ extension GraphQL.DataHolderProtectionState: GraphQLEnum {
 }
 
 extension GraphQL.AnalysisResultStatus: GraphQLEnum {
+    static func getDefaultValue(from rawValue: Self.RawValue?) -> Self {
+        .unknown(rawValue ?? "")
+    }
+}
+
+extension GraphQL.AnalysisResultStatusReason: GraphQLEnum {
     static func getDefaultValue(from rawValue: Self.RawValue?) -> Self {
         .unknown(rawValue ?? "")
     }

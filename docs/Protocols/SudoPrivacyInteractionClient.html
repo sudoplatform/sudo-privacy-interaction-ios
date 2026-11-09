@@ -71,6 +71,9 @@
                 <a class="nav-group-task-link" href="../Enums/AnalysisResultStatus.html">AnalysisResultStatus</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/AnalysisResultStatusReason.html">AnalysisResultStatusReason</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/ConnectionState.html">ConnectionState</a>
               </li>
               <li class="nav-group-task">
@@ -195,6 +198,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/InitiateActionInput.html">InitiateActionInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ListActionsForDataHolderInput.html">ListActionsForDataHolderInput</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/ListAnalysisResultsInput.html">ListAnalysisResultsInput</a>
@@ -514,6 +520,68 @@ consent flow.</p>
                       <div>
                         <h4>Return Value</h4>
                         <p>The disconnected <code><a href="../Structs/VirtualPresence.html">VirtualPresence</a></code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP27refreshVirtualPresenceState6withIdAA0fG0VSS_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/refreshVirtualPresenceState(withId:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP27refreshVirtualPresenceState6withIdAA0fG0VSS_tYaKF">refreshVirtualPresenceState(withId:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Validate a virtual presence&rsquo;s provider grant on demand and return its reconciled state.</p>
+
+<p>If the provider confirms the grant has been revoked (for example, the user removed access in
+their provider account), the presence transitions to <code>.needsReauth</code>; otherwise its state is
+returned unchanged. Use before gating access on a current <code>.connected</code> state.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">refreshVirtualPresenceState</span><span class="p">(</span><span class="n">withId</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/VirtualPresence.html">VirtualPresence</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Unique identifier of the virtual presence to refresh.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The reconciled <code><a href="../Structs/VirtualPresence.html">VirtualPresence</a></code>.</p>
                       </div>
                     </section>
                   </div>
@@ -1154,9 +1222,9 @@ re-query for the terminal result.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP20listAvailableActions15forDataHolderIdAA10ListOutputVyAA0F6ActionVGSS_tYaKF"></a>
-                    <a name="//apple_ref/swift/Method/listAvailableActions(forDataHolderId:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP20listAvailableActions15forDataHolderIdAA10ListOutputVyAA0F6ActionVGSS_tYaKF">listAvailableActions(forDataHolderId:<wbr>)</a>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP20listAvailableActions15forDataHolderId16includeCompletedAA10ListOutputVyAA0F6ActionVGSS_SbSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/listAvailableActions(forDataHolderId:includeCompleted:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP20listAvailableActions15forDataHolderId16includeCompletedAA10ListOutputVyAA0F6ActionVGSS_SbSgtYaKF">listAvailableActions(forDataHolderId:<wbr>includeCompleted:<wbr>)</a>
                     </code>
                       <span class="declaration-note">
                         Asynchronous
@@ -1179,7 +1247,10 @@ re-query for the terminal result.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">listAvailableActions</span><span class="p">(</span><span class="n">forDataHolderId</span> <span class="nv">dataHolderId</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/ListOutput.html">ListOutput</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/AvailableAction.html">AvailableAction</a></span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">listAvailableActions</span><span class="p">(</span>
+    <span class="n">forDataHolderId</span> <span class="nv">dataHolderId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">includeCompleted</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span>
+<span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/ListOutput.html">ListOutput</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/AvailableAction.html">AvailableAction</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -1199,12 +1270,89 @@ re-query for the terminal result.</p>
                                 </div>
                               </td>
                             </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>includeCompleted</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>When <code>true</code>, include actions whose most recent persisted instance is
+in a completed state; when <code>false</code> they are omitted. When <code>nil</code>, the service default
+applies.</p>
+                                </div>
+                              </td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
                       <div>
                         <h4>Return Value</h4>
                         <p>A paginated list of <code><a href="../Structs/AvailableAction.html">AvailableAction</a></code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP24listActionsForDataHolder9withInputAA10ListOutputVyAA6ActionVGAA0lfghiK0V_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/listActionsForDataHolder(withInput:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP24listActionsForDataHolder9withInputAA10ListOutputVyAA6ActionVGAA0lfghiK0V_tYaKF">listActionsForDataHolder(withInput:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List the persisted action history for a data holder.</p>
+
+<p>Returns every action that has been initiated against the data holder (all intents, all
+statuses, every attempt), ordered newest-first. This is the executed-action history,
+distinct from <code>listAvailableActions</code>, which returns the derived set of actions a user could
+take.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">listActionsForDataHolder</span><span class="p">(</span><span class="n">withInput</span> <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Structs/ListActionsForDataHolderInput.html">ListActionsForDataHolderInput</a></span><span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/ListOutput.html">ListOutput</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Action.html">Action</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Parameters identifying the data holder and paging the results.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A paginated list of <code><a href="../Structs/Action.html">Action</a></code>.</p>
                       </div>
                     </section>
                   </div>
@@ -1925,6 +2073,65 @@ updated. The delivered <code><a href="../Structs/AnalysisResultUpdate.html">Anal
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientPAAE20listAvailableActions15forDataHolderIdAA10ListOutputVyAA0F6ActionVGSS_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/listAvailableActions(forDataHolderId:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientPAAE20listAvailableActions15forDataHolderIdAA10ListOutputVyAA0F6ActionVGSS_tYaKF">listAvailableActions(forDataHolderId:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method, asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List the actions currently available for a data holder relationship, using the service
+default for whether completed actions are included.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>SudoPrivacyInteractionError</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">listAvailableActions</span><span class="p">(</span><span class="n">forDataHolderId</span> <span class="nv">dataHolderId</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/ListOutput.html">ListOutput</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/AvailableAction.html">AvailableAction</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dataHolderId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Identifier of the data holder whose available actions to list.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A paginated list of <code><a href="../Structs/AvailableAction.html">AvailableAction</a></code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </div>
@@ -1933,7 +2140,7 @@ updated. The delivered <code><a href="../Structs/AnalysisResultUpdate.html">Anal
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2026 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2026-10-26)</p>
+      <p>&copy; 2026 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2026-11-09)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>

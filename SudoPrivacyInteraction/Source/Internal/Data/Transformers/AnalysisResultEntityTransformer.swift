@@ -15,6 +15,7 @@ struct AnalysisResultEntityTransformer {
             virtualPresenceId: fields.virtualPresenceId,
             dataHolderIdentifier: fields.dataHolderIdentifier,
             status: transform(fields.getAnalysisResultStatus()),
+            statusReason: fields.getAnalysisResultStatusReason().map(transform(_:)),
             lastAnalyzedAt: Self.date(fromEpochMs: fields.lastAnalyzedAtEpochMs),
             data: fields.data.map { transform($0.fragments.analysisResultDataFields) },
             owner: fields.owner,
@@ -129,6 +130,24 @@ struct AnalysisResultEntityTransformer {
             return .failed
         case .unavailable:
             return .unavailable
+        case .unknown:
+            return .unknown
+        }
+    }
+
+    /// Maps the shared `AnalysisResultStatusReason`.
+    func transform(_ reason: GraphQL.AnalysisResultStatusReason) -> AnalysisResultStatusReason {
+        switch reason {
+        case .invalidDomain:
+            return .invalidDomain
+        case .policyUnavailable:
+            return .policyUnavailable
+        case .malicious:
+            return .malicious
+        case .notAttempted:
+            return .notAttempted
+        case .other:
+            return .other
         case .unknown:
             return .unknown
         }

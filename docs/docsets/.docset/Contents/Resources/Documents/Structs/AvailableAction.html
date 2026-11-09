@@ -71,6 +71,9 @@
                 <a class="nav-group-task-link" href="../Enums/AnalysisResultStatus.html">AnalysisResultStatus</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/AnalysisResultStatusReason.html">AnalysisResultStatusReason</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/ConnectionState.html">ConnectionState</a>
               </li>
               <li class="nav-group-task">
@@ -195,6 +198,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/InitiateActionInput.html">InitiateActionInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ListActionsForDataHolderInput.html">ListActionsForDataHolderInput</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/ListAnalysisResultsInput.html">ListAnalysisResultsInput</a>
@@ -442,9 +448,38 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:22SudoPrivacyInteraction15AvailableActionV6intent14additionalInfo16fulfilmentMethod6origin5title11descriptionAcA0E6IntentO_SSSgAA0e10FulfilmentJ0OAA0E6OriginOA2Ltcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(intent:additionalInfo:fulfilmentMethod:origin:title:description:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:22SudoPrivacyInteraction15AvailableActionV6intent14additionalInfo16fulfilmentMethod6origin5title11descriptionAcA0E6IntentO_SSSgAA0e10FulfilmentJ0OAA0E6OriginOA2Ltcfc">init(intent:<wbr>additionalInfo:<wbr>fulfilmentMethod:<wbr>origin:<wbr>title:<wbr>description:<wbr>)</a>
+                    <a name="/s:22SudoPrivacyInteraction15AvailableActionV6statusAA0E6StatusOSgvp"></a>
+                    <a name="//apple_ref/swift/Property/status" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction15AvailableActionV6statusAA0E6StatusOSgvp">status</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Lifecycle status of the most recent, non-superseded persisted action for this intent on the
+data holder. <code>nil</code> when the user has never initiated this action, distinguishing
+&ldquo;not yet started&rdquo; (<code>nil</code>) from &ldquo;in progress&rdquo; or &ldquo;completed&rdquo;.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">status</span><span class="p">:</span> <span class="kt"><a href="../Enums/ActionStatus.html">ActionStatus</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction15AvailableActionV6intent14additionalInfo16fulfilmentMethod6origin5title11description6statusAcA0E6IntentO_SSSgAA0e10FulfilmentJ0OAA0E6OriginOA2mA0E6StatusOSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(intent:additionalInfo:fulfilmentMethod:origin:title:description:status:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction15AvailableActionV6intent14additionalInfo16fulfilmentMethod6origin5title11description6statusAcA0E6IntentO_SSSgAA0e10FulfilmentJ0OAA0E6OriginOA2mA0E6StatusOSgtcfc">init(intent:<wbr>additionalInfo:<wbr>fulfilmentMethod:<wbr>origin:<wbr>title:<wbr>description:<wbr>status:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -464,7 +499,8 @@
     <span class="nv">fulfilmentMethod</span><span class="p">:</span> <span class="kt"><a href="../Enums/ActionFulfilmentMethod.html">ActionFulfilmentMethod</a></span><span class="p">,</span>
     <span class="nv">origin</span><span class="p">:</span> <span class="kt"><a href="../Enums/ActionOrigin.html">ActionOrigin</a></span><span class="p">,</span>
     <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span>
-    <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span>
+    <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span>
+    <span class="nv">status</span><span class="p">:</span> <span class="kt"><a href="../Enums/ActionStatus.html">ActionStatus</a></span><span class="p">?</span>
 <span class="p">)</span></code></pre>
 
                         </div>
@@ -480,7 +516,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2026 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2026-10-26)</p>
+      <p>&copy; 2026 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2026-11-09)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>

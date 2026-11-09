@@ -152,6 +152,11 @@ public class DefaultSudoPrivacyInteractionClient: SudoPrivacyInteractionClient {
         return try await useCase.execute(id: id)
     }
 
+    public func refreshVirtualPresenceState(withId id: String) async throws -> VirtualPresence {
+        let useCase = useCaseFactory.generateRefreshVirtualPresenceStateUseCase()
+        return try await useCase.execute(id: id)
+    }
+
     public func listVirtualPresences(withInput input: ListVirtualPresencesInput) async throws -> ListOutput<VirtualPresence> {
         let useCase = useCaseFactory.generateListVirtualPresencesUseCase()
         return try await useCase.execute(input: input)
@@ -216,9 +221,19 @@ public class DefaultSudoPrivacyInteractionClient: SudoPrivacyInteractionClient {
 
     // MARK: - Actions
 
-    public func listAvailableActions(forDataHolderId dataHolderId: String) async throws -> ListOutput<AvailableAction> {
+    public func listAvailableActions(
+        forDataHolderId dataHolderId: String,
+        includeCompleted: Bool?
+    ) async throws -> ListOutput<AvailableAction> {
         let useCase = useCaseFactory.generateListAvailableActionsUseCase()
-        return try await useCase.execute(dataHolderId: dataHolderId)
+        return try await useCase.execute(dataHolderId: dataHolderId, includeCompleted: includeCompleted)
+    }
+
+    public func listActionsForDataHolder(
+        withInput input: ListActionsForDataHolderInput
+    ) async throws -> ListOutput<Action> {
+        let useCase = useCaseFactory.generateListActionsForDataHolderUseCase()
+        return try await useCase.execute(input: input)
     }
 
     public func initiateAction(withInput input: InitiateActionInput) async throws -> Action {

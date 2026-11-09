@@ -62,6 +62,12 @@ final class DefaultVirtualPresenceRepository: VirtualPresenceRepository, SudoApi
         return transformer.transform(result.rescanVirtualPresence.fragments.virtualPresenceFields)
     }
 
+    func refreshState(id: String) async throws -> VirtualPresence {
+        let mutation = GraphQL.RefreshVirtualPresenceStateMutation(id: id)
+        let result = try await perform(mutation)
+        return transformer.transform(result.refreshVirtualPresenceState.fragments.virtualPresenceFields)
+    }
+
     func list(limit: Int?, nextToken: String?) async throws -> ListOutput<VirtualPresence> {
         let queryInput = GraphQL.ListVirtualPresencesInput(
             limit: limit.map { .some($0) },

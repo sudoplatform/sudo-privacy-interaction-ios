@@ -40,6 +40,9 @@ public struct OrganizationAnalysis: Equatable, Sendable {
     /// Aggregate status. `.pending` while an asynchronous source is still resolving.
     public let status: AnalysisResultStatus
 
+    /// Reason for the current `status`, when the service provides one.
+    public let statusReason: AnalysisResultStatusReason?
+
     /// Time the aggregate was last derived.
     public let lastAnalyzedAt: Date
 
@@ -62,6 +65,7 @@ public struct OrganizationAnalysis: Equatable, Sendable {
         id: String,
         domain: String,
         status: AnalysisResultStatus,
+        statusReason: AnalysisResultStatusReason? = nil,
         lastAnalyzedAt: Date,
         data: AnalysisResultData?,
         owner: String,
@@ -72,6 +76,7 @@ public struct OrganizationAnalysis: Equatable, Sendable {
         self.id = id
         self.domain = domain
         self.status = status
+        self.statusReason = statusReason
         self.lastAnalyzedAt = lastAnalyzedAt
         self.data = data
         self.owner = owner

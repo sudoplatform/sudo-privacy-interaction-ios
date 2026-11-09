@@ -19,6 +19,24 @@ public enum AnalysisResultStatus: String, Equatable, Sendable {
     case unknown
 }
 
+/// Explains why an analysis has its current `AnalysisResultStatus`.
+///
+/// Typically populated when the status is `.failed` or `.unavailable`, to distinguish the cause.
+public enum AnalysisResultStatusReason: String, Equatable, Sendable {
+    /// The supplied domain was not a valid, analyzable domain.
+    case invalidDomain
+    /// No privacy policy was available to analyze.
+    case policyUnavailable
+    /// The domain was identified as malicious.
+    case malicious
+    /// Analysis was not attempted.
+    case notAttempted
+    /// A reason that does not fall into the other categories.
+    case other
+    /// A reason returned by the service that this version of the SDK does not recognize.
+    case unknown
+}
+
 /// Tri-state signal representing confidence in a determination.
 public enum SignalValue: String, Equatable, Sendable {
     case yes
@@ -421,6 +439,9 @@ public struct AnalysisResult: Equatable, Sendable {
     /// Aggregate status of the analysis.
     public let status: AnalysisResultStatus
 
+    /// Reason for the current `status`, when the service provides one.
+    public let statusReason: AnalysisResultStatusReason?
+
     /// Time the aggregate was last derived.
     public let lastAnalyzedAt: Date
 
@@ -444,6 +465,7 @@ public struct AnalysisResult: Equatable, Sendable {
         virtualPresenceId: String,
         dataHolderIdentifier: String,
         status: AnalysisResultStatus,
+        statusReason: AnalysisResultStatusReason? = nil,
         lastAnalyzedAt: Date,
         data: AnalysisResultData?,
         owner: String,
@@ -455,6 +477,7 @@ public struct AnalysisResult: Equatable, Sendable {
         self.virtualPresenceId = virtualPresenceId
         self.dataHolderIdentifier = dataHolderIdentifier
         self.status = status
+        self.statusReason = statusReason
         self.lastAnalyzedAt = lastAnalyzedAt
         self.data = data
         self.owner = owner

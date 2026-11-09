@@ -21,7 +21,7 @@ class ListAvailableActionsUseCase {
 
     // MARK: - Methods
 
-    func execute(dataHolderId: String) async throws -> ListOutput<AvailableAction> {
-        try await actionRepository.listAvailable(dataHolderId: dataHolderId)
+    func execute(dataHolderId: String, includeCompleted: Bool? = nil) async throws -> ListOutput<AvailableAction> {
+        try await actionRepository.listAvailable(dataHolderId: dataHolderId, includeCompleted: includeCompleted)
     }
 }

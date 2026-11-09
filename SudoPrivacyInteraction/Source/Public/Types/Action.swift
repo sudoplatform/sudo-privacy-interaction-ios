@@ -19,6 +19,18 @@ public enum ActionIntent: String, Equatable, Sendable {
     case deleteMyData
     /// Opt out of sale / tracking, manage consent.
     case limitDataUse
+    /// The user has replaced the account's email with a private email. Always available for an
+    /// email presence; self-reported.
+    case swapEmail
+    /// The user has replaced the account's phone number with a private number. Offered only when a
+    /// signal indicates the data holder holds the user's phone number.
+    case swapPhone
+    /// The user has replaced the account's payment card with a virtual card. Offered only when the
+    /// data holder is identified as collecting credit card data.
+    case swapVirtualCard
+    /// The user has saved this account in a password manager. Offered only when the data holder
+    /// supports account creation.
+    case saveInPassword
     /// Anything unmapped (also the catch-all for values this version of the SDK does not recognize);
     /// carries `additionalInfo`.
     case other
@@ -138,13 +150,19 @@ public struct AvailableAction: Equatable, Sendable {
     /// Short presentation hint describing the action.
     public let description: String?
 
+    /// Lifecycle status of the most recent, non-superseded persisted action for this intent on the
+    /// data holder. `nil` when the user has never initiated this action, distinguishing
+    /// "not yet started" (`nil`) from "in progress" or "completed".
+    public let status: ActionStatus?
+
     public init(
         intent: ActionIntent,
         additionalInfo: String?,
         fulfilmentMethod: ActionFulfilmentMethod,
         origin: ActionOrigin,
         title: String?,
-        description: String?
+        description: String?,
+        status: ActionStatus?
     ) {
         self.intent = intent
         self.additionalInfo = additionalInfo
@@ -152,6 +170,7 @@ public struct AvailableAction: Equatable, Sendable {
         self.origin = origin
         self.title = title
         self.description = description
+        self.status = status
     }
 }
 

@@ -71,6 +71,9 @@
                 <a class="nav-group-task-link" href="../Enums/AnalysisResultStatus.html">AnalysisResultStatus</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/AnalysisResultStatusReason.html">AnalysisResultStatusReason</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/ConnectionState.html">ConnectionState</a>
               </li>
               <li class="nav-group-task">
@@ -195,6 +198,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/InitiateActionInput.html">InitiateActionInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ListActionsForDataHolderInput.html">ListActionsForDataHolderInput</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/ListAnalysisResultsInput.html">ListAnalysisResultsInput</a>
@@ -568,6 +574,35 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP27refreshVirtualPresenceState6withIdAA0fG0VSS_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/refreshVirtualPresenceState(withId:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP27refreshVirtualPresenceState6withIdAA0fG0VSS_tYaKF">refreshVirtualPresenceState(withId:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">refreshVirtualPresenceState</span><span class="p">(</span><span class="n">withId</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/VirtualPresence.html">VirtualPresence</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:22SudoPrivacyInteraction0abC6ClientP20listVirtualPresences9withInputAA10ListOutputVyAA0F8PresenceVGAA0jfgI0V_tYaKF"></a>
                     <a name="//apple_ref/swift/Method/listVirtualPresences(withInput:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP20listVirtualPresences9withInputAA10ListOutputVyAA0F8PresenceVGAA0jfgI0V_tYaKF">listVirtualPresences(withInput:<wbr>)</a>
@@ -927,9 +962,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP20listAvailableActions15forDataHolderIdAA10ListOutputVyAA0F6ActionVGSS_tYaKF"></a>
-                    <a name="//apple_ref/swift/Method/listAvailableActions(forDataHolderId:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP20listAvailableActions15forDataHolderIdAA10ListOutputVyAA0F6ActionVGSS_tYaKF">listAvailableActions(forDataHolderId:<wbr>)</a>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP20listAvailableActions15forDataHolderId16includeCompletedAA10ListOutputVyAA0F6ActionVGSS_SbSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/listAvailableActions(forDataHolderId:includeCompleted:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP20listAvailableActions15forDataHolderId16includeCompletedAA10ListOutputVyAA0F6ActionVGSS_SbSgtYaKF">listAvailableActions(forDataHolderId:<wbr>includeCompleted:<wbr>)</a>
                     </code>
                       <span class="declaration-note">
                         Asynchronous
@@ -946,7 +981,41 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listAvailableActions</span><span class="p">(</span><span class="n">forDataHolderId</span> <span class="nv">dataHolderId</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/ListOutput.html">ListOutput</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/AvailableAction.html">AvailableAction</a></span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listAvailableActions</span><span class="p">(</span>
+    <span class="n">forDataHolderId</span> <span class="nv">dataHolderId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">includeCompleted</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span>
+<span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/ListOutput.html">ListOutput</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/AvailableAction.html">AvailableAction</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction0abC6ClientP24listActionsForDataHolder9withInputAA10ListOutputVyAA6ActionVGAA0lfghiK0V_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/listActionsForDataHolder(withInput:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction0abC6ClientP24listActionsForDataHolder9withInputAA10ListOutputVyAA6ActionVGAA0lfghiK0V_tYaKF">listActionsForDataHolder(withInput:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listActionsForDataHolder</span><span class="p">(</span>
+    <span class="n">withInput</span> <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Structs/ListActionsForDataHolderInput.html">ListActionsForDataHolderInput</a></span>
+<span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/ListOutput.html">ListOutput</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Action.html">Action</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -1335,7 +1404,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2026 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2026-10-26)</p>
+      <p>&copy; 2026 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2026-11-09)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>

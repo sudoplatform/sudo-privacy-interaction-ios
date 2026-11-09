@@ -21,6 +21,7 @@ struct OrganizationAnalysisEntityTransformer {
             id: fields.id,
             domain: fields.domain,
             status: analysisResultTransformer.transform(fields.getAnalysisResultStatus()),
+            statusReason: fields.getAnalysisResultStatusReason().map(analysisResultTransformer.transform(_:)),
             lastAnalyzedAt: Self.date(fromEpochMs: fields.lastAnalyzedAtEpochMs),
             data: fields.data.map { analysisResultTransformer.transform($0.fragments.analysisResultDataFields) },
             owner: fields.owner,

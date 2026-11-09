@@ -76,6 +76,10 @@ class UseCaseFactory: @unchecked Sendable {
         return RescanVirtualPresenceUseCase(virtualPresenceRepository: virtualPresenceRepository)
     }
 
+    func generateRefreshVirtualPresenceStateUseCase() -> RefreshVirtualPresenceStateUseCase {
+        return RefreshVirtualPresenceStateUseCase(virtualPresenceRepository: virtualPresenceRepository)
+    }
+
     func generateGetProviderConfigurationUseCase() -> GetProviderConfigurationUseCase {
         return GetProviderConfigurationUseCase(providerConfigurationRepository: providerConfigurationRepository)
     }
@@ -86,6 +90,10 @@ class UseCaseFactory: @unchecked Sendable {
 
     func generateListAvailableActionsUseCase() -> ListAvailableActionsUseCase {
         return ListAvailableActionsUseCase(actionRepository: actionRepository)
+    }
+
+    func generateListActionsForDataHolderUseCase() -> ListActionsForDataHolderUseCase {
+        return ListActionsForDataHolderUseCase(actionRepository: actionRepository)
     }
 
     func generateInitiateActionUseCase() -> InitiateActionUseCase {

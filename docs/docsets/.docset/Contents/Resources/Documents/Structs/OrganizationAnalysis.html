@@ -71,6 +71,9 @@
                 <a class="nav-group-task-link" href="../Enums/AnalysisResultStatus.html">AnalysisResultStatus</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/AnalysisResultStatusReason.html">AnalysisResultStatusReason</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/ConnectionState.html">ConnectionState</a>
               </li>
               <li class="nav-group-task">
@@ -195,6 +198,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/InitiateActionInput.html">InitiateActionInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ListActionsForDataHolderInput.html">ListActionsForDataHolderInput</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/ListAnalysisResultsInput.html">ListAnalysisResultsInput</a>
@@ -367,6 +373,33 @@ carries only organization-generic signals. <code>id</code> equals the analyzed d
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:22SudoPrivacyInteraction20OrganizationAnalysisV12statusReasonAA0e12ResultStatusG0OSgvp"></a>
+                    <a name="//apple_ref/swift/Property/statusReason" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction20OrganizationAnalysisV12statusReasonAA0e12ResultStatusG0OSgvp">statusReason</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reason for the current <code><a href="../Structs/OrganizationAnalysis.html#/s:22SudoPrivacyInteraction20OrganizationAnalysisV6statusAA0E12ResultStatusOvp">status</a></code>, when the service provides one.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">statusReason</span><span class="p">:</span> <span class="kt"><a href="../Enums/AnalysisResultStatusReason.html">AnalysisResultStatusReason</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:22SudoPrivacyInteraction20OrganizationAnalysisV14lastAnalyzedAt10Foundation4DateVvp"></a>
                     <a name="//apple_ref/swift/Property/lastAnalyzedAt" class="dashAnchor"></a>
                     <a class="token" href="#/s:22SudoPrivacyInteraction20OrganizationAnalysisV14lastAnalyzedAt10Foundation4DateVvp">lastAnalyzedAt</a>
@@ -529,9 +562,9 @@ carries only organization-generic signals. <code>id</code> equals the analyzed d
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:22SudoPrivacyInteraction20OrganizationAnalysisV2id6domain6status14lastAnalyzedAt4data5owner7version07createdK007updatedK0ACSS_SSAA0E12ResultStatusO10Foundation4DateVAA0eQ4DataVSgSSSiA2Qtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(id:domain:status:lastAnalyzedAt:data:owner:version:createdAt:updatedAt:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:22SudoPrivacyInteraction20OrganizationAnalysisV2id6domain6status14lastAnalyzedAt4data5owner7version07createdK007updatedK0ACSS_SSAA0E12ResultStatusO10Foundation4DateVAA0eQ4DataVSgSSSiA2Qtcfc">init(id:<wbr>domain:<wbr>status:<wbr>lastAnalyzedAt:<wbr>data:<wbr>owner:<wbr>version:<wbr>createdAt:<wbr>updatedAt:<wbr>)</a>
+                    <a name="/s:22SudoPrivacyInteraction20OrganizationAnalysisV2id6domain6status0H6Reason14lastAnalyzedAt4data5owner7version07createdL007updatedL0ACSS_SSAA0E12ResultStatusOAA0ersI0OSg10Foundation4DateVAA0eR4DataVSgSSSiA2Utcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(id:domain:status:statusReason:lastAnalyzedAt:data:owner:version:createdAt:updatedAt:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction20OrganizationAnalysisV2id6domain6status0H6Reason14lastAnalyzedAt4data5owner7version07createdL007updatedL0ACSS_SSAA0E12ResultStatusOAA0ersI0OSg10Foundation4DateVAA0eR4DataVSgSSSiA2Utcfc">init(id:<wbr>domain:<wbr>status:<wbr>statusReason:<wbr>lastAnalyzedAt:<wbr>data:<wbr>owner:<wbr>version:<wbr>createdAt:<wbr>updatedAt:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -549,6 +582,7 @@ carries only organization-generic signals. <code>id</code> equals the analyzed d
     <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">domain</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">status</span><span class="p">:</span> <span class="kt"><a href="../Enums/AnalysisResultStatus.html">AnalysisResultStatus</a></span><span class="p">,</span>
+    <span class="nv">statusReason</span><span class="p">:</span> <span class="kt"><a href="../Enums/AnalysisResultStatusReason.html">AnalysisResultStatusReason</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">lastAnalyzedAt</span><span class="p">:</span> <span class="kt">Date</span><span class="p">,</span>
     <span class="nv">data</span><span class="p">:</span> <span class="kt"><a href="../Structs/AnalysisResultData.html">AnalysisResultData</a></span><span class="p">?,</span>
     <span class="nv">owner</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
@@ -570,7 +604,7 @@ carries only organization-generic signals. <code>id</code> equals the analyzed d
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2026 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2026-10-26)</p>
+      <p>&copy; 2026 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2026-11-09)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>

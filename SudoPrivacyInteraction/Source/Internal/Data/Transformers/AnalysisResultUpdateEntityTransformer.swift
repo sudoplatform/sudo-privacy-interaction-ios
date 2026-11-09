@@ -16,6 +16,7 @@ struct AnalysisResultUpdateEntityTransformer {
             virtualPresenceId: fields.virtualPresenceId,
             dataHolderIdentifier: fields.dataHolderIdentifier,
             status: transform(fields.getAnalysisResultStatus()),
+            statusReason: fields.getAnalysisResultStatusReason().map(transform(_:)),
             lastAnalyzedAt: Self.date(fromEpochMs: fields.lastAnalyzedAtEpochMs),
             owner: fields.owner,
             version: fields.version,
@@ -38,6 +39,23 @@ struct AnalysisResultUpdateEntityTransformer {
             return .failed
         case .unavailable:
             return .unavailable
+        case .unknown:
+            return .unknown
+        }
+    }
+
+    private func transform(_ reason: GraphQL.AnalysisResultStatusReason) -> AnalysisResultStatusReason {
+        switch reason {
+        case .invalidDomain:
+            return .invalidDomain
+        case .policyUnavailable:
+            return .policyUnavailable
+        case .malicious:
+            return .malicious
+        case .notAttempted:
+            return .notAttempted
+        case .other:
+            return .other
         case .unknown:
             return .unknown
         }

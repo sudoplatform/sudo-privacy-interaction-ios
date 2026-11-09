@@ -53,6 +53,17 @@ public protocol SudoPrivacyInteractionClient: AnyObject {
     /// - Throws: `SudoPrivacyInteractionError`.
     func disconnectVirtualPresence(withId id: String) async throws -> VirtualPresence
 
+    /// Validate a virtual presence's provider grant on demand and return its reconciled state.
+    ///
+    /// If the provider confirms the grant has been revoked (for example, the user removed access in
+    /// their provider account), the presence transitions to `.needsReauth`; otherwise its state is
+    /// returned unchanged. Use before gating access on a current `.connected` state.
+    ///
+    /// - Parameter id: Unique identifier of the virtual presence to refresh.
+    /// - Returns: The reconciled `VirtualPresence`.
+    /// - Throws: `SudoPrivacyInteractionError`.
+    func refreshVirtualPresenceState(withId id: String) async throws -> VirtualPresence
+
     /// List the virtual presences owned by the signed-in user.
     ///
     /// - Parameter input: Parameters used to page the results.
@@ -141,10 +152,29 @@ public protocol SudoPrivacyInteractionClient: AnyObject {
 
     /// List the actions currently available for a data holder relationship.
     ///
-    /// - Parameter dataHolderId: Identifier of the data holder whose available actions to list.
+    /// - Parameters:
+    ///   - dataHolderId: Identifier of the data holder whose available actions to list.
+    ///   - includeCompleted: When `true`, include actions whose most recent persisted instance is
+    ///     in a completed state; when `false` they are omitted. When `nil`, the service default
+    ///     applies.
     /// - Returns: A paginated list of `AvailableAction`.
     /// - Throws: `SudoPrivacyInteractionError`.
-    func listAvailableActions(forDataHolderId dataHolderId: String) async throws -> ListOutput<AvailableAction>
+    func listAvailableActions(
+        forDataHolderId dataHolderId: String,
+        includeCompleted: Bool?
+    ) async throws -> ListOutput<AvailableAction>
+
+    /// List the persisted action history for a data holder.
+    ///
+    /// Returns every action that has been initiated against the data holder (all intents, all
+    /// statuses, every attempt), ordered newest-first. This is the executed-action history,
+    /// distinct from `listAvailableActions`, which returns the derived set of actions a user could
+    /// take.
+    ///
+    /// - Parameter input: Parameters identifying the data holder and paging the results.
+    /// - Returns: A paginated list of `Action`.
+    /// - Throws: `SudoPrivacyInteractionError`.
+    func listActionsForDataHolder(withInput input: ListActionsForDataHolderInput) async throws -> ListOutput<Action>
 
     /// Initiate an action against a data holder relationship.
     ///
@@ -239,4 +269,17 @@ public protocol SudoPrivacyInteractionClient: AnyObject {
     ///
     /// - Parameter subscriptionId: The identifier of the subscription to cancel.
     func unsubscribeFromAction(subscriptionId: String)
+}
+
+public extension SudoPrivacyInteractionClient {
+
+    /// List the actions currently available for a data holder relationship, using the service
+    /// default for whether completed actions are included.
+    ///
+    /// - Parameter dataHolderId: Identifier of the data holder whose available actions to list.
+    /// - Returns: A paginated list of `AvailableAction`.
+    /// - Throws: `SudoPrivacyInteractionError`.
+    func listAvailableActions(forDataHolderId dataHolderId: String) async throws -> ListOutput<AvailableAction> {
+        try await listAvailableActions(forDataHolderId: dataHolderId, includeCompleted: nil)
+    }
 }

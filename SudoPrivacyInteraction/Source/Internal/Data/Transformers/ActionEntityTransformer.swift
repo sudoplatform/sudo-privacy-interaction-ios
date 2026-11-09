@@ -40,7 +40,8 @@ struct ActionEntityTransformer {
             fulfilmentMethod: transform(fields.getActionFulfilmentMethod()),
             origin: transform(fields.getActionOrigin()),
             title: fields.title,
-            description: fields.description
+            description: fields.description,
+            status: fields.getOptionalActionStatus().map { transform($0) }
         )
     }
 
@@ -70,6 +71,14 @@ struct ActionEntityTransformer {
             return .deleteMyData
         case .limitDataUse:
             return .limitDataUse
+        case .swapEmail:
+            return .swapEmail
+        case .swapPhone:
+            return .swapPhone
+        case .swapVirtualCard:
+            return .swapVirtualCard
+        case .saveInPassword:
+            return .saveInPassword
         case .other, .unknown:
             // `OTHER` is the service's catch-all; an unrecognized value also collapses to it.
             return .other

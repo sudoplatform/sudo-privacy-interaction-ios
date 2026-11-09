@@ -23,6 +23,9 @@ protocol VirtualPresenceRepository: AnyObject {
     /// Rescan an existing virtual presence for new data holders.
     func rescan(input: RescanVirtualPresenceInput) async throws -> VirtualPresence
 
+    /// Validate a virtual presence's provider grant on demand and return its reconciled state.
+    func refreshState(id: String) async throws -> VirtualPresence
+
     /// List virtual presences owned by the signed-in user.
     func list(limit: Int?, nextToken: String?) async throws -> ListOutput<VirtualPresence>
 }

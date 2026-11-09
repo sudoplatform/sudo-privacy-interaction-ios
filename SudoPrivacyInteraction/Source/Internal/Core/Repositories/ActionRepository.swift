@@ -12,7 +12,23 @@ import Foundation
 protocol ActionRepository: AnyObject {
 
     /// List the actions currently available for a data holder relationship.
-    func listAvailable(dataHolderId: String) async throws -> ListOutput<AvailableAction>
+    ///
+    /// - Parameters:
+    ///   - dataHolderId: Identifier of the data holder whose available actions to list.
+    ///   - includeCompleted: When `true`, include actions whose most recent persisted instance is
+    ///     in a completed state. When `nil`, the service default applies.
+    func listAvailable(dataHolderId: String, includeCompleted: Bool?) async throws -> ListOutput<AvailableAction>
+
+    /// List the persisted action history for a data holder.
+    ///
+    /// Returns every action that has been initiated against the data holder (all intents, all
+    /// statuses, every attempt), ordered newest-first.
+    ///
+    /// - Parameters:
+    ///   - dataHolderId: Identifier of the data holder whose action history to list.
+    ///   - limit: Maximum number of items to return in a single page.
+    ///   - nextToken: Token identifying the page of results to return.
+    func listForDataHolder(dataHolderId: String, limit: Int?, nextToken: String?) async throws -> ListOutput<Action>
 
     /// Initiate an action against a data holder relationship.
     func initiate(input: InitiateActionInput) async throws -> Action
