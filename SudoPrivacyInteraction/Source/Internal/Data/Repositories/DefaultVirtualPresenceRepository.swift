@@ -92,7 +92,7 @@ final class DefaultVirtualPresenceRepository: VirtualPresenceRepository, SudoApi
 
     private static func transform(_ input: ConnectVirtualPresenceWithRefreshTokenInput) -> GraphQL.RefreshTokenInput {
         GraphQL.RefreshTokenInput(
-            expiresInEpochMs: input.expiresAt.map { .some($0.timeIntervalSince1970 * 1000) },
+            expiresAtEpochMs: input.expiresAt.map { .some($0.timeIntervalSince1970 * 1000) },
             providerIdentity: input.providerIdentity,
             refreshToken: input.refreshToken,
             scopes: input.scopes.map { .some($0) }

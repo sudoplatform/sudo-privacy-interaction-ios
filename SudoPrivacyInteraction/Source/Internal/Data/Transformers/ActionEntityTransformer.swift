@@ -79,6 +79,12 @@ struct ActionEntityTransformer {
             return .swapVirtualCard
         case .saveInPassword:
             return .saveInPassword
+        case .useTwoFactorAuth:
+            return .useTwoFactorAuth
+        case .usePasskey:
+            return .usePasskey
+        case .useStrongPassword:
+            return .useStrongPassword
         case .other, .unknown:
             // `OTHER` is the service's catch-all; an unrecognized value also collapses to it.
             return .other

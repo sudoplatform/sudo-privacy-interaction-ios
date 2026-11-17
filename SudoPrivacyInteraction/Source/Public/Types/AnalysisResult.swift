@@ -211,6 +211,7 @@ public struct CapabilitySignals: Equatable, Sendable {
 
     public let usesCookiesOrTracking: SignalValue
     public let supportsTwoFactorAuth: SignalValue
+    public let supportsPasskeys: SignalValue
 
     /// Whether the organization sells personal information.
     @available(*, deprecated, message: "Use supportsOptOutOfSale instead.")
@@ -224,7 +225,8 @@ public struct CapabilitySignals: Equatable, Sendable {
         supportsSubscriptions: SignalValue,
         supportsOptOutOfSale: SignalValue,
         usesCookiesOrTracking: SignalValue,
-        supportsTwoFactorAuth: SignalValue
+        supportsTwoFactorAuth: SignalValue,
+        supportsPasskeys: SignalValue
     ) {
         self.supportsAccountCreation = supportsAccountCreation
         self.supportsAccountDeletion = supportsAccountDeletion
@@ -234,6 +236,7 @@ public struct CapabilitySignals: Equatable, Sendable {
         self.supportsOptOutOfSale = supportsOptOutOfSale
         self.usesCookiesOrTracking = usesCookiesOrTracking
         self.supportsTwoFactorAuth = supportsTwoFactorAuth
+        self.supportsPasskeys = supportsPasskeys
     }
 }
 

@@ -464,14 +464,72 @@ holding some of the user&rsquo;s data, typically discovered by scanning a connec
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Time of the most recent interaction with this data holder.</p>
+                        <p>Time of the most recent interaction with this data holder. Equal to
+<code><a href="../Structs/DataHolder.html#/s:22SudoPrivacyInteraction10DataHolderV26mostRecentInboundContactAt10Foundation4DateVvp">mostRecentInboundContactAt</a></code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">mostRecentInteractionAt</span><span class="p">:</span> <span class="kt">Date</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@available(*, deprecated, message: "Use mostRecentInboundContactAt instead.")</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">mostRecentInteractionAt</span><span class="p">:</span> <span class="kt">Date</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction10DataHolderV26mostRecentInboundContactAt10Foundation4DateVvp"></a>
+                    <a name="//apple_ref/swift/Property/mostRecentInboundContactAt" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction10DataHolderV26mostRecentInboundContactAt10Foundation4DateVvp">mostRecentInboundContactAt</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Time of the most recent inbound contact from this data holder. Falls back to <code><a href="../Structs/DataHolder.html#/s:22SudoPrivacyInteraction10DataHolderV9createdAt10Foundation4DateVvp">createdAt</a></code> for
+data holders the service has not yet backfilled with this value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">mostRecentInboundContactAt</span><span class="p">:</span> <span class="kt">Date</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction10DataHolderV21firstInboundContactAt10Foundation4DateVvp"></a>
+                    <a name="//apple_ref/swift/Property/firstInboundContactAt" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction10DataHolderV21firstInboundContactAt10Foundation4DateVvp">firstInboundContactAt</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Time of the earliest observed contact from this data holder. Falls back to <code><a href="../Structs/DataHolder.html#/s:22SudoPrivacyInteraction10DataHolderV9createdAt10Foundation4DateVvp">createdAt</a></code> for
+data holders the service has not yet backfilled with this value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">firstInboundContactAt</span><span class="p">:</span> <span class="kt">Date</span></code></pre>
 
                         </div>
                       </div>
@@ -589,9 +647,9 @@ holding some of the user&rsquo;s data, typically discovered by scanning a connec
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:22SudoPrivacyInteraction10DataHolderV2id17virtualPresenceId10domainName4name15protectionState17complianceConcern010mostRecentC2At5owner7version07createdS007updatedS0ACSS_S3SAA0de10ProtectionN0OSb10Foundation4DateVSSSiA2Stcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(id:virtualPresenceId:domainName:name:protectionState:complianceConcern:mostRecentInteractionAt:owner:version:createdAt:updatedAt:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:22SudoPrivacyInteraction10DataHolderV2id17virtualPresenceId10domainName4name15protectionState17complianceConcern010mostRecentC2At5owner7version07createdS007updatedS0ACSS_S3SAA0de10ProtectionN0OSb10Foundation4DateVSSSiA2Stcfc">init(id:<wbr>virtualPresenceId:<wbr>domainName:<wbr>name:<wbr>protectionState:<wbr>complianceConcern:<wbr>mostRecentInteractionAt:<wbr>owner:<wbr>version:<wbr>createdAt:<wbr>updatedAt:<wbr>)</a>
+                    <a name="/s:22SudoPrivacyInteraction10DataHolderV2id17virtualPresenceId10domainName4name15protectionState17complianceConcern26mostRecentInboundContactAt05firststU05owner7version07createdU007updatedU0ACSS_S3SAA0de10ProtectionN0OSb10Foundation4DateVATSSSiA2Ttcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(id:virtualPresenceId:domainName:name:protectionState:complianceConcern:mostRecentInboundContactAt:firstInboundContactAt:owner:version:createdAt:updatedAt:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction10DataHolderV2id17virtualPresenceId10domainName4name15protectionState17complianceConcern26mostRecentInboundContactAt05firststU05owner7version07createdU007updatedU0ACSS_S3SAA0de10ProtectionN0OSb10Foundation4DateVATSSSiA2Ttcfc">init(id:<wbr>virtualPresenceId:<wbr>domainName:<wbr>name:<wbr>protectionState:<wbr>complianceConcern:<wbr>mostRecentInboundContactAt:<wbr>firstInboundContactAt:<wbr>owner:<wbr>version:<wbr>createdAt:<wbr>updatedAt:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -606,6 +664,48 @@ holding some of the user&rsquo;s data, typically discovered by scanning a connec
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">virtualPresenceId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">domainName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">protectionState</span><span class="p">:</span> <span class="kt"><a href="../Enums/DataHolderProtectionState.html">DataHolderProtectionState</a></span><span class="p">,</span>
+    <span class="nv">complianceConcern</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span>
+    <span class="nv">mostRecentInboundContactAt</span><span class="p">:</span> <span class="kt">Date</span><span class="p">,</span>
+    <span class="nv">firstInboundContactAt</span><span class="p">:</span> <span class="kt">Date</span><span class="p">,</span>
+    <span class="nv">owner</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">version</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span>
+    <span class="nv">createdAt</span><span class="p">:</span> <span class="kt">Date</span><span class="p">,</span>
+    <span class="nv">updatedAt</span><span class="p">:</span> <span class="kt">Date</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:22SudoPrivacyInteraction10DataHolderV2id17virtualPresenceId10domainName4name15protectionState17complianceConcern010mostRecentC2At5owner7version07createdS007updatedS0ACSS_S3SAA0de10ProtectionN0OSb10Foundation4DateVSSSiA2Stcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(id:virtualPresenceId:domainName:name:protectionState:complianceConcern:mostRecentInteractionAt:owner:version:createdAt:updatedAt:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:22SudoPrivacyInteraction10DataHolderV2id17virtualPresenceId10domainName4name15protectionState17complianceConcern010mostRecentC2At5owner7version07createdS007updatedS0ACSS_S3SAA0de10ProtectionN0OSb10Foundation4DateVSSSiA2Stcfc">init(id:<wbr>virtualPresenceId:<wbr>domainName:<wbr>name:<wbr>protectionState:<wbr>complianceConcern:<wbr>mostRecentInteractionAt:<wbr>owner:<wbr>version:<wbr>createdAt:<wbr>updatedAt:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retained for source compatibility. <code><a href="../Structs/DataHolder.html#/s:22SudoPrivacyInteraction10DataHolderV010mostRecentC2At10Foundation4DateVvp">mostRecentInteractionAt</a></code> populates
+<code><a href="../Structs/DataHolder.html#/s:22SudoPrivacyInteraction10DataHolderV26mostRecentInboundContactAt10Foundation4DateVvp">mostRecentInboundContactAt</a></code>, and <code><a href="../Structs/DataHolder.html#/s:22SudoPrivacyInteraction10DataHolderV21firstInboundContactAt10Foundation4DateVvp">firstInboundContactAt</a></code> defaults to <code><a href="../Structs/DataHolder.html#/s:22SudoPrivacyInteraction10DataHolderV9createdAt10Foundation4DateVvp">createdAt</a></code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available(*, deprecated, message: "Use the initializer that takes mostRecentInboundContactAt and firstInboundContactAt.")</span>
+<span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
     <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">virtualPresenceId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">domainName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
@@ -632,7 +732,7 @@ holding some of the user&rsquo;s data, typically discovered by scanning a connec
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2026 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2026-11-09)</p>
+      <p>&copy; 2026 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2026-11-17)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>

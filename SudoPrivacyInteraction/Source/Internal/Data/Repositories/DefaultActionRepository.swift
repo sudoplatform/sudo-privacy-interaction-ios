@@ -92,6 +92,12 @@ final class DefaultActionRepository: ActionRepository, SudoApiGraphQLExecutor {
             return .swapVirtualCard
         case .saveInPassword:
             return .saveInPassword
+        case .useTwoFactorAuth:
+            return .useTwoFactorAuth
+        case .usePasskey:
+            return .usePasskey
+        case .useStrongPassword:
+            return .useStrongPassword
         case .other:
             return .other
         }

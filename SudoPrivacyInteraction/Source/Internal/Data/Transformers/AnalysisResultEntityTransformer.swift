@@ -88,7 +88,8 @@ struct AnalysisResultEntityTransformer {
             supportsSubscriptions: transform(capabilities.getSignalValue(forKey: "supportsSubscriptions")),
             supportsOptOutOfSale: transform(capabilities.getSignalValue(forKey: "supportsOptOutOfSale")),
             usesCookiesOrTracking: transform(capabilities.getSignalValue(forKey: "usesCookiesOrTracking")),
-            supportsTwoFactorAuth: transform(capabilities.getSignalValue(forKey: "supportsTwoFactorAuth"))
+            supportsTwoFactorAuth: transform(capabilities.getSignalValue(forKey: "supportsTwoFactorAuth")),
+            supportsPasskeys: transform(capabilities.getSignalValue(forKey: "supportsPasskeys"))
         )
     }
 

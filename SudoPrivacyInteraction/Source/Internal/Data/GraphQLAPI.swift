@@ -17,6 +17,9 @@ internal enum ActionIntent: RawRepresentable, Equatable, JSONDecodable, JSONEnco
   case swapEmail
   case swapPhone
   case swapVirtualCard
+  case usePasskey
+  case useStrongPassword
+  case useTwoFactorAuth
   /// Auto generated constant for unknown enum values
   case unknown(RawValue)
 
@@ -31,6 +34,9 @@ internal enum ActionIntent: RawRepresentable, Equatable, JSONDecodable, JSONEnco
       case "SWAP_EMAIL": self = .swapEmail
       case "SWAP_PHONE": self = .swapPhone
       case "SWAP_VIRTUAL_CARD": self = .swapVirtualCard
+      case "USE_PASSKEY": self = .usePasskey
+      case "USE_STRONG_PASSWORD": self = .useStrongPassword
+      case "USE_TWO_FACTOR_AUTH": self = .useTwoFactorAuth
       default: self = .unknown(rawValue)
     }
   }
@@ -46,6 +52,9 @@ internal enum ActionIntent: RawRepresentable, Equatable, JSONDecodable, JSONEnco
       case .swapEmail: return "SWAP_EMAIL"
       case .swapPhone: return "SWAP_PHONE"
       case .swapVirtualCard: return "SWAP_VIRTUAL_CARD"
+      case .usePasskey: return "USE_PASSKEY"
+      case .useStrongPassword: return "USE_STRONG_PASSWORD"
+      case .useTwoFactorAuth: return "USE_TWO_FACTOR_AUTH"
       case .unknown(let value): return value
     }
   }
@@ -61,6 +70,9 @@ internal enum ActionIntent: RawRepresentable, Equatable, JSONDecodable, JSONEnco
       case (.swapEmail, .swapEmail): return true
       case (.swapPhone, .swapPhone): return true
       case (.swapVirtualCard, .swapVirtualCard): return true
+      case (.usePasskey, .usePasskey): return true
+      case (.useStrongPassword, .useStrongPassword): return true
+      case (.useTwoFactorAuth, .useTwoFactorAuth): return true
       case (.unknown(let lhsValue), .unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
     }
@@ -853,16 +865,16 @@ internal struct AuthCodeInput: GraphQLMapConvertible {
 internal struct RefreshTokenInput: GraphQLMapConvertible {
   internal var graphQLMap: GraphQLMap
 
-  internal init(expiresInEpochMs: Optional<Double?> = nil, providerIdentity: String, refreshToken: String, scopes: Optional<[String]?> = nil) {
-    graphQLMap = ["expiresInEpochMs": expiresInEpochMs, "providerIdentity": providerIdentity, "refreshToken": refreshToken, "scopes": scopes]
+  internal init(expiresAtEpochMs: Optional<Double?> = nil, providerIdentity: String, refreshToken: String, scopes: Optional<[String]?> = nil) {
+    graphQLMap = ["expiresAtEpochMs": expiresAtEpochMs, "providerIdentity": providerIdentity, "refreshToken": refreshToken, "scopes": scopes]
   }
 
-  internal var expiresInEpochMs: Optional<Double?> {
+  internal var expiresAtEpochMs: Optional<Double?> {
     get {
-      return graphQLMap["expiresInEpochMs"] as? Double?
+      return graphQLMap["expiresAtEpochMs"] as? Double?
     }
     set {
-      graphQLMap.updateValue(newValue, forKey: "expiresInEpochMs")
+      graphQLMap.updateValue(newValue, forKey: "expiresAtEpochMs")
     }
   }
 
@@ -3211,7 +3223,8 @@ internal final class ArchiveDataHolderMutation: GraphQLMutation {
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
         GraphQLField("protectionState", type: .nonNull(.scalar(DataHolderProtectionState.self))),
         GraphQLField("complianceConcern", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("mostRecentInteractionEpochMs", type: .nonNull(.scalar(Double.self))),
+        GraphQLField("mostRecentInboundContactEpochMs", type: .scalar(Double.self)),
+        GraphQLField("firstInboundContactEpochMs", type: .scalar(Double.self)),
         GraphQLField("owner", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("version", type: .nonNull(.scalar(Int.self))),
         GraphQLField("createdAtEpochMs", type: .nonNull(.scalar(Double.self))),
@@ -3224,8 +3237,8 @@ internal final class ArchiveDataHolderMutation: GraphQLMutation {
         self.snapshot = snapshot
       }
 
-      internal init(id: GraphQLID, virtualPresenceId: GraphQLID, domainName: String, name: String, protectionState: DataHolderProtectionState, complianceConcern: Bool, mostRecentInteractionEpochMs: Double, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
-        self.init(snapshot: ["__typename": "DataHolder", "id": id, "virtualPresenceId": virtualPresenceId, "domainName": domainName, "name": name, "protectionState": protectionState, "complianceConcern": complianceConcern, "mostRecentInteractionEpochMs": mostRecentInteractionEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
+      internal init(id: GraphQLID, virtualPresenceId: GraphQLID, domainName: String, name: String, protectionState: DataHolderProtectionState, complianceConcern: Bool, mostRecentInboundContactEpochMs: Double? = nil, firstInboundContactEpochMs: Double? = nil, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
+        self.init(snapshot: ["__typename": "DataHolder", "id": id, "virtualPresenceId": virtualPresenceId, "domainName": domainName, "name": name, "protectionState": protectionState, "complianceConcern": complianceConcern, "mostRecentInboundContactEpochMs": mostRecentInboundContactEpochMs, "firstInboundContactEpochMs": firstInboundContactEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
       }
 
       internal var __typename: String {
@@ -3291,12 +3304,21 @@ internal final class ArchiveDataHolderMutation: GraphQLMutation {
         }
       }
 
-      internal var mostRecentInteractionEpochMs: Double {
+      internal var mostRecentInboundContactEpochMs: Double? {
         get {
-          return snapshot["mostRecentInteractionEpochMs"]! as! Double
+          return snapshot["mostRecentInboundContactEpochMs"] as? Double
         }
         set {
-          snapshot.updateValue(newValue, forKey: "mostRecentInteractionEpochMs")
+          snapshot.updateValue(newValue, forKey: "mostRecentInboundContactEpochMs")
+        }
+      }
+
+      internal var firstInboundContactEpochMs: Double? {
+        get {
+          return snapshot["firstInboundContactEpochMs"] as? Double
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "firstInboundContactEpochMs")
         }
       }
 
@@ -3418,7 +3440,8 @@ internal final class UnarchiveDataHolderMutation: GraphQLMutation {
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
         GraphQLField("protectionState", type: .nonNull(.scalar(DataHolderProtectionState.self))),
         GraphQLField("complianceConcern", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("mostRecentInteractionEpochMs", type: .nonNull(.scalar(Double.self))),
+        GraphQLField("mostRecentInboundContactEpochMs", type: .scalar(Double.self)),
+        GraphQLField("firstInboundContactEpochMs", type: .scalar(Double.self)),
         GraphQLField("owner", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("version", type: .nonNull(.scalar(Int.self))),
         GraphQLField("createdAtEpochMs", type: .nonNull(.scalar(Double.self))),
@@ -3431,8 +3454,8 @@ internal final class UnarchiveDataHolderMutation: GraphQLMutation {
         self.snapshot = snapshot
       }
 
-      internal init(id: GraphQLID, virtualPresenceId: GraphQLID, domainName: String, name: String, protectionState: DataHolderProtectionState, complianceConcern: Bool, mostRecentInteractionEpochMs: Double, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
-        self.init(snapshot: ["__typename": "DataHolder", "id": id, "virtualPresenceId": virtualPresenceId, "domainName": domainName, "name": name, "protectionState": protectionState, "complianceConcern": complianceConcern, "mostRecentInteractionEpochMs": mostRecentInteractionEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
+      internal init(id: GraphQLID, virtualPresenceId: GraphQLID, domainName: String, name: String, protectionState: DataHolderProtectionState, complianceConcern: Bool, mostRecentInboundContactEpochMs: Double? = nil, firstInboundContactEpochMs: Double? = nil, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
+        self.init(snapshot: ["__typename": "DataHolder", "id": id, "virtualPresenceId": virtualPresenceId, "domainName": domainName, "name": name, "protectionState": protectionState, "complianceConcern": complianceConcern, "mostRecentInboundContactEpochMs": mostRecentInboundContactEpochMs, "firstInboundContactEpochMs": firstInboundContactEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
       }
 
       internal var __typename: String {
@@ -3498,12 +3521,21 @@ internal final class UnarchiveDataHolderMutation: GraphQLMutation {
         }
       }
 
-      internal var mostRecentInteractionEpochMs: Double {
+      internal var mostRecentInboundContactEpochMs: Double? {
         get {
-          return snapshot["mostRecentInteractionEpochMs"]! as! Double
+          return snapshot["mostRecentInboundContactEpochMs"] as? Double
         }
         set {
-          snapshot.updateValue(newValue, forKey: "mostRecentInteractionEpochMs")
+          snapshot.updateValue(newValue, forKey: "mostRecentInboundContactEpochMs")
+        }
+      }
+
+      internal var firstInboundContactEpochMs: Double? {
+        get {
+          return snapshot["firstInboundContactEpochMs"] as? Double
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "firstInboundContactEpochMs")
         }
       }
 
@@ -3952,7 +3984,8 @@ internal final class GetDataHolderQuery: GraphQLQuery {
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
         GraphQLField("protectionState", type: .nonNull(.scalar(DataHolderProtectionState.self))),
         GraphQLField("complianceConcern", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("mostRecentInteractionEpochMs", type: .nonNull(.scalar(Double.self))),
+        GraphQLField("mostRecentInboundContactEpochMs", type: .scalar(Double.self)),
+        GraphQLField("firstInboundContactEpochMs", type: .scalar(Double.self)),
         GraphQLField("owner", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("version", type: .nonNull(.scalar(Int.self))),
         GraphQLField("createdAtEpochMs", type: .nonNull(.scalar(Double.self))),
@@ -3965,8 +3998,8 @@ internal final class GetDataHolderQuery: GraphQLQuery {
         self.snapshot = snapshot
       }
 
-      internal init(id: GraphQLID, virtualPresenceId: GraphQLID, domainName: String, name: String, protectionState: DataHolderProtectionState, complianceConcern: Bool, mostRecentInteractionEpochMs: Double, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
-        self.init(snapshot: ["__typename": "DataHolder", "id": id, "virtualPresenceId": virtualPresenceId, "domainName": domainName, "name": name, "protectionState": protectionState, "complianceConcern": complianceConcern, "mostRecentInteractionEpochMs": mostRecentInteractionEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
+      internal init(id: GraphQLID, virtualPresenceId: GraphQLID, domainName: String, name: String, protectionState: DataHolderProtectionState, complianceConcern: Bool, mostRecentInboundContactEpochMs: Double? = nil, firstInboundContactEpochMs: Double? = nil, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
+        self.init(snapshot: ["__typename": "DataHolder", "id": id, "virtualPresenceId": virtualPresenceId, "domainName": domainName, "name": name, "protectionState": protectionState, "complianceConcern": complianceConcern, "mostRecentInboundContactEpochMs": mostRecentInboundContactEpochMs, "firstInboundContactEpochMs": firstInboundContactEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
       }
 
       internal var __typename: String {
@@ -4032,12 +4065,21 @@ internal final class GetDataHolderQuery: GraphQLQuery {
         }
       }
 
-      internal var mostRecentInteractionEpochMs: Double {
+      internal var mostRecentInboundContactEpochMs: Double? {
         get {
-          return snapshot["mostRecentInteractionEpochMs"]! as! Double
+          return snapshot["mostRecentInboundContactEpochMs"] as? Double
         }
         set {
-          snapshot.updateValue(newValue, forKey: "mostRecentInteractionEpochMs")
+          snapshot.updateValue(newValue, forKey: "mostRecentInboundContactEpochMs")
+        }
+      }
+
+      internal var firstInboundContactEpochMs: Double? {
+        get {
+          return snapshot["firstInboundContactEpochMs"] as? Double
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "firstInboundContactEpochMs")
         }
       }
 
@@ -4207,7 +4249,8 @@ internal final class ListDataHoldersQuery: GraphQLQuery {
           GraphQLField("name", type: .nonNull(.scalar(String.self))),
           GraphQLField("protectionState", type: .nonNull(.scalar(DataHolderProtectionState.self))),
           GraphQLField("complianceConcern", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("mostRecentInteractionEpochMs", type: .nonNull(.scalar(Double.self))),
+          GraphQLField("mostRecentInboundContactEpochMs", type: .scalar(Double.self)),
+          GraphQLField("firstInboundContactEpochMs", type: .scalar(Double.self)),
           GraphQLField("owner", type: .nonNull(.scalar(GraphQLID.self))),
           GraphQLField("version", type: .nonNull(.scalar(Int.self))),
           GraphQLField("createdAtEpochMs", type: .nonNull(.scalar(Double.self))),
@@ -4220,8 +4263,8 @@ internal final class ListDataHoldersQuery: GraphQLQuery {
           self.snapshot = snapshot
         }
 
-        internal init(id: GraphQLID, virtualPresenceId: GraphQLID, domainName: String, name: String, protectionState: DataHolderProtectionState, complianceConcern: Bool, mostRecentInteractionEpochMs: Double, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
-          self.init(snapshot: ["__typename": "DataHolder", "id": id, "virtualPresenceId": virtualPresenceId, "domainName": domainName, "name": name, "protectionState": protectionState, "complianceConcern": complianceConcern, "mostRecentInteractionEpochMs": mostRecentInteractionEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
+        internal init(id: GraphQLID, virtualPresenceId: GraphQLID, domainName: String, name: String, protectionState: DataHolderProtectionState, complianceConcern: Bool, mostRecentInboundContactEpochMs: Double? = nil, firstInboundContactEpochMs: Double? = nil, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
+          self.init(snapshot: ["__typename": "DataHolder", "id": id, "virtualPresenceId": virtualPresenceId, "domainName": domainName, "name": name, "protectionState": protectionState, "complianceConcern": complianceConcern, "mostRecentInboundContactEpochMs": mostRecentInboundContactEpochMs, "firstInboundContactEpochMs": firstInboundContactEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
         }
 
         internal var __typename: String {
@@ -4287,12 +4330,21 @@ internal final class ListDataHoldersQuery: GraphQLQuery {
           }
         }
 
-        internal var mostRecentInteractionEpochMs: Double {
+        internal var mostRecentInboundContactEpochMs: Double? {
           get {
-            return snapshot["mostRecentInteractionEpochMs"]! as! Double
+            return snapshot["mostRecentInboundContactEpochMs"] as? Double
           }
           set {
-            snapshot.updateValue(newValue, forKey: "mostRecentInteractionEpochMs")
+            snapshot.updateValue(newValue, forKey: "mostRecentInboundContactEpochMs")
+          }
+        }
+
+        internal var firstInboundContactEpochMs: Double? {
+          get {
+            return snapshot["firstInboundContactEpochMs"] as? Double
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "firstInboundContactEpochMs")
           }
         }
 
@@ -5360,6 +5412,7 @@ internal final class GetAnalysisResultQuery: GraphQLQuery {
             GraphQLField("supportsOptOutOfSale", type: .nonNull(.scalar(SignalValue.self))),
             GraphQLField("usesCookiesOrTracking", type: .nonNull(.scalar(SignalValue.self))),
             GraphQLField("supportsTwoFactorAuth", type: .nonNull(.scalar(SignalValue.self))),
+            GraphQLField("supportsPasskeys", type: .nonNull(.scalar(SignalValue.self))),
           ]
 
           internal var snapshot: Snapshot
@@ -5368,8 +5421,8 @@ internal final class GetAnalysisResultQuery: GraphQLQuery {
             self.snapshot = snapshot
           }
 
-          internal init(supportsAccountCreation: SignalValue, supportsAccountDeletion: SignalValue, supportsDataDeletionRequests: SignalValue, supportsDataExport: SignalValue, supportsSubscriptions: SignalValue, supportsOptOutOfSale: SignalValue, usesCookiesOrTracking: SignalValue, supportsTwoFactorAuth: SignalValue) {
-            self.init(snapshot: ["__typename": "CapabilitySignals", "supportsAccountCreation": supportsAccountCreation, "supportsAccountDeletion": supportsAccountDeletion, "supportsDataDeletionRequests": supportsDataDeletionRequests, "supportsDataExport": supportsDataExport, "supportsSubscriptions": supportsSubscriptions, "supportsOptOutOfSale": supportsOptOutOfSale, "usesCookiesOrTracking": usesCookiesOrTracking, "supportsTwoFactorAuth": supportsTwoFactorAuth])
+          internal init(supportsAccountCreation: SignalValue, supportsAccountDeletion: SignalValue, supportsDataDeletionRequests: SignalValue, supportsDataExport: SignalValue, supportsSubscriptions: SignalValue, supportsOptOutOfSale: SignalValue, usesCookiesOrTracking: SignalValue, supportsTwoFactorAuth: SignalValue, supportsPasskeys: SignalValue) {
+            self.init(snapshot: ["__typename": "CapabilitySignals", "supportsAccountCreation": supportsAccountCreation, "supportsAccountDeletion": supportsAccountDeletion, "supportsDataDeletionRequests": supportsDataDeletionRequests, "supportsDataExport": supportsDataExport, "supportsSubscriptions": supportsSubscriptions, "supportsOptOutOfSale": supportsOptOutOfSale, "usesCookiesOrTracking": usesCookiesOrTracking, "supportsTwoFactorAuth": supportsTwoFactorAuth, "supportsPasskeys": supportsPasskeys])
           }
 
           internal var __typename: String {
@@ -5450,6 +5503,15 @@ internal final class GetAnalysisResultQuery: GraphQLQuery {
             }
             set {
               snapshot.updateValue(newValue, forKey: "supportsTwoFactorAuth")
+            }
+          }
+
+          internal var supportsPasskeys: SignalValue {
+            get {
+              return snapshot["supportsPasskeys"]! as! SignalValue
+            }
+            set {
+              snapshot.updateValue(newValue, forKey: "supportsPasskeys")
             }
           }
         }
@@ -6398,6 +6460,7 @@ internal final class ListAnalysisResultsQuery: GraphQLQuery {
               GraphQLField("supportsOptOutOfSale", type: .nonNull(.scalar(SignalValue.self))),
               GraphQLField("usesCookiesOrTracking", type: .nonNull(.scalar(SignalValue.self))),
               GraphQLField("supportsTwoFactorAuth", type: .nonNull(.scalar(SignalValue.self))),
+              GraphQLField("supportsPasskeys", type: .nonNull(.scalar(SignalValue.self))),
             ]
 
             internal var snapshot: Snapshot
@@ -6406,8 +6469,8 @@ internal final class ListAnalysisResultsQuery: GraphQLQuery {
               self.snapshot = snapshot
             }
 
-            internal init(supportsAccountCreation: SignalValue, supportsAccountDeletion: SignalValue, supportsDataDeletionRequests: SignalValue, supportsDataExport: SignalValue, supportsSubscriptions: SignalValue, supportsOptOutOfSale: SignalValue, usesCookiesOrTracking: SignalValue, supportsTwoFactorAuth: SignalValue) {
-              self.init(snapshot: ["__typename": "CapabilitySignals", "supportsAccountCreation": supportsAccountCreation, "supportsAccountDeletion": supportsAccountDeletion, "supportsDataDeletionRequests": supportsDataDeletionRequests, "supportsDataExport": supportsDataExport, "supportsSubscriptions": supportsSubscriptions, "supportsOptOutOfSale": supportsOptOutOfSale, "usesCookiesOrTracking": usesCookiesOrTracking, "supportsTwoFactorAuth": supportsTwoFactorAuth])
+            internal init(supportsAccountCreation: SignalValue, supportsAccountDeletion: SignalValue, supportsDataDeletionRequests: SignalValue, supportsDataExport: SignalValue, supportsSubscriptions: SignalValue, supportsOptOutOfSale: SignalValue, usesCookiesOrTracking: SignalValue, supportsTwoFactorAuth: SignalValue, supportsPasskeys: SignalValue) {
+              self.init(snapshot: ["__typename": "CapabilitySignals", "supportsAccountCreation": supportsAccountCreation, "supportsAccountDeletion": supportsAccountDeletion, "supportsDataDeletionRequests": supportsDataDeletionRequests, "supportsDataExport": supportsDataExport, "supportsSubscriptions": supportsSubscriptions, "supportsOptOutOfSale": supportsOptOutOfSale, "usesCookiesOrTracking": usesCookiesOrTracking, "supportsTwoFactorAuth": supportsTwoFactorAuth, "supportsPasskeys": supportsPasskeys])
             }
 
             internal var __typename: String {
@@ -6488,6 +6551,15 @@ internal final class ListAnalysisResultsQuery: GraphQLQuery {
               }
               set {
                 snapshot.updateValue(newValue, forKey: "supportsTwoFactorAuth")
+              }
+            }
+
+            internal var supportsPasskeys: SignalValue {
+              get {
+                return snapshot["supportsPasskeys"]! as! SignalValue
+              }
+              set {
+                snapshot.updateValue(newValue, forKey: "supportsPasskeys")
               }
             }
           }
@@ -7491,6 +7563,7 @@ internal final class GetOrganizationAnalysisQuery: GraphQLQuery {
             GraphQLField("supportsOptOutOfSale", type: .nonNull(.scalar(SignalValue.self))),
             GraphQLField("usesCookiesOrTracking", type: .nonNull(.scalar(SignalValue.self))),
             GraphQLField("supportsTwoFactorAuth", type: .nonNull(.scalar(SignalValue.self))),
+            GraphQLField("supportsPasskeys", type: .nonNull(.scalar(SignalValue.self))),
           ]
 
           internal var snapshot: Snapshot
@@ -7499,8 +7572,8 @@ internal final class GetOrganizationAnalysisQuery: GraphQLQuery {
             self.snapshot = snapshot
           }
 
-          internal init(supportsAccountCreation: SignalValue, supportsAccountDeletion: SignalValue, supportsDataDeletionRequests: SignalValue, supportsDataExport: SignalValue, supportsSubscriptions: SignalValue, supportsOptOutOfSale: SignalValue, usesCookiesOrTracking: SignalValue, supportsTwoFactorAuth: SignalValue) {
-            self.init(snapshot: ["__typename": "CapabilitySignals", "supportsAccountCreation": supportsAccountCreation, "supportsAccountDeletion": supportsAccountDeletion, "supportsDataDeletionRequests": supportsDataDeletionRequests, "supportsDataExport": supportsDataExport, "supportsSubscriptions": supportsSubscriptions, "supportsOptOutOfSale": supportsOptOutOfSale, "usesCookiesOrTracking": usesCookiesOrTracking, "supportsTwoFactorAuth": supportsTwoFactorAuth])
+          internal init(supportsAccountCreation: SignalValue, supportsAccountDeletion: SignalValue, supportsDataDeletionRequests: SignalValue, supportsDataExport: SignalValue, supportsSubscriptions: SignalValue, supportsOptOutOfSale: SignalValue, usesCookiesOrTracking: SignalValue, supportsTwoFactorAuth: SignalValue, supportsPasskeys: SignalValue) {
+            self.init(snapshot: ["__typename": "CapabilitySignals", "supportsAccountCreation": supportsAccountCreation, "supportsAccountDeletion": supportsAccountDeletion, "supportsDataDeletionRequests": supportsDataDeletionRequests, "supportsDataExport": supportsDataExport, "supportsSubscriptions": supportsSubscriptions, "supportsOptOutOfSale": supportsOptOutOfSale, "usesCookiesOrTracking": usesCookiesOrTracking, "supportsTwoFactorAuth": supportsTwoFactorAuth, "supportsPasskeys": supportsPasskeys])
           }
 
           internal var __typename: String {
@@ -7581,6 +7654,15 @@ internal final class GetOrganizationAnalysisQuery: GraphQLQuery {
             }
             set {
               snapshot.updateValue(newValue, forKey: "supportsTwoFactorAuth")
+            }
+          }
+
+          internal var supportsPasskeys: SignalValue {
+            get {
+              return snapshot["supportsPasskeys"]! as! SignalValue
+            }
+            set {
+              snapshot.updateValue(newValue, forKey: "supportsPasskeys")
             }
           }
         }
@@ -9353,7 +9435,8 @@ internal final class OnDataHoldersUpdateSubscription: GraphQLSubscription {
           GraphQLField("name", type: .nonNull(.scalar(String.self))),
           GraphQLField("protectionState", type: .nonNull(.scalar(DataHolderProtectionState.self))),
           GraphQLField("complianceConcern", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("mostRecentInteractionEpochMs", type: .nonNull(.scalar(Double.self))),
+          GraphQLField("mostRecentInboundContactEpochMs", type: .scalar(Double.self)),
+          GraphQLField("firstInboundContactEpochMs", type: .scalar(Double.self)),
           GraphQLField("owner", type: .nonNull(.scalar(GraphQLID.self))),
           GraphQLField("version", type: .nonNull(.scalar(Int.self))),
           GraphQLField("createdAtEpochMs", type: .nonNull(.scalar(Double.self))),
@@ -9366,8 +9449,8 @@ internal final class OnDataHoldersUpdateSubscription: GraphQLSubscription {
           self.snapshot = snapshot
         }
 
-        internal init(id: GraphQLID, virtualPresenceId: GraphQLID, domainName: String, name: String, protectionState: DataHolderProtectionState, complianceConcern: Bool, mostRecentInteractionEpochMs: Double, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
-          self.init(snapshot: ["__typename": "DataHolderUpdateItem", "id": id, "virtualPresenceId": virtualPresenceId, "domainName": domainName, "name": name, "protectionState": protectionState, "complianceConcern": complianceConcern, "mostRecentInteractionEpochMs": mostRecentInteractionEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
+        internal init(id: GraphQLID, virtualPresenceId: GraphQLID, domainName: String, name: String, protectionState: DataHolderProtectionState, complianceConcern: Bool, mostRecentInboundContactEpochMs: Double? = nil, firstInboundContactEpochMs: Double? = nil, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
+          self.init(snapshot: ["__typename": "DataHolderUpdateItem", "id": id, "virtualPresenceId": virtualPresenceId, "domainName": domainName, "name": name, "protectionState": protectionState, "complianceConcern": complianceConcern, "mostRecentInboundContactEpochMs": mostRecentInboundContactEpochMs, "firstInboundContactEpochMs": firstInboundContactEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
         }
 
         internal var __typename: String {
@@ -9433,12 +9516,21 @@ internal final class OnDataHoldersUpdateSubscription: GraphQLSubscription {
           }
         }
 
-        internal var mostRecentInteractionEpochMs: Double {
+        internal var mostRecentInboundContactEpochMs: Double? {
           get {
-            return snapshot["mostRecentInteractionEpochMs"]! as! Double
+            return snapshot["mostRecentInboundContactEpochMs"] as? Double
           }
           set {
-            snapshot.updateValue(newValue, forKey: "mostRecentInteractionEpochMs")
+            snapshot.updateValue(newValue, forKey: "mostRecentInboundContactEpochMs")
+          }
+        }
+
+        internal var firstInboundContactEpochMs: Double? {
+          get {
+            return snapshot["firstInboundContactEpochMs"] as? Double
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "firstInboundContactEpochMs")
           }
         }
 
@@ -10862,7 +10954,7 @@ internal struct AvailableActionFields: GraphQLFragment {
 
 internal struct AnalysisResultDataFields: GraphQLFragment {
   internal static let fragmentString =
-    "fragment AnalysisResultDataFields on AnalysisResultData {\n  __typename\n  privacyScore {\n    __typename\n    score\n    breakdown {\n      __typename\n      aspect\n      contribution\n    }\n    coverage {\n      __typename\n      evaluated\n      total\n    }\n  }\n  privacySummary {\n    __typename\n    bulletPoints\n    sourceUrl\n    sourceLastUpdated\n  }\n  categories {\n    __typename\n    category\n    collected\n    dataLabels\n    sharedWithThirdParties\n    monetized\n    retained\n    retention {\n      __typename\n      style\n      timeInDays\n      additionalInfo\n    }\n    userCanOptOut\n    requiredForService\n    requiredForLaw\n  }\n  capabilities {\n    __typename\n    supportsAccountCreation\n    supportsAccountDeletion\n    supportsDataDeletionRequests\n    supportsDataExport\n    supportsSubscriptions\n    supportsOptOutOfSale\n    usesCookiesOrTracking\n    supportsTwoFactorAuth\n  }\n  riskIndicators {\n    __typename\n    dataCollectionBreadth\n    collectsSensitiveDataForNonEssentialPurposes\n    sellsPersonalInformation\n    maxRetentionDays\n    hasIndefiniteRetention\n    encryptionPractices\n    breachRisk\n  }\n  organizationIdentity {\n    __typename\n    brandName\n    companyName\n    primaryCategory\n    categories\n  }\n  attribution\n}"
+    "fragment AnalysisResultDataFields on AnalysisResultData {\n  __typename\n  privacyScore {\n    __typename\n    score\n    breakdown {\n      __typename\n      aspect\n      contribution\n    }\n    coverage {\n      __typename\n      evaluated\n      total\n    }\n  }\n  privacySummary {\n    __typename\n    bulletPoints\n    sourceUrl\n    sourceLastUpdated\n  }\n  categories {\n    __typename\n    category\n    collected\n    dataLabels\n    sharedWithThirdParties\n    monetized\n    retained\n    retention {\n      __typename\n      style\n      timeInDays\n      additionalInfo\n    }\n    userCanOptOut\n    requiredForService\n    requiredForLaw\n  }\n  capabilities {\n    __typename\n    supportsAccountCreation\n    supportsAccountDeletion\n    supportsDataDeletionRequests\n    supportsDataExport\n    supportsSubscriptions\n    supportsOptOutOfSale\n    usesCookiesOrTracking\n    supportsTwoFactorAuth\n    supportsPasskeys\n  }\n  riskIndicators {\n    __typename\n    dataCollectionBreadth\n    collectsSensitiveDataForNonEssentialPurposes\n    sellsPersonalInformation\n    maxRetentionDays\n    hasIndefiniteRetention\n    encryptionPractices\n    breachRisk\n  }\n  organizationIdentity {\n    __typename\n    brandName\n    companyName\n    primaryCategory\n    categories\n  }\n  attribution\n}"
 
   internal static let possibleTypes = ["AnalysisResultData"]
 
@@ -11364,6 +11456,7 @@ internal struct AnalysisResultDataFields: GraphQLFragment {
       GraphQLField("supportsOptOutOfSale", type: .nonNull(.scalar(SignalValue.self))),
       GraphQLField("usesCookiesOrTracking", type: .nonNull(.scalar(SignalValue.self))),
       GraphQLField("supportsTwoFactorAuth", type: .nonNull(.scalar(SignalValue.self))),
+      GraphQLField("supportsPasskeys", type: .nonNull(.scalar(SignalValue.self))),
     ]
 
     internal var snapshot: Snapshot
@@ -11372,8 +11465,8 @@ internal struct AnalysisResultDataFields: GraphQLFragment {
       self.snapshot = snapshot
     }
 
-    internal init(supportsAccountCreation: SignalValue, supportsAccountDeletion: SignalValue, supportsDataDeletionRequests: SignalValue, supportsDataExport: SignalValue, supportsSubscriptions: SignalValue, supportsOptOutOfSale: SignalValue, usesCookiesOrTracking: SignalValue, supportsTwoFactorAuth: SignalValue) {
-      self.init(snapshot: ["__typename": "CapabilitySignals", "supportsAccountCreation": supportsAccountCreation, "supportsAccountDeletion": supportsAccountDeletion, "supportsDataDeletionRequests": supportsDataDeletionRequests, "supportsDataExport": supportsDataExport, "supportsSubscriptions": supportsSubscriptions, "supportsOptOutOfSale": supportsOptOutOfSale, "usesCookiesOrTracking": usesCookiesOrTracking, "supportsTwoFactorAuth": supportsTwoFactorAuth])
+    internal init(supportsAccountCreation: SignalValue, supportsAccountDeletion: SignalValue, supportsDataDeletionRequests: SignalValue, supportsDataExport: SignalValue, supportsSubscriptions: SignalValue, supportsOptOutOfSale: SignalValue, usesCookiesOrTracking: SignalValue, supportsTwoFactorAuth: SignalValue, supportsPasskeys: SignalValue) {
+      self.init(snapshot: ["__typename": "CapabilitySignals", "supportsAccountCreation": supportsAccountCreation, "supportsAccountDeletion": supportsAccountDeletion, "supportsDataDeletionRequests": supportsDataDeletionRequests, "supportsDataExport": supportsDataExport, "supportsSubscriptions": supportsSubscriptions, "supportsOptOutOfSale": supportsOptOutOfSale, "usesCookiesOrTracking": usesCookiesOrTracking, "supportsTwoFactorAuth": supportsTwoFactorAuth, "supportsPasskeys": supportsPasskeys])
     }
 
     internal var __typename: String {
@@ -11454,6 +11547,15 @@ internal struct AnalysisResultDataFields: GraphQLFragment {
       }
       set {
         snapshot.updateValue(newValue, forKey: "supportsTwoFactorAuth")
+      }
+    }
+
+    internal var supportsPasskeys: SignalValue {
+      get {
+        return snapshot["supportsPasskeys"]! as! SignalValue
+      }
+      set {
+        snapshot.updateValue(newValue, forKey: "supportsPasskeys")
       }
     }
   }
@@ -12286,6 +12388,7 @@ internal struct AnalysisResultFields: GraphQLFragment {
         GraphQLField("supportsOptOutOfSale", type: .nonNull(.scalar(SignalValue.self))),
         GraphQLField("usesCookiesOrTracking", type: .nonNull(.scalar(SignalValue.self))),
         GraphQLField("supportsTwoFactorAuth", type: .nonNull(.scalar(SignalValue.self))),
+        GraphQLField("supportsPasskeys", type: .nonNull(.scalar(SignalValue.self))),
       ]
 
       internal var snapshot: Snapshot
@@ -12294,8 +12397,8 @@ internal struct AnalysisResultFields: GraphQLFragment {
         self.snapshot = snapshot
       }
 
-      internal init(supportsAccountCreation: SignalValue, supportsAccountDeletion: SignalValue, supportsDataDeletionRequests: SignalValue, supportsDataExport: SignalValue, supportsSubscriptions: SignalValue, supportsOptOutOfSale: SignalValue, usesCookiesOrTracking: SignalValue, supportsTwoFactorAuth: SignalValue) {
-        self.init(snapshot: ["__typename": "CapabilitySignals", "supportsAccountCreation": supportsAccountCreation, "supportsAccountDeletion": supportsAccountDeletion, "supportsDataDeletionRequests": supportsDataDeletionRequests, "supportsDataExport": supportsDataExport, "supportsSubscriptions": supportsSubscriptions, "supportsOptOutOfSale": supportsOptOutOfSale, "usesCookiesOrTracking": usesCookiesOrTracking, "supportsTwoFactorAuth": supportsTwoFactorAuth])
+      internal init(supportsAccountCreation: SignalValue, supportsAccountDeletion: SignalValue, supportsDataDeletionRequests: SignalValue, supportsDataExport: SignalValue, supportsSubscriptions: SignalValue, supportsOptOutOfSale: SignalValue, usesCookiesOrTracking: SignalValue, supportsTwoFactorAuth: SignalValue, supportsPasskeys: SignalValue) {
+        self.init(snapshot: ["__typename": "CapabilitySignals", "supportsAccountCreation": supportsAccountCreation, "supportsAccountDeletion": supportsAccountDeletion, "supportsDataDeletionRequests": supportsDataDeletionRequests, "supportsDataExport": supportsDataExport, "supportsSubscriptions": supportsSubscriptions, "supportsOptOutOfSale": supportsOptOutOfSale, "usesCookiesOrTracking": usesCookiesOrTracking, "supportsTwoFactorAuth": supportsTwoFactorAuth, "supportsPasskeys": supportsPasskeys])
       }
 
       internal var __typename: String {
@@ -12376,6 +12479,15 @@ internal struct AnalysisResultFields: GraphQLFragment {
         }
         set {
           snapshot.updateValue(newValue, forKey: "supportsTwoFactorAuth")
+        }
+      }
+
+      internal var supportsPasskeys: SignalValue {
+        get {
+          return snapshot["supportsPasskeys"]! as! SignalValue
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "supportsPasskeys")
         }
       }
     }
@@ -12678,7 +12790,7 @@ internal struct AnalysisResultUpdateFields: GraphQLFragment {
 
 internal struct DataHolderFields: GraphQLFragment {
   internal static let fragmentString =
-    "fragment DataHolderFields on DataHolder {\n  __typename\n  id\n  virtualPresenceId\n  domainName\n  name\n  protectionState\n  complianceConcern\n  mostRecentInteractionEpochMs\n  owner\n  version\n  createdAtEpochMs\n  updatedAtEpochMs\n}"
+    "fragment DataHolderFields on DataHolder {\n  __typename\n  id\n  virtualPresenceId\n  domainName\n  name\n  protectionState\n  complianceConcern\n  mostRecentInboundContactEpochMs\n  firstInboundContactEpochMs\n  owner\n  version\n  createdAtEpochMs\n  updatedAtEpochMs\n}"
 
   internal static let possibleTypes = ["DataHolder"]
 
@@ -12690,7 +12802,8 @@ internal struct DataHolderFields: GraphQLFragment {
     GraphQLField("name", type: .nonNull(.scalar(String.self))),
     GraphQLField("protectionState", type: .nonNull(.scalar(DataHolderProtectionState.self))),
     GraphQLField("complianceConcern", type: .nonNull(.scalar(Bool.self))),
-    GraphQLField("mostRecentInteractionEpochMs", type: .nonNull(.scalar(Double.self))),
+    GraphQLField("mostRecentInboundContactEpochMs", type: .scalar(Double.self)),
+    GraphQLField("firstInboundContactEpochMs", type: .scalar(Double.self)),
     GraphQLField("owner", type: .nonNull(.scalar(GraphQLID.self))),
     GraphQLField("version", type: .nonNull(.scalar(Int.self))),
     GraphQLField("createdAtEpochMs", type: .nonNull(.scalar(Double.self))),
@@ -12703,8 +12816,8 @@ internal struct DataHolderFields: GraphQLFragment {
     self.snapshot = snapshot
   }
 
-  internal init(id: GraphQLID, virtualPresenceId: GraphQLID, domainName: String, name: String, protectionState: DataHolderProtectionState, complianceConcern: Bool, mostRecentInteractionEpochMs: Double, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
-    self.init(snapshot: ["__typename": "DataHolder", "id": id, "virtualPresenceId": virtualPresenceId, "domainName": domainName, "name": name, "protectionState": protectionState, "complianceConcern": complianceConcern, "mostRecentInteractionEpochMs": mostRecentInteractionEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
+  internal init(id: GraphQLID, virtualPresenceId: GraphQLID, domainName: String, name: String, protectionState: DataHolderProtectionState, complianceConcern: Bool, mostRecentInboundContactEpochMs: Double? = nil, firstInboundContactEpochMs: Double? = nil, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
+    self.init(snapshot: ["__typename": "DataHolder", "id": id, "virtualPresenceId": virtualPresenceId, "domainName": domainName, "name": name, "protectionState": protectionState, "complianceConcern": complianceConcern, "mostRecentInboundContactEpochMs": mostRecentInboundContactEpochMs, "firstInboundContactEpochMs": firstInboundContactEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
   }
 
   internal var __typename: String {
@@ -12770,12 +12883,21 @@ internal struct DataHolderFields: GraphQLFragment {
     }
   }
 
-  internal var mostRecentInteractionEpochMs: Double {
+  internal var mostRecentInboundContactEpochMs: Double? {
     get {
-      return snapshot["mostRecentInteractionEpochMs"]! as! Double
+      return snapshot["mostRecentInboundContactEpochMs"] as? Double
     }
     set {
-      snapshot.updateValue(newValue, forKey: "mostRecentInteractionEpochMs")
+      snapshot.updateValue(newValue, forKey: "mostRecentInboundContactEpochMs")
+    }
+  }
+
+  internal var firstInboundContactEpochMs: Double? {
+    get {
+      return snapshot["firstInboundContactEpochMs"] as? Double
+    }
+    set {
+      snapshot.updateValue(newValue, forKey: "firstInboundContactEpochMs")
     }
   }
 
@@ -12978,7 +13100,7 @@ internal struct DataHolderScanSummaryFields: GraphQLFragment {
 
 internal struct DataHolderUpdateItemFields: GraphQLFragment {
   internal static let fragmentString =
-    "fragment DataHolderUpdateItemFields on DataHolderUpdateItem {\n  __typename\n  id\n  virtualPresenceId\n  domainName\n  name\n  protectionState\n  complianceConcern\n  mostRecentInteractionEpochMs\n  owner\n  version\n  createdAtEpochMs\n  updatedAtEpochMs\n}"
+    "fragment DataHolderUpdateItemFields on DataHolderUpdateItem {\n  __typename\n  id\n  virtualPresenceId\n  domainName\n  name\n  protectionState\n  complianceConcern\n  mostRecentInboundContactEpochMs\n  firstInboundContactEpochMs\n  owner\n  version\n  createdAtEpochMs\n  updatedAtEpochMs\n}"
 
   internal static let possibleTypes = ["DataHolderUpdateItem"]
 
@@ -12990,7 +13112,8 @@ internal struct DataHolderUpdateItemFields: GraphQLFragment {
     GraphQLField("name", type: .nonNull(.scalar(String.self))),
     GraphQLField("protectionState", type: .nonNull(.scalar(DataHolderProtectionState.self))),
     GraphQLField("complianceConcern", type: .nonNull(.scalar(Bool.self))),
-    GraphQLField("mostRecentInteractionEpochMs", type: .nonNull(.scalar(Double.self))),
+    GraphQLField("mostRecentInboundContactEpochMs", type: .scalar(Double.self)),
+    GraphQLField("firstInboundContactEpochMs", type: .scalar(Double.self)),
     GraphQLField("owner", type: .nonNull(.scalar(GraphQLID.self))),
     GraphQLField("version", type: .nonNull(.scalar(Int.self))),
     GraphQLField("createdAtEpochMs", type: .nonNull(.scalar(Double.self))),
@@ -13003,8 +13126,8 @@ internal struct DataHolderUpdateItemFields: GraphQLFragment {
     self.snapshot = snapshot
   }
 
-  internal init(id: GraphQLID, virtualPresenceId: GraphQLID, domainName: String, name: String, protectionState: DataHolderProtectionState, complianceConcern: Bool, mostRecentInteractionEpochMs: Double, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
-    self.init(snapshot: ["__typename": "DataHolderUpdateItem", "id": id, "virtualPresenceId": virtualPresenceId, "domainName": domainName, "name": name, "protectionState": protectionState, "complianceConcern": complianceConcern, "mostRecentInteractionEpochMs": mostRecentInteractionEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
+  internal init(id: GraphQLID, virtualPresenceId: GraphQLID, domainName: String, name: String, protectionState: DataHolderProtectionState, complianceConcern: Bool, mostRecentInboundContactEpochMs: Double? = nil, firstInboundContactEpochMs: Double? = nil, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
+    self.init(snapshot: ["__typename": "DataHolderUpdateItem", "id": id, "virtualPresenceId": virtualPresenceId, "domainName": domainName, "name": name, "protectionState": protectionState, "complianceConcern": complianceConcern, "mostRecentInboundContactEpochMs": mostRecentInboundContactEpochMs, "firstInboundContactEpochMs": firstInboundContactEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
   }
 
   internal var __typename: String {
@@ -13070,12 +13193,21 @@ internal struct DataHolderUpdateItemFields: GraphQLFragment {
     }
   }
 
-  internal var mostRecentInteractionEpochMs: Double {
+  internal var mostRecentInboundContactEpochMs: Double? {
     get {
-      return snapshot["mostRecentInteractionEpochMs"]! as! Double
+      return snapshot["mostRecentInboundContactEpochMs"] as? Double
     }
     set {
-      snapshot.updateValue(newValue, forKey: "mostRecentInteractionEpochMs")
+      snapshot.updateValue(newValue, forKey: "mostRecentInboundContactEpochMs")
+    }
+  }
+
+  internal var firstInboundContactEpochMs: Double? {
+    get {
+      return snapshot["firstInboundContactEpochMs"] as? Double
+    }
+    set {
+      snapshot.updateValue(newValue, forKey: "firstInboundContactEpochMs")
     }
   }
 
@@ -13177,7 +13309,8 @@ internal struct DataHoldersUpdateFields: GraphQLFragment {
       GraphQLField("name", type: .nonNull(.scalar(String.self))),
       GraphQLField("protectionState", type: .nonNull(.scalar(DataHolderProtectionState.self))),
       GraphQLField("complianceConcern", type: .nonNull(.scalar(Bool.self))),
-      GraphQLField("mostRecentInteractionEpochMs", type: .nonNull(.scalar(Double.self))),
+      GraphQLField("mostRecentInboundContactEpochMs", type: .scalar(Double.self)),
+      GraphQLField("firstInboundContactEpochMs", type: .scalar(Double.self)),
       GraphQLField("owner", type: .nonNull(.scalar(GraphQLID.self))),
       GraphQLField("version", type: .nonNull(.scalar(Int.self))),
       GraphQLField("createdAtEpochMs", type: .nonNull(.scalar(Double.self))),
@@ -13190,8 +13323,8 @@ internal struct DataHoldersUpdateFields: GraphQLFragment {
       self.snapshot = snapshot
     }
 
-    internal init(id: GraphQLID, virtualPresenceId: GraphQLID, domainName: String, name: String, protectionState: DataHolderProtectionState, complianceConcern: Bool, mostRecentInteractionEpochMs: Double, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
-      self.init(snapshot: ["__typename": "DataHolderUpdateItem", "id": id, "virtualPresenceId": virtualPresenceId, "domainName": domainName, "name": name, "protectionState": protectionState, "complianceConcern": complianceConcern, "mostRecentInteractionEpochMs": mostRecentInteractionEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
+    internal init(id: GraphQLID, virtualPresenceId: GraphQLID, domainName: String, name: String, protectionState: DataHolderProtectionState, complianceConcern: Bool, mostRecentInboundContactEpochMs: Double? = nil, firstInboundContactEpochMs: Double? = nil, owner: GraphQLID, version: Int, createdAtEpochMs: Double, updatedAtEpochMs: Double) {
+      self.init(snapshot: ["__typename": "DataHolderUpdateItem", "id": id, "virtualPresenceId": virtualPresenceId, "domainName": domainName, "name": name, "protectionState": protectionState, "complianceConcern": complianceConcern, "mostRecentInboundContactEpochMs": mostRecentInboundContactEpochMs, "firstInboundContactEpochMs": firstInboundContactEpochMs, "owner": owner, "version": version, "createdAtEpochMs": createdAtEpochMs, "updatedAtEpochMs": updatedAtEpochMs])
     }
 
     internal var __typename: String {
@@ -13257,12 +13390,21 @@ internal struct DataHoldersUpdateFields: GraphQLFragment {
       }
     }
 
-    internal var mostRecentInteractionEpochMs: Double {
+    internal var mostRecentInboundContactEpochMs: Double? {
       get {
-        return snapshot["mostRecentInteractionEpochMs"]! as! Double
+        return snapshot["mostRecentInboundContactEpochMs"] as? Double
       }
       set {
-        snapshot.updateValue(newValue, forKey: "mostRecentInteractionEpochMs")
+        snapshot.updateValue(newValue, forKey: "mostRecentInboundContactEpochMs")
+      }
+    }
+
+    internal var firstInboundContactEpochMs: Double? {
+      get {
+        return snapshot["firstInboundContactEpochMs"] as? Double
+      }
+      set {
+        snapshot.updateValue(newValue, forKey: "firstInboundContactEpochMs")
       }
     }
 
@@ -13979,6 +14121,7 @@ internal struct OrganizationAnalysisFields: GraphQLFragment {
         GraphQLField("supportsOptOutOfSale", type: .nonNull(.scalar(SignalValue.self))),
         GraphQLField("usesCookiesOrTracking", type: .nonNull(.scalar(SignalValue.self))),
         GraphQLField("supportsTwoFactorAuth", type: .nonNull(.scalar(SignalValue.self))),
+        GraphQLField("supportsPasskeys", type: .nonNull(.scalar(SignalValue.self))),
       ]
 
       internal var snapshot: Snapshot
@@ -13987,8 +14130,8 @@ internal struct OrganizationAnalysisFields: GraphQLFragment {
         self.snapshot = snapshot
       }
 
-      internal init(supportsAccountCreation: SignalValue, supportsAccountDeletion: SignalValue, supportsDataDeletionRequests: SignalValue, supportsDataExport: SignalValue, supportsSubscriptions: SignalValue, supportsOptOutOfSale: SignalValue, usesCookiesOrTracking: SignalValue, supportsTwoFactorAuth: SignalValue) {
-        self.init(snapshot: ["__typename": "CapabilitySignals", "supportsAccountCreation": supportsAccountCreation, "supportsAccountDeletion": supportsAccountDeletion, "supportsDataDeletionRequests": supportsDataDeletionRequests, "supportsDataExport": supportsDataExport, "supportsSubscriptions": supportsSubscriptions, "supportsOptOutOfSale": supportsOptOutOfSale, "usesCookiesOrTracking": usesCookiesOrTracking, "supportsTwoFactorAuth": supportsTwoFactorAuth])
+      internal init(supportsAccountCreation: SignalValue, supportsAccountDeletion: SignalValue, supportsDataDeletionRequests: SignalValue, supportsDataExport: SignalValue, supportsSubscriptions: SignalValue, supportsOptOutOfSale: SignalValue, usesCookiesOrTracking: SignalValue, supportsTwoFactorAuth: SignalValue, supportsPasskeys: SignalValue) {
+        self.init(snapshot: ["__typename": "CapabilitySignals", "supportsAccountCreation": supportsAccountCreation, "supportsAccountDeletion": supportsAccountDeletion, "supportsDataDeletionRequests": supportsDataDeletionRequests, "supportsDataExport": supportsDataExport, "supportsSubscriptions": supportsSubscriptions, "supportsOptOutOfSale": supportsOptOutOfSale, "usesCookiesOrTracking": usesCookiesOrTracking, "supportsTwoFactorAuth": supportsTwoFactorAuth, "supportsPasskeys": supportsPasskeys])
       }
 
       internal var __typename: String {
@@ -14069,6 +14212,15 @@ internal struct OrganizationAnalysisFields: GraphQLFragment {
         }
         set {
           snapshot.updateValue(newValue, forKey: "supportsTwoFactorAuth")
+        }
+      }
+
+      internal var supportsPasskeys: SignalValue {
+        get {
+          return snapshot["supportsPasskeys"]! as! SignalValue
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "supportsPasskeys")
         }
       }
     }

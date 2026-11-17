@@ -40,8 +40,18 @@ public struct DataHolder: Equatable, Sendable {
     /// Whether there is a compliance concern with this data holder.
     public let complianceConcern: Bool
 
-    /// Time of the most recent interaction with this data holder.
-    public let mostRecentInteractionAt: Date
+    /// Time of the most recent interaction with this data holder. Equal to
+    /// `mostRecentInboundContactAt`.
+    @available(*, deprecated, message: "Use mostRecentInboundContactAt instead.")
+    public var mostRecentInteractionAt: Date { mostRecentInboundContactAt }
+
+    /// Time of the most recent inbound contact from this data holder. Falls back to `createdAt` for
+    /// data holders the service has not yet backfilled with this value.
+    public let mostRecentInboundContactAt: Date
+
+    /// Time of the earliest observed contact from this data holder. Falls back to `createdAt` for
+    /// data holders the service has not yet backfilled with this value.
+    public let firstInboundContactAt: Date
 
     /// Identifier of the Sudo that owns this data holder.
     public let owner: String
@@ -62,7 +72,8 @@ public struct DataHolder: Equatable, Sendable {
         name: String,
         protectionState: DataHolderProtectionState,
         complianceConcern: Bool,
-        mostRecentInteractionAt: Date,
+        mostRecentInboundContactAt: Date,
+        firstInboundContactAt: Date,
         owner: String,
         version: Int,
         createdAt: Date,
@@ -74,10 +85,43 @@ public struct DataHolder: Equatable, Sendable {
         self.name = name
         self.protectionState = protectionState
         self.complianceConcern = complianceConcern
-        self.mostRecentInteractionAt = mostRecentInteractionAt
+        self.mostRecentInboundContactAt = mostRecentInboundContactAt
+        self.firstInboundContactAt = firstInboundContactAt
         self.owner = owner
         self.version = version
         self.createdAt = createdAt
         self.updatedAt = updatedAt
+    }
+
+    /// Retained for source compatibility. `mostRecentInteractionAt` populates
+    /// `mostRecentInboundContactAt`, and `firstInboundContactAt` defaults to `createdAt`.
+    @available(*, deprecated, message: "Use the initializer that takes mostRecentInboundContactAt and firstInboundContactAt.")
+    public init(
+        id: String,
+        virtualPresenceId: String,
+        domainName: String,
+        name: String,
+        protectionState: DataHolderProtectionState,
+        complianceConcern: Bool,
+        mostRecentInteractionAt: Date,
+        owner: String,
+        version: Int,
+        createdAt: Date,
+        updatedAt: Date
+    ) {
+        self.init(
+            id: id,
+            virtualPresenceId: virtualPresenceId,
+            domainName: domainName,
+            name: name,
+            protectionState: protectionState,
+            complianceConcern: complianceConcern,
+            mostRecentInboundContactAt: mostRecentInteractionAt,
+            firstInboundContactAt: createdAt,
+            owner: owner,
+            version: version,
+            createdAt: createdAt,
+            updatedAt: updatedAt
+        )
     }
 }

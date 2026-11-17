@@ -31,6 +31,15 @@ public enum ActionIntent: String, Equatable, Sendable {
     /// The user has saved this account in a password manager. Offered only when the data holder
     /// supports account creation.
     case saveInPassword
+    /// The user has turned on two-factor authentication for this account. Offered only when the
+    /// data holder supports two-factor authentication.
+    case useTwoFactorAuth
+    /// The user has set up a passkey for this account. Offered only when the data holder supports
+    /// passkeys.
+    case usePasskey
+    /// The user has set a strong, unique password on this account. Offered whenever the data holder
+    /// supports account creation.
+    case useStrongPassword
     /// Anything unmapped (also the catch-all for values this version of the SDK does not recognize);
     /// carries `additionalInfo`.
     case other
